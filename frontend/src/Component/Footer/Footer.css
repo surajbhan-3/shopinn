@@ -1,0 +1,52 @@
+
+.main-footer{
+    width: 100%;
+    margin: auto;
+     background-color: black;
+     height: 300px;
+     padding-top: 50px;
+
+
+}
+
+.footer-wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 230px;
+    margin: auto;
+    
+
+}
+.f-div{
+    width: 20%;
+    /* border: 1px solid red; */
+    color: white;
+
+}
+.f-div #subsc{
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: -10px;
+
+
+}
+.f-div p{
+    font-size: 12px;
+}
+#hrwi{
+    width: 100%;
+    border-bottom: 1px solid grey;
+    
+
+}
+.copy{
+    color: white;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.copy div{
+    margin-left: -76%;
+}

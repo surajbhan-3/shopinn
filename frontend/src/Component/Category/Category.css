@@ -1,0 +1,20 @@
+.category-class{
+
+     display: flex;
+     width: 80%;
+     margin: auto;
+     justify-content: space-between;
+     /* border: 1px solid; */
+     height: 150px;
+     margin-top: 50px;
+     margin-bottom: 50px;
+
+
+      
+}
+.browsebycategory{
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    color: rgb(173, 39, 61);
+}

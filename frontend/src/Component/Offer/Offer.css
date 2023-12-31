@@ -1,0 +1,16 @@
+
+.main-offer{
+    width: 100%;
+     background-color: black;
+
+    text-align: center;
+    height: 30px;
+    color: white;
+    padding-top: 14px;
+    font-size: 12px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    
+
+}

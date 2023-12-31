@@ -1,0 +1,30 @@
+.hero-section{
+    height: 350px;
+    width: 80%;
+    margin: auto;
+    margin-top:150px;
+
+
+}
+.category-list{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+   border-radius: 12px;
+
+}
+.category-list div{
+    width: 49%;
+}
+.category-list img{
+     width: 100%;
+     height: 100%;
+     object-fit: cover;   
+     border: none;
+     border-radius: 12px;
+     
+
+}
+
+

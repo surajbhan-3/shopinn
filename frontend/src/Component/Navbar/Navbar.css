@@ -1,0 +1,112 @@
+.navb{
+    width: 100%;
+    border-bottom: 1px solid grey;
+    position:fixed;
+    top: 40px;
+    z-index: 1;
+    background-color: white;
+}
+.nav-wrapper{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.ldec{
+      text-decoration: none;
+       color: black;
+}
+#hho{
+    text-decoration: none;
+    color: black;
+}
+#abtt{
+    text-decoration: none;
+    color: black;
+}
+#cct{
+    text-decoration: none;
+    color: black;
+}
+#wisl{
+    text-decoration: none;
+    color: black;
+}
+#siin{
+    text-decoration: none;
+    color: black;
+}
+.item-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    margin-left: 100px;
+    /* background-color: firebrick; */
+}
+.wi-li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: green; */
+    width: 24%;
+}
+.search{
+    display: flex;
+   
+}
+.search span{
+    margin-left: 10px;
+}
+.search input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+}
+
+.user-profile-image{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+}
+.user-profile-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.user-profile-nav:hover .profile-settings{
+    display: block;
+}
+.profile-settings{
+    display: none;
+    height: 130px;
+    width: 200px;
+     position: fixed;
+     right: 70px;
+     top: 87px;
+     background-color:#ff4e5c;
+     border-radius: 2px;
+     font-size: 14px;
+    padding: 10px;
+    color: beige;
+
+    }
+    .profile-settings .psts{
+        display: flex;
+        margin-bottom: 10px;
+        text-decoration: none;
+        color: wheat;
+    }
+    .profile-settings>div>.psts>div+div{
+        margin-left: 10px;
+    }
+
+
+  .navb sup{
+    color: #e63e40;
+    font-weight: bold;
+    
+  }  

@@ -1,0 +1,17 @@
+.main-admin{
+    border: 1px solid black;
+    height: 90vh;
+    width: 90%;
+    margin: auto;
+}
+.left-side{
+    width: 30%;
+    height: 100%;
+    border-right: 1px solid grey;
+    padding-top: 20px;
+
+}
+.right-side{
+    width: 70%;
+    height: 100%;
+}

@@ -1,0 +1,13 @@
+.sweet-loading{
+     width: 50%;
+     margin: auto;
+    transform: translateY(30vh);
+    background-color: rgb(143, 132, 132)(136, 114, 114);
+}
+.sweet-loading h1{
+    /* text-align: center; */
+    transform: translateX(35%);
+}
+.sweet-loading .loder-e{
+    transform: translateX(70%);
+}
