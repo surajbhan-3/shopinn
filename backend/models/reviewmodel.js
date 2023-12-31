@@ -1,12 +1,15 @@
 const mongoose = require("mongoose")
+const Schema = require("mongoose") // this import is neccessary when using Schema types
 
 const reviewSchema = mongoose.Schema({
 
     product:{type:Schema.Types.ObjectId,ref:"product"},
-    user:{type:Schema.Types.ObjectId, ref:"User"},
-    review:[{
+   
+    reviews:[{
+        user:{type:Schema.Types.ObjectId, ref:"User"},
         rating:{type:Number, min:1, max:5},
-        reviewData:{type:String}
+        reviewTitle:{type:String, required:true},
+        reviewData:{type:String, required:true}
     }],
     createdAt: { type: Date,default: Date.now },
     updatedAt: { type: Date },

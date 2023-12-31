@@ -1,8 +1,10 @@
 const {UserModel} = require("../models/usermodel") 
 const {TokenBlacklist} = require("../models/blacklistmodel")
+const {ProductModel} = require("../models/productmodel")
 const bcrypt = require("bcrypt")
 require("dotenv").config()
 const jwt = require("jsonwebtoken");
+const { ReviewModel } = require("../models/reviewmodel")
 
 const saltRounds=Number(process.env.salt_rounds)
 
@@ -83,13 +85,48 @@ const  logoutUser = async(req,res)=>{
 }
 
 const userReview = async (req,res)=>{
-  const {rating, reviewData} = req.body
-       try {
+  const productId = req.params.id;
+  const {userId, rating,reviewTitle, reviewData} = req.body
 
+       try {
          
+         const productTobeReview = await ProductModel.findOne({_id:productId})
+
+          if(!productTobeReview){
+            return res.status(400).json({"Message":error.message})
+          }
+
+         const userWhichIsReviewing = await UserModel.findOne({_id: userId}) 
+
+         if(!userWhichIsReviewing){
+          return res.status(400).json({"Message":error.message})
+         }
+
+          const checkProductIdInReviewModel = await  ReviewModel.findOne({product:productTobeReview})
+          if(!checkProductIdInReviewModel){
+              const productReivew = new ReviewModel({product:productId, reviews:[{user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewData}]})
+              console.log(productReivew)
+         await productReivew.save()
+         return  res.status(200).send({"Message":"Product review added Successfully"})
+          }
+
+          const allReviewsdata = checkProductIdInReviewModel.reviews
+          const isUseridAvailable = allReviewsdata.find((el)=>{
+                      return el.user == userId
+          })
+          if(isUseridAvailable){
+            return res.status(200).send({"Message":"User already Given the reviews you can edit only"})
+          }
+
+          // const checkUserIdInReviewModel = await ReviewModel.find
+
+         const productReivew = new ReviewModel({product:productId, reviews:[{user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewData}]})
+         console.log(productReivew)
+         await productReivew.save()
+         return  res.status(200).send({"Message":"Product review added Successfully"})
         
        } catch (error) {
-        
+        return res.status(400).json({"Message":error.message})
        }
 }
 

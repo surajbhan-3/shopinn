@@ -8,7 +8,7 @@ const {registerUser, loginUser, userReview} = require("../controllers/userContro
 
 router.post("/register", registerUser)
 router.post("/login", loginUser)
-router.post("/product/review/:id",auth, userReview)
+router.post("/products/review/:id",auth, userReview)
 
 
 
