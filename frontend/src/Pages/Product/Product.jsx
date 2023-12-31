@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from "axios";
 import "./Product.css"
+import Reviews from '../../Component/Reviews/Reviews';
 function Product() {
 
   let productId =localStorage.getItem("shopinn-product-key")
@@ -94,13 +95,22 @@ if(checkProductInWishlist){
                          <div>
                           {isProductPresentInCart? <button>Go to Cart</button> :<button>Add to cart</button>  }
                            
-                      </div>
+                         </div>
 
                       <div>
                       {isProductPresentInWishlist? <button>Go to Wishlist</button> :<button>Add to Wishlist</button>  }
                       </div>
 
+                      <div className="reviewsSection">
+                         
+                          <Reviews />
                      </div>
+                      
+
+                     </div>
+
+
+                     
 
                       
                 </div>
