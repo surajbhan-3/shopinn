@@ -1,11 +1,11 @@
 const mongoose = require("mongoose")
-
+const Schema = mongoose
 
 const orderSchema = mongoose.Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'UserModel' },
-    products: [{ type: Schema.Types.ObjectId, ref: 'ProductModel' }],
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    products: [{ type: Schema.Types.ObjectId, ref: 'product' }],
     orderStatus: String,
-    paymentDetails: { type: Schema.Types.ObjectId, ref: 'PaymentModel' },
+    paymentDetails: { type: Schema.Types.ObjectId, ref: 'payment' },
    
   });
   

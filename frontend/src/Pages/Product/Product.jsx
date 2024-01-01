@@ -3,12 +3,13 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from "axios";
 import "./Product.css"
-import Reviews from '../../Component/Reviews/Reviews';
+
 function Product() {
 
   let productId =localStorage.getItem("shopinn-product-key")
 
     const [data, setData] = useState([])
+      const [reviewData, setReviewData] = useState([]);
     const ___cartProducts = (useSelector((state)=>{
       return state.ProductReducer.cartData
 }))
@@ -48,28 +49,27 @@ if(checkProductInWishlist){
 
 
       useEffect(()=>{
-        const getSingleProduct = async()=>{
-           
-          
-          
-              const response = await axios.get(
-                  `http://localhost:4500/api/products/product_details/${__productKey}`,
-                
-                  {
-                    headers: {
-                      Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-                    },
-                  }
-                ).catch((err)=>{
-                  console.log(err)
-                });
-                console.log(response.data)
-                setData(response.data)
-              };
-          
-              getSingleProduct()             
-
-    },[])
+        const getSingleProduct = async () => {
+          try {
+            const response = await axios.get(
+              `http://localhost:4500/api/products/product_details/${__productKey}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+                },
+              }
+            );
+            console.log(response);
+            setData(response.data[0]);
+            setReviewData(response.data[1]);
+          } catch (error) {
+            console.error("Error fetching data:", error.response || error);
+            // Handle errors (e.g., set error state)
+          }
+        };
+      
+        getSingleProduct();
+    },[__productKey])
     
 
   return (
@@ -102,8 +102,42 @@ if(checkProductInWishlist){
                       </div>
 
                       <div className="reviewsSection">
+                      <div>
+      <div className="userReview">
+                          <div className="addReviewButton"><button>Add Review</button></div>
                          
-                          <Reviews />
+                          <div className="writeReview">
+                               <form action="">
+                                 <label htmlFor="">Stars</label>
+                                 <input type="radio" name="1" id="" />
+                                <label>Title</label>
+                                <input type="text" placeholder='Title of the product' />
+                               <label htmlFor="">Write Review</label> <br />
+                                <textarea name="" id="" cols="40" rows="10"></textarea>
+                               </form>
+                          </div>
+                          </div>
+
+                          <div >
+                                {
+                                 reviewData.map((el)=>{
+
+                                  return (
+                                    <div className='allReviews' key={el.user.username}>
+                                    <div className='user-image'>
+                                  <img src={el.user.avtar} alt="" />
+                                </div>
+                                <div className='userGivenReviews'>
+                                   <div className="userName">{el.user.username}<span>{el.rating}</span></div> 
+                                     <div className="reviewTitle"><p>{el.reviewTitle}</p></div>
+                                     <div className="reviewData">{el.reviewData}</div>
+                                </div>
+                                </div>
+                                  )
+                                 })
+                                }
+                          </div>
+    </div>
                      </div>
                       
 

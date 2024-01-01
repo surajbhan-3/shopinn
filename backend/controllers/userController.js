@@ -1,12 +1,23 @@
 const {UserModel} = require("../models/usermodel") 
 const {TokenBlacklist} = require("../models/blacklistmodel")
 const {ProductModel} = require("../models/productmodel")
+const {UserUpdateModel} = require("../models/userUpdatemodel")
+const {AddressModel} = require("../models/addressmodel")
+const {uploadImageToCloudinary} = require("../utils/cloudinary")
+
+
+
+
+
 const bcrypt = require("bcrypt")
 require("dotenv").config()
 const jwt = require("jsonwebtoken");
 const { ReviewModel } = require("../models/reviewmodel")
 
 const saltRounds=Number(process.env.salt_rounds)
+
+
+
 
 
 const  registerUser = async(req,res)=>{
@@ -57,7 +68,7 @@ console.log(email, password, "ehllo")
             // console.log(isUserPresent)
          const token = jwt.sign({userId:isUserPresent._id, username:isUserPresent.username, role:isUserPresent.role},process.env.secret)
      
-         return res.status(200).json({"Message":"User Logged in Successfully",Token:token,Role:isUserPresent.role, userId:isUserPresent._id})
+         return res.status(200).json({"Message":"User Logged in Successfully",Token:token,Role:isUserPresent.role, userId:isUserPresent._id, avtar:isUserPresent.avtar})
         
         
       } catch (error) {
@@ -84,7 +95,64 @@ const  logoutUser = async(req,res)=>{
           
 }
 
-const userReview = async (req,res)=>{
+
+const userSettings = async(req,res) =>{
+           const {userId} = req.body;
+
+             try {
+              const userPrimaryDetails = await UserModel.findOne({_id:userId})
+              const userSecondaryDetails  = await UserUpdateModel.find({user:userId})
+              const userAddressDetails = await AddressModel.find({User:userId})
+              const {username, avtar, email} = userPrimaryDetails
+              console.log(userPrimaryDetails)
+              console.log(userSecondaryDetails)
+              return res.status(200).send({userData:{username:username, avtar:avtar, email:email},userSecondaryDetails, userAddressDetails})
+             } catch (error) {
+              
+             }
+
+}
+
+
+const editUserSettings = async(req,res)=>{
+
+        try {
+          
+        } catch (error) {
+          
+        }
+}
+
+const updateProfilePicture =  async (req, res) => {
+  console.log("Updating profile picture");
+  const userId  = req.params.id;
+
+  try {
+    // Find the user by ID
+    const user = await UserModel.findOne({ _id: userId });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+       console.log(req.file, "this is req.file")
+       const avtarFilePath = req.file.path     
+              console.log(avtarFilePath, "avtarfilepateh")
+        const avatar =   await uploadImageToCloudinary(avtarFilePath) 
+        console.log(avatar.url)
+       user.avtar = avatar.url;
+    await user.save();
+        console.log("userImage added")
+    res.status(200).json({ message: 'Profile picture updated successfully', url: result.secure_url });
+  } catch (error) {
+    res.status(500).json({ Message: 'Failed to update profile picture', Error:error.message });
+  }
+};
+
+
+
+
+const addUserReview = async (req,res)=>{
   const productId = req.params.id;
   const {userId, rating,reviewTitle, reviewData} = req.body
 
@@ -95,34 +163,31 @@ const userReview = async (req,res)=>{
           if(!productTobeReview){
             return res.status(400).json({"Message":error.message})
           }
-
          const userWhichIsReviewing = await UserModel.findOne({_id: userId}) 
-
          if(!userWhichIsReviewing){
           return res.status(400).json({"Message":error.message})
          }
-
           const checkProductIdInReviewModel = await  ReviewModel.findOne({product:productTobeReview})
           if(!checkProductIdInReviewModel){
               const productReivew = new ReviewModel({product:productId, reviews:[{user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewData}]})
-              console.log(productReivew)
-         await productReivew.save()
+
+              await productReivew.save()
          return  res.status(200).send({"Message":"Product review added Successfully"})
           }
 
           const allReviewsdata = checkProductIdInReviewModel.reviews
+          console.log(allReviewsdata, "all reviewsdata")
           const isUseridAvailable = allReviewsdata.find((el)=>{
                       return el.user == userId
           })
+          console.log(isUseridAvailable, "sifsdaf auad")
           if(isUseridAvailable){
             return res.status(200).send({"Message":"User already Given the reviews you can edit only"})
           }
 
-          // const checkUserIdInReviewModel = await ReviewModel.find
-
-         const productReivew = new ReviewModel({product:productId, reviews:[{user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewData}]})
-         console.log(productReivew)
-         await productReivew.save()
+        checkProductIdInReviewModel.reviews.push({user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewData} );
+              await  checkProductIdInReviewModel.save()
+        
          return  res.status(200).send({"Message":"Product review added Successfully"})
         
        } catch (error) {
@@ -130,4 +195,12 @@ const userReview = async (req,res)=>{
        }
 }
 
-module.exports = {registerUser, loginUser, userReview}
+
+
+
+
+         
+
+
+
+module.exports = {registerUser, loginUser, userSettings, addUserReview, updateProfilePicture}

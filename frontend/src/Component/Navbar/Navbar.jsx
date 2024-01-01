@@ -24,6 +24,7 @@ function Navbar({ hideElements }) {
     return state.ProductReducer.cartData
 }))
 
+const avtar = localStorage.getItem("shopinn-user-profile-image")
 // const dispatch = useDispatch()
 
 // dispatch(wishlistProducts())
@@ -93,7 +94,7 @@ function Navbar({ hideElements }) {
                   <div className="user-profile-nav">
                     <div className="user-profile-image">
                       <img
-                        src="https://surajbhan-3.github.io/static/media/surajbhan.b2f333622d09708419dd.jpg"
+                        src={avtar}
                         alt=""
                       />
                     </div>

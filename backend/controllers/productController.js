@@ -1,7 +1,7 @@
 const {ProductModel} = require("../models/productmodel")
 const {WishlistModel} = require("../models/wishlistmodel")
 const {CartModel} = require("../models/cartmodel")
-
+const {ReviewModel} = require("../models/reviewmodel")
 
 
 const getProduct = async(req,res)=>{
@@ -17,14 +17,43 @@ const getProduct = async(req,res)=>{
 }
 
 const getSingleProduct = async (req,res)=>{
-      const userId = req.params.id;
+      const productId = req.params.id;
       
        try {
-         const singleProduct = await ProductModel.find({_id:userId})
-         res.status(200).send(singleProduct);
+       
+
+
+         const singleProduct = await ProductModel.find({_id:productId})
+
+      
+        const ifProductHasReviews = await ReviewModel.findOne({product:productId})
+
+         if(!ifProductHasReviews){
+          return  res.status(200).send([singleProduct, []]);
+         }
+         const userReviews = await ReviewModel.findOne({ product: productId })
+         .populate({
+           path: 'reviews.user',
+         
+         });
+       const allReviews = userReviews.reviews
+
+      
+
+          const reviewDetails = allReviews.map((el)=>{
+           return   {
+               user:{username:el.user.username, avtar:el.user.avtar},
+               rating: el.rating,
+               reviewTitle: el.reviewTitle,
+               reviewData: el.reviewData
+             }
+          })
+           console.log(reviewDetails)
+        return res.status(200).send([singleProduct, reviewDetails]);
       } catch (error) {
-         return res.status(500).json({"Message":"Internal Server Error"})
+         return res.status(500).json({"Message":"Internal Server Error", Error:error.message})
        }
+
 }
 
 const addProduct = async(req,res)=>{

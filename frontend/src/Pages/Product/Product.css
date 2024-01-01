@@ -29,4 +29,29 @@
     /* border: 1px solid red; */
 }
 
+.allReviews{
+    border: 1px solid black;
+    height: auto;
+    width: 500px;
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 12px;
+}
+.allReviews .user-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.allReviews .user-image img{
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+}
+.userGivenReviews{
+    margin-left: 10px;
+}
+.userGivenReviews .userName{
+    margin-top: 5px ;
+}
 

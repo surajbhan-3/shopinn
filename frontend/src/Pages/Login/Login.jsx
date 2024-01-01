@@ -40,6 +40,7 @@ const handleLogin= async(e)=>{
          if(data.Token && data.Role!=="admin"){
           localStorage.setItem("shopin-token",data.Token)
           localStorage.setItem("userId", data.userId);
+          localStorage.setItem("shopinn-user-profile-image", data.avtar)
           handleIsLoggedIn()
           alert("user login succesfully")
        navigate("/")
