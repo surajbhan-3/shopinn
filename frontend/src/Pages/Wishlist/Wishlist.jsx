@@ -143,9 +143,14 @@ const handleRemoveFromWhislist = async (key) =>{
             <div id="t-rating">
               <span>*****</span>
             </div>
-            <div>
-                <button  onClick={() => { handleAddToCart(products._id); handleRemoveFromWhislist(products._id) }}>Move to cart</button>
-                <button onClick={()=>{handleRemoveFromWhislist(products._id)}}>Remove</button>
+            <div className='move-remove-btn-wishlist'>
+               <div>
+               <button  onClick={() => { handleAddToCart(products._id); handleRemoveFromWhislist(products._id) }}>Move to cart</button>
+               </div>
+               <div>
+                  <button  onClick={()=>{handleRemoveFromWhislist(products._id)}}>Remove</button>
+
+              </div>
             </div>
            
           </div>

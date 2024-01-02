@@ -105,7 +105,7 @@ const onPointerEnter = () => console.log('Enter')
                      </div>
                      <div className="right-div">
                         <h1>{product.name}</h1>
-                         <p>by: {product.brand}</p>
+                         <p>By : {product.brand}</p>
                         <div>
                             <p>{product.description}</p>
                         </div>
@@ -113,21 +113,29 @@ const onPointerEnter = () => console.log('Enter')
                             <p>Price : Rs.{product.price}</p>
                          </div>
 
-                         <div>
+                             <div className="btc-wrapper">
+                             <div className='gtc-button'>
                           {isProductPresentInCart? <button>Go to Cart</button> :<button>Add to cart</button>  }
                            
                          </div>
 
-                      <div>
-                      {isProductPresentInWishlist? <button>Go to Wishlist</button> :<button>Add to Wishlist</button>  }
-                      </div>
+                          <div className='gtw-button'>
+                          {isProductPresentInWishlist? <button>Go to Wishlist</button> :<button>Add to Wishlist</button>  }
+                          </div>
 
+                             </div>
                       <div className="reviewsSection">
                       <div>
       <div className="userReview">
+
+                          <div className='all-reviews-of-product'>
+                               <i id='stpr'>See the Proudct Reviews</i>
+                          </div>
                           <div className="addReviewButton">
 
-                            <button onClick={handleAddReview} >Add Review</button>
+                            <button onClick={handleAddReview} >
+                              {reviewAddBox ? "Adding Review" : "Add Review"}
+                              </button>
                             
                           </div>
                          
@@ -135,19 +143,20 @@ const onPointerEnter = () => console.log('Enter')
                             
                             reviewAddBox ? 
                            (  <div className="writeReview">
-                           <form action="">
+                           <form action="" className='rf-review-form'>
                              <label htmlFor="">How satisfy You are</label>
-                                  <Rating className='rating-star-c'
+                                  <Rating size={25} className='rating-star-c'
                                       onClick={handleRating}
                                       onPointerEnter={onPointerEnter}
                                       onPointerLeave={onPointerLeave}
                                       onPointerMove={onPointerMove}
                                       /* Available Props */
                                     />
-                            <label>Title</label>
+                            <label id='rt-title'>Title</label>
                             <input type="text" placeholder='Title of the product' />
-                           <label htmlFor="">Write Review</label> <br />
+                           <label htmlFor="" id='rt-feed'>Write Review</label> 
                             <textarea name="" id="" cols="40" rows="10"></textarea>
+                            <button>Submit</button>
                            </form>
                       </div>)
                             
@@ -167,8 +176,8 @@ const onPointerEnter = () => console.log('Enter')
                                 </div>
                                 <div className='userGivenReviews'>
                                    <div className="userName">{el.user.username}<span>{el.rating}</span></div> 
-                                     <div className="reviewTitle"><p>{el.reviewTitle}</p></div>
-                                     <div className="reviewData">{el.reviewData}</div>
+                                     <div className="reviewTitle"><p><i>{el.reviewTitle}</i></p></div>
+                                     <div className="reviewData"><p>{el.reviewData}</p></div>
                                 </div>
                                 </div>
                                   )

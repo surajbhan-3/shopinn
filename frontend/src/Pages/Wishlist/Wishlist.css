@@ -1,7 +1,7 @@
 
 .wishlist-section{
     /* border: 1px solid black; */
-    width: 80%;
+    width: 70%;
     margin: auto;
     margin-top: 150px;
     display: grid;
@@ -15,7 +15,7 @@
 .wishlist-section .t-inner-card{
     position: relative;
     height: auto;
-    width: 200px;    
+    width: 300px;    
     /* border: 1px solid green; */
     border: 1px solid grey;
     border-radius: 12px 0px 12px 12px;
@@ -24,7 +24,7 @@
 
 }
 .wishlist-section #t-image-div{
-    height: 200px;
+    height: auto;
     width: 100%;
     /* border: 1px solid red; */
 }
@@ -39,6 +39,7 @@
     font-size: 16px;
     padding: 10px;
     font-weight: 700;
+    height: 30px;
 
 }
 .wishlist-section #t-price{
@@ -90,4 +91,31 @@
 .wishlist-section .wishlist-t>button>span{
     margin-left: 30%;
     font-weight: bold;
+}
+
+
+.move-remove-btn-wishlist{
+    display: flex;
+    /* border: 1px solid black; */
+}
+.move-remove-btn-wishlist >div>button{
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin: 10px;
+    background-color: #ff4e5c;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.move-remove-btn-wishlist>div+div button{
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin: 10px;
+    color: black;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid #ff4e5c;
 }

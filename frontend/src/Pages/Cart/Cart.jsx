@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import { cartProducts, wishlistProducts } from '../../Redux/ProductReducer/Action'
 import axios from 'axios'
 import { Store } from 'react-notifications-component'
+import "./Cart.css";
+
 
 
 function Cart() {
@@ -131,7 +133,7 @@ const handleRemoveFromCart = async (key)=>{
 
  
   return (
-    <div className='wishlist-section'>
+    <div className='cart-section'>
     {___cartProducts.map((products) => {
   return (
     <div className="t-inner-card" key={products._id}>
@@ -147,12 +149,14 @@ const handleRemoveFromCart = async (key)=>{
       <div id="t-rating">
         <span>*****</span>
       </div>
-      <div>
+       <div className='move-remove-btn-cartpage'>
+       <div>
           <button  onClick={()=>{handleRemoveFromCart(products._id)}}  >Remove</button>
       </div>
       <div>
         <button onClick={() => { handleMoveToWishlist(products._id); handleRemoveFromCart(products._id) }} >Move to wishlist</button>
       </div>
+       </div>
      
     </div>
   );
