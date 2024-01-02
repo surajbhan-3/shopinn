@@ -125,7 +125,7 @@ const avtar = localStorage.getItem("shopinn-user-profile-image")
                         </Link>
                       </div>
                       <div>
-                        <Link className="psts" id="revii" to="/about">
+                        <Link className="psts" id="revii" to="/reviews_given">
                           <div>
                           
                             <FaRegStar />

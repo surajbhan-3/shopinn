@@ -2,6 +2,7 @@ const {ProductModel} = require("../models/productmodel")
 const {WishlistModel} = require("../models/wishlistmodel")
 const {CartModel} = require("../models/cartmodel")
 const {ReviewModel} = require("../models/reviewmodel")
+const mongoose = require("mongoose")
 
 
 const getProduct = async(req,res)=>{
@@ -275,6 +276,56 @@ const removeSingleProductFromCart = async(req,res)=>{
 
 
 
+const getAllReivewsGiven = async (req, res) =>{
+
+    const {userId} = req.body;
+    const objectId = new mongoose.Types.ObjectId(userId);
+    console.log(userId)
+           console.log("all reivews")
+          
+         //   const allData = await ReviewModel.aggregate([{$unwind:"$reviews"},{$match:{"reviews.user":userId}},{$project:{rating:1, reviewTitle:1}}])
+            
+      const allData = await   ReviewModel.aggregate(
+          
+         [
+
+
+            {
+               $match: {
+                 "reviews.user": objectId
+               }
+             } ,
+              {
+               $unwind: "$reviews"  // Deconstruct the "reviews" array
+             },
+           
+              {
+               $match: {
+                 "reviews.user": objectId
+               }
+             },
+             {
+               $project: {
+                 "review": "$reviews",  // Project only the matching review object
+                 "_id": 0  
+               }
+             }
+             
+           
+           ]
+      )
+         console.log(allData)
+        try {
+         
+        } catch (error) {
+         
+        }
+}
+
+
+
+
+
 module.exports = {addProduct,
       deleteProduct,
        getProduct,
@@ -285,5 +336,6 @@ module.exports = {addProduct,
       getProductFromCart,
       getSingleProduct,
       removeSingleProductFromWishlist,
-      removeSingleProductFromCart
+      removeSingleProductFromCart,
+      getAllReivewsGiven
    }

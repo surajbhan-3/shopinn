@@ -55,3 +55,14 @@
     margin-top: 5px ;
 }
 
+
+.writeReview{
+   
+}
+
+
+
+.writeReview form{
+     display: flex;
+     flex-direction: column;
+}

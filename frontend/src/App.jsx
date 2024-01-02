@@ -19,6 +19,7 @@ import Product from "./Pages/Product/Product";
 import Loader from "./Component/Loader/Loader";
 import { showLoader, stopLoader } from "./Redux/LoaderReducer/Action";
 import Category from "./Component/Category/Category";
+import Reviews from "./Pages/Reviews/Reviews";
 
 
 
@@ -91,6 +92,22 @@ useEffect(() => {
            </>
          }
        />
+
+<Route
+         path="/reviews_given"
+         element={
+           <>
+             <Offer />
+             <Navbar   />
+             <Reviews />
+             <Footer/>
+           </>
+         }
+       />
+
+
+
+
         <Route
          path="/my_order"
          element={

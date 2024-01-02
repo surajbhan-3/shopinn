@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from "axios";
+import { Rating } from 'react-simple-star-rating'
 import "./Product.css"
 
 function Product() {
@@ -10,6 +11,8 @@ function Product() {
 
     const [data, setData] = useState([])
       const [reviewData, setReviewData] = useState([]);
+      const [reviewAddBox, setReviewAddBox] = useState(false)
+      const [rating, setRating] = useState(0)
     const ___cartProducts = (useSelector((state)=>{
       return state.ProductReducer.cartData
 }))
@@ -72,6 +75,24 @@ if(checkProductInWishlist){
     },[__productKey])
     
 
+const handleAddReview = async ()=>{
+
+   setReviewAddBox(prevState => !prevState)
+   console.log(reviewAddBox)
+}
+
+
+const handleRating = (rate) => {
+  setRating(rate)
+     console.log(rating, "this is the stae of rating")
+  // other logic
+}
+
+const onPointerEnter = () => console.log('Enter')
+  const onPointerLeave = () => console.log('Leave')
+  const onPointerMove = (value, index) => console.log(value, index)
+
+
   return (
     <div className='product_page'>
      
@@ -104,18 +125,35 @@ if(checkProductInWishlist){
                       <div className="reviewsSection">
                       <div>
       <div className="userReview">
-                          <div className="addReviewButton"><button>Add Review</button></div>
-                         
-                          <div className="writeReview">
-                               <form action="">
-                                 <label htmlFor="">Stars</label>
-                                 <input type="radio" name="1" id="" />
-                                <label>Title</label>
-                                <input type="text" placeholder='Title of the product' />
-                               <label htmlFor="">Write Review</label> <br />
-                                <textarea name="" id="" cols="40" rows="10"></textarea>
-                               </form>
+                          <div className="addReviewButton">
+
+                            <button onClick={handleAddReview} >Add Review</button>
+                            
                           </div>
+                         
+                          {
+                            
+                            reviewAddBox ? 
+                           (  <div className="writeReview">
+                           <form action="">
+                             <label htmlFor="">How satisfy You are</label>
+                                  <Rating className='rating-star-c'
+                                      onClick={handleRating}
+                                      onPointerEnter={onPointerEnter}
+                                      onPointerLeave={onPointerLeave}
+                                      onPointerMove={onPointerMove}
+                                      /* Available Props */
+                                    />
+                            <label>Title</label>
+                            <input type="text" placeholder='Title of the product' />
+                           <label htmlFor="">Write Review</label> <br />
+                            <textarea name="" id="" cols="40" rows="10"></textarea>
+                           </form>
+                      </div>)
+                            
+                            :(null) 
+                           
+                          }
                           </div>
 
                           <div >
