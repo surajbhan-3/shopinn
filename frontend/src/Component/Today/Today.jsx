@@ -26,8 +26,13 @@ function Today() {
 
   useEffect(() => {
     dispatch(fetchTodayDealProducts())
-    dispatch(wishlistProducts())
-    dispatch(cartProducts())
+    
+
+    if (isLoggedIn) {
+      dispatch(wishlistProducts());
+      dispatch(cartProducts());
+    }
+
   }, []);
 
 
@@ -100,15 +105,8 @@ function Today() {
     }
   };
   const handleProductPage = (key) =>{
-
-    if (!isLoggedIn) {
-      navigate("/signup");
-    } else {
-    
       localStorage.setItem("shopinn-product-key", key)
        navigate("/product")     
-    }
-      
   }
 
   return (

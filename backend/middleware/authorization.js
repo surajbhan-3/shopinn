@@ -2,22 +2,22 @@ const jwt = require("jsonwebtoken");
 const {TokenBlacklist}= require("../models/blacklistmodel")
 require("dotenv").config();
 
-const auth = (req,res,next)=>{
+const auth = async (req,res,next)=>{
  
     const token = req.headers.authorization.split(" ")[1];
+    console.log(token, "this is the token")
    
-    // const verifyToken = TokenBlacklist.findOne({token});
-
-    //  if(verifyToken){
-    //     console.log(verifyToken)
-    //     return res.json({"Message":"Invalid Token"})
-    //  }
-
+    
 
     try {
 
+         const verifyToken = await TokenBlacklist.findOne({token:token});
+          if(verifyToken){
+            return res.json({"Message":"Invalid Token Login again"})
+          }
+        
+
         const decodeToken = jwt.verify(token, process.env.secret);
-      
         req.body.userId = decodeToken.userId;
         req.body.username = decodeToken.username;
         next();
@@ -52,5 +52,6 @@ const isAdmin = async(req,res,next)=>{
             return res.status(500).json({"Message":"Internal Server Error"})
         }
 }
+
 
 module.exports ={auth, isAdmin}

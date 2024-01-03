@@ -18,18 +18,18 @@ function Category() {
          <div className='category-class'>
           <div>
             <Link to="/mobiles">
-            <img width="100%" height="100%" src={Moblie} alt="" srcset="" />
+            <img width="100%" height="100%" src={Moblie} alt=""  />
             </Link>
           </div>
           <div>
           <Link to="/shoes">
-          <img width="100%" height="100%" src={Shoes} alt="" srcset="" />
+          <img width="100%" height="100%" src={Shoes} alt="" />
           </Link>
           </div>
           <div>
          
          <Link to="/books">
-         <img width="100%" height="100%" src={Open} alt="" srcset="" />
+         <img width="100%" height="100%" src={Open} alt=""  />
          </Link>
           </div>
 

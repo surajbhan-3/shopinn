@@ -4,10 +4,15 @@ import { useEffect } from 'react';
 import axios from "axios";
 import { Rating } from 'react-simple-star-rating'
 import "./Product.css"
+import { useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { AuthContext } from '../../Context/AuthContext';
+
 
 
 function Product() {
- 
+ const {isLoggedIn} = useContext(AuthContext);
+ const navigate = useNavigate()
   let productId =localStorage.getItem("shopinn-product-key")
 
     const [data, setData] = useState([])
@@ -59,11 +64,7 @@ if(checkProductInWishlist){
           try {
             const response = await axios.get(
               `http://localhost:4500/api/products/product_details/${__productKey}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-                },
-              }
+              
             );
             console.log(response);
             setData(response.data[0]);
@@ -80,8 +81,10 @@ if(checkProductInWishlist){
 
 const handleAddReview = async ()=>{
 
-   setReviewAddBox(prevState => !prevState)
-   console.log(reviewAddBox)
+   isLoggedIn ? (
+    setReviewAddBox(prevState => !prevState)
+    // console.log(reviewAddBox)
+   ): navigate("/login")
 }
 
 
@@ -108,7 +111,7 @@ const finalReviewDataFromUser ={
    console.log(finalReviewDataFromUser)
          
  
-// when working with axios you don't need to stringfy and dont' need to write body just like we do in fetch 
+     // when working with axios you don't need to stringfy and dont' need to write body just like we do in fetch 
 
            try {
             

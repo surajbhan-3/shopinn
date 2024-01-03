@@ -3,6 +3,7 @@ import axios from "axios"
 import {ActionTypes} from "./ActionTypes"
 
 
+
 export const fetchTodayDealProducts =  () => {
 
    return async function (dispatch,getState) {
@@ -17,6 +18,7 @@ export const fetchTodayDealProducts =  () => {
 
 
 export const cartProducts = ()=>{
+  
 
    return async function (dispatch) {
       const userId = localStorage.getItem("userId")
@@ -32,16 +34,19 @@ export const cartProducts = ()=>{
          console.log(err)
        });
    
-      dispatch({
-             type:ActionTypes.CART_PRODUCTS,
-             payload:response.data.products
-         })
+     
+        dispatch({
+          type:ActionTypes.CART_PRODUCTS,
+          payload:response.data.products
+      })
+      
    }  
 }
 
 
 
 export const wishlistProducts = ()=>{
+
 
    return async function (dispatch) {
       const userId = localStorage.getItem("userId")
@@ -56,13 +61,17 @@ export const wishlistProducts = ()=>{
        ).catch((err)=>{
          console.log(err)
        });
+       console.log("hello from wishlist proudcts")
+       console.log(response)
 
   
    
+    
       dispatch({
-             type:ActionTypes.WISHLIST_PRODUCTS,
-             payload:response.data.products
-         })
+        type:ActionTypes.WISHLIST_PRODUCTS,
+        payload:response.data.products
+    })
+     
    } 
 
 }

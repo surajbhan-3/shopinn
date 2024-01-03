@@ -134,7 +134,7 @@ const handleRemoveFromCart = async (key)=>{
  
   return (
     <div className='cart-section'>
-    {___cartProducts.map((products) => {
+    {___cartProducts?___cartProducts.map((products) => {
   return (
     <div className="t-inner-card" key={products._id}>
       <div id="t-image-div">
@@ -159,8 +159,9 @@ const handleRemoveFromCart = async (key)=>{
        </div>
      
     </div>
-  );
-})}
+  )
+}):<p>You don't have any products in Cart</p>
+}
 </div>
   )
 }

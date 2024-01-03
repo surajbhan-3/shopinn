@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import "./Navbar.css";
+import axios from "axios";
+import { Store } from "react-notifications-component";
 import { Link } from "react-router-dom";
 import { GrCart } from "react-icons/gr";
 import { FaRegHeart } from "react-icons/fa";
@@ -11,7 +13,7 @@ import { FaRegStar } from "react-icons/fa";
 import { HiOutlineLogout } from "react-icons/hi";
 import { AuthContext } from "../../Context/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
-// import { wishlistProducts } from "../../Redux/ProductReducer/Action";
+import { wishlistProducts } from "../../Redux/ProductReducer/Action";
 
 
 // ({ hideElements, isLoggedIn, handleIsLoggedOut })
@@ -24,11 +26,53 @@ function Navbar({ hideElements }) {
     return state.ProductReducer.cartData
 }))
 
+console.log(___cartProducts)
+
 const avtar = localStorage.getItem("shopinn-user-profile-image")
-// const dispatch = useDispatch()
+ const dispatch = useDispatch()
+//  dispatch(wishlistProducts())
 
-// dispatch(wishlistProducts())
 
+
+    const userLogout = async () =>{
+
+        
+    try {
+       const response = await axios.post(`http://localhost:4500/api/user/logout`,
+       {}, 
+       {
+         headers: {
+           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+         },
+       }
+       
+       )
+       console.log(response)
+       if(response.status == 200){
+
+         Store.addNotification({
+           title: "Product Already In  Cart",
+           message: "Produc has been  in cart",
+           type: "success",
+           insert: "top",
+           container: "top-right",
+           animationIn: ["animate__animated", "animate__fadeIn"],
+           animationOut: ["animate__animated", "animate__fadeOut"],
+           dismiss: {
+             duration: 2000,
+             onScreen: true
+           }
+        
+         });
+         {handleIsLoggedOut()}
+         window.location.reload()
+       }
+       
+    } catch (error) {
+     console.log(error)
+    }
+
+}
 
 
   return (
@@ -76,15 +120,15 @@ const avtar = localStorage.getItem("shopinn-user-profile-image")
           </div>
           {!hideElements && (
             <>
-            <Link to="/wishlist" id="wisl">
+            <Link to={isLoggedIn ? '/wishlist' : '/login'} id="wisl">
             <div id="whislist">
-                <FaRegHeart /> <sup>{__wishlistProducts.length}</sup>
+                <FaRegHeart /> {__wishlistProducts.length>0?<sup>{__wishlistProducts.length}</sup>:null}
               </div>
             </Link>
              
              <Link to="/cart" id="cct">
              <div id="cart-items-nav">
-                <GrCart /> <sup>{___cartProducts.length}</sup>
+                <GrCart /> {___cartProducts.length>0?<sup>{___cartProducts.length}</sup>:null}
               </div>
              </Link>
               {!isLoggedIn ? (
@@ -136,10 +180,10 @@ const avtar = localStorage.getItem("shopinn-user-profile-image")
                       <div>
                        
                         <Link className="psts" id="llog" to="/">
-                          <div onClick={handleIsLoggedOut}>
+                          <div onClick={userLogout}>
                             <HiOutlineLogout /> 
                           </div>
-                          <div  onClick={handleIsLoggedOut} >Logout</div>
+                          <div  onClick={userLogout} >Logout</div>
                         </Link>
                       </div>
                     </div>

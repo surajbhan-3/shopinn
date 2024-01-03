@@ -74,6 +74,7 @@ const addProduct = async(req,res)=>{
          return res.status(500).json({"Message":"Internal Server Error"})
 
       }
+      
 }
 
 

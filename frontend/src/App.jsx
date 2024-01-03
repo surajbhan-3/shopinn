@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Home from "../src/Pages/Home/Home";
@@ -20,7 +21,7 @@ import Category from "./Component/Category/Category";
 import Reviews from "./Pages/Reviews/Reviews";
 import AdminNavbar from "./Pages/Admin/Adminnavbar/Adminnavbar";
 import Dashboard from "./Pages/Admin/Pages/Dashboard/Dashboard";
-
+import Privateroute from "./Component/Private/Privateroute";
 
 
 
@@ -28,6 +29,8 @@ import Dashboard from "./Pages/Admin/Pages/Dashboard/Dashboard";
 function App() {
   const isLoading = useSelector((state) => state.LoaderReducer.isLoading);
   const dispatch = useDispatch()
+
+
 
 useEffect(() => {
     // Show loader when component mounts
@@ -44,134 +47,35 @@ useEffect(() => {
   return (
     
     <BrowserRouter>
-      {isLoading ? <Loader />:
-      <Routes>
-      <Route
-         path="/"
-         element={
-           <>
-             <Offer />
-             <Navbar   />
-             <Home />
-             <Category />
-             <Footer />
-           </>
-         }
-       />
-       <Route path="/about" element={<About />} />
-       <Route
-         path="/signup"
-         element={
-           <>
-             <Navbar class="snav" hideElements={true} />
-             <Signup />
-           </>
-         }
-       />
-       
-       <Route path="/login" element={<Login />} />
-       
-          <Route
-         path="/settings"
-         element={
-           <>
-             <Offer />
-             <Navbar   />
-             <Profile />
-             <Footer/>
-           </>
-         }
-       />
+        {isLoading ? <Loader /> :
+            <Routes>
+              <Route path="/about" element={<About />} />
+            
 
-<Route
-         path="/reviews_given"
-         element={
-           <>
-             <Offer />
-             <Navbar   />
-             <Reviews />
-             <Footer/>
-           </>
-         }
-       />
+              <Route path="/"        element={ <React.Fragment> <Offer /> <Navbar /> <Home /> <Category /> <Footer /> </React.Fragment> } />
+              <Route path="/mobiles" element={ <React.Fragment> <Offer /> <Navbar /> <Footer/> </React.Fragment> } />
+              <Route path="/shoes"   element={ <React.Fragment> <Offer /> <Navbar /> <Footer/> </React.Fragment> } />
+              <Route path="/books"   element={ <React.Fragment> <Offer /> <Navbar /> <Footer/> </React.Fragment> } />
 
 
+              <Route path="/product" element={ <React.Fragment> <Offer /> <Navbar />  <Product /> <Footer/> </React.Fragment>} />
+              <Route path="/signup"  element={ <React.Fragment> <Offer /> <Navbar class="snav" hideElements={true} /> <Signup /> </React.Fragment> } />
+              <Route path="/login"   element={ <React.Fragment> <Offer /> <Navbar class="snav" hideElements={true} /> <Login />  </React.Fragment> } />
+
+              <Route element={<Privateroute />}>
+                    {/* Protected routes */}
+                <Route path="/wishlist"      element={ <React.Fragment> <Offer /> <Navbar /> <Wishlist /> <Footer/> </React.Fragment> } />
+                <Route path="/cart"          element={ <React.Fragment> <Offer /> <Navbar /> <Cart     /> <Footer/> </React.Fragment> } />
+                <Route path="/settings"      element={ <React.Fragment> <Offer /> <Navbar /> <Profile  /> <Footer/> </React.Fragment> } />
+                <Route path="/my_order"      element={ <React.Fragment> <Offer /> <Navbar /> <Myorder  /> <Footer/> </React.Fragment> } />
+                <Route path="/reviews_given" element={ <React.Fragment> <Offer /> <Navbar /> <Reviews  /> <Footer/> </React.Fragment> } />
+              
+                <Route path="/admin"         element={ <React.Fragment> <AdminNavbar /> <Dashboard /> </React.Fragment> } />
+            
+              </Route>   {/* Private or Protected routes ends here */}
 
 
-        <Route
-         path="/my_order"
-         element={
-           <>
-             <Offer />
-             <Navbar   />
-             <Myorder />
-             <Footer/>
-           </>
-         }
-       />
-
-<Route path="/mobiles" element={
- <>
-  <Offer />
-  <Navbar /> 
- <Footer/>
- </>
-} />
-
-
-<Route path="/shoes" element={
- <>
-  <Offer />
-  <Navbar /> 
- <Footer/>
- </>
-} />
-
-<Route path="/books" element={
- <>
-  <Offer />
-  <Navbar /> 
- <Footer/>
- </>
-} />
-
-
-<Route path="/wishlist" element={
- <>
-  <Offer />
-  <Navbar /> 
- <Wishlist />
- <Footer/>
- </>
-} />
-<Route path="/cart" element={
- <>
-  <Offer />
-  <Navbar /> 
- <Cart />
- <Footer/>
- </>
-} />
-<Route path="/product" element={
- <>
-  <Offer />
-  <Navbar /> 
- <Product />
- <Footer/>
- </>
-} />
-
-
-<Route path="/admin" element={
- <>
- <AdminNavbar />
- <Dashboard />
-
- </>
-} />
-
-
-     </Routes>}
+            </Routes>}
     </BrowserRouter>
   );
 }

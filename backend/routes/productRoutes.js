@@ -5,7 +5,7 @@ const {addProduct, getProduct, deleteProduct, updateProduct, addProductToWishLis
 
 
 productRouter.get("/products",getProduct)
-productRouter.get("/product_details/:id",auth, getSingleProduct)
+productRouter.get("/product_details/:id", getSingleProduct)
 
 productRouter.post("/add_product", isAdmin, addProduct)
 

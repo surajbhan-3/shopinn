@@ -15,6 +15,12 @@ export const AuthContextProvider = ({children})=>{
 const handleIsLoggedOut = () =>{
        setLoggedIn(false);
        localStorage.removeItem('isLoggedIn');
+       localStorage.removeItem("shopin-token")
+       localStorage.removeItem("shopinn-user-profile-image");
+       localStorage.removeItem("token")
+       localStorage.removeItem("email");
+       localStorage.removeItem("userId")
+       
     }
 
    return <AuthContext.Provider value={{isLoggedIn:isLoggedIn,handleIsLoggedIn:handleIsLoggedIn,handleIsLoggedOut:handleIsLoggedOut}} >

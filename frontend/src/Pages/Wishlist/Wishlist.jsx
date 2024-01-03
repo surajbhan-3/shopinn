@@ -128,7 +128,7 @@ const handleRemoveFromWhislist = async (key) =>{
 
   return (
     <div className='wishlist-section'>
-          {__wishlistProducts.map((products) => {
+          {__wishlistProducts?__wishlistProducts.map((products) => {
         return (
           <div className="t-inner-card" key={products._id}>
             <div id="t-image-div">
@@ -155,7 +155,7 @@ const handleRemoveFromWhislist = async (key) =>{
            
           </div>
         );
-      })}
+      }):<p>You Don't have any Item in wishlist</p>}
     </div>
   )
 }

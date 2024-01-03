@@ -66,8 +66,8 @@ console.log(email, password, "ehllo")
 
          }
             // console.log(isUserPresent)
-         const token = jwt.sign({userId:isUserPresent._id, username:isUserPresent.username, role:isUserPresent.role},process.env.secret)
-     
+         const token = jwt.sign({userId:isUserPresent._id, username:isUserPresent.username, role:isUserPresent.role},process.env.secret, {expiresIn:"7d"})
+          
          return res.status(200).json({"Message":"User Logged in Successfully",Token:token,Role:isUserPresent.role, userId:isUserPresent._id, avtar:isUserPresent.avtar})
         
         
@@ -81,18 +81,21 @@ console.log(email, password, "ehllo")
 
 const  logoutUser = async(req,res)=>{
   const token = req.headers.authorization?.split(" ")[1]
-
+        
           try {
-            
-              const tokenEntry = new TokenBlacklist({token});
+  
+              const tokenEntry = new TokenBlacklist({token:token});
               await tokenEntry.save();
-               res.status(200).json({"Message":"User has been Logout"})
+              console.log("data saved")
+             return res.status(200).send({"Message":"User has been Logout"})
 
           } catch (error) {
+             console.log(error.message, "this is erro .mesag")
             return res.status(500).json({"Message":"Failed to Authenticate Token Blacklist","Error":error.message})
             
           }
           
+
 }
 
 
@@ -216,4 +219,4 @@ const addUserReview = async (req,res)=>{
 
 
 
-module.exports = {registerUser, loginUser, userSettings, addUserReview, updateProfilePicture}
+module.exports = {registerUser, loginUser,logoutUser, userSettings, addUserReview, updateProfilePicture}
