@@ -7,8 +7,6 @@ import About from "./Pages/About/About";
 import Navbar from "./Component/Navbar/Navbar";
 import Signup from "./Pages/Signup/Signup";
 import Login from "./Pages/Login/Login";
-import Admin from "./Pages/Admin/Admin";
-// import Adminnavbar from "./Pages/Admin/Adminnavbar/Adminnavbar";
 import Footer from "./Component/Footer/Footer";
 import Offer from "./Component/Offer/Offer";
 import Profile from "./Component/Profile/Profile";
@@ -20,6 +18,8 @@ import Loader from "./Component/Loader/Loader";
 import { showLoader, stopLoader } from "./Redux/LoaderReducer/Action";
 import Category from "./Component/Category/Category";
 import Reviews from "./Pages/Reviews/Reviews";
+import AdminNavbar from "./Pages/Admin/Adminnavbar/Adminnavbar";
+import Dashboard from "./Pages/Admin/Pages/Dashboard/Dashboard";
 
 
 
@@ -70,17 +70,7 @@ useEffect(() => {
        />
        
        <Route path="/login" element={<Login />} />
-       <Route
-         path="/admin"
-         element={
-           <>
-             {/* <Adminnavbar /> */}
-
-             <Navbar   />
-             <Admin />
-           </>
-         }
-       />
+       
           <Route
          path="/settings"
          element={
@@ -170,6 +160,16 @@ useEffect(() => {
  <Footer/>
  </>
 } />
+
+
+<Route path="/admin" element={
+ <>
+ <AdminNavbar />
+ <Dashboard />
+
+ </>
+} />
+
 
      </Routes>}
     </BrowserRouter>

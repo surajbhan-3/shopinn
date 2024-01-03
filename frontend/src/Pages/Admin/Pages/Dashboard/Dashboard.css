@@ -1,0 +1,25 @@
+.dashboard-page{
+
+    display: flex;
+    background-color: red;
+    height:100vh;
+
+
+}
+
+.dash-left{
+    width: 25%;
+    height: 100vh;
+    border: 1px solid black;
+
+
+
+}
+
+
+.dash-right{
+    width: 75%;
+    border: 1px solid black;
+    height: 100vh;
+
+}
