@@ -5,14 +5,17 @@ import axios from "axios";
 import { Rating } from 'react-simple-star-rating'
 import "./Product.css"
 
-function Product() {
 
+function Product() {
+ 
   let productId =localStorage.getItem("shopinn-product-key")
 
     const [data, setData] = useState([])
       const [reviewData, setReviewData] = useState([]);
       const [reviewAddBox, setReviewAddBox] = useState(false)
       const [rating, setRating] = useState(0)
+      const [title , setTitle] = useState("")
+      const [reviewText, setReviewText] = useState("")
     const ___cartProducts = (useSelector((state)=>{
       return state.ProductReducer.cartData
 }))
@@ -93,6 +96,45 @@ const onPointerEnter = () => console.log('Enter')
   const onPointerMove = (value, index) => console.log(value, index)
 
 
+const finalReviewDataFromUser ={
+        rating:rating,
+        reviewTitle:title,
+        reviewText:reviewText
+
+}
+
+ const handleWriteReview = async (e) =>{
+      e.preventDefault();
+   console.log(finalReviewDataFromUser)
+         
+ 
+// when working with axios you don't need to stringfy and dont' need to write body just like we do in fetch 
+
+           try {
+            
+            const response = await axios.post(
+              `http://localhost:4500/api/user/products/review/${__productKey}`,
+              {
+                finalReviewDataFromUser
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+                },
+              }
+            );
+            console.log(response);
+           
+              setRating(0)
+              setReviewText("")
+              setTitle("")
+              window.location.reload()
+           } catch (error) {
+              console.log(error)
+           }
+ }
+
+
   return (
     <div className='product_page'>
      
@@ -143,7 +185,7 @@ const onPointerEnter = () => console.log('Enter')
                             
                             reviewAddBox ? 
                            (  <div className="writeReview">
-                           <form action="" className='rf-review-form'>
+                           <form action="" className='rf-review-form' onSubmit={handleWriteReview}>
                              <label htmlFor="">How satisfy You are</label>
                                   <Rating size={25} className='rating-star-c'
                                       onClick={handleRating}
@@ -153,10 +195,10 @@ const onPointerEnter = () => console.log('Enter')
                                       /* Available Props */
                                     />
                             <label id='rt-title'>Title</label>
-                            <input type="text" placeholder='Title of the product' />
+                            <input type="text" value={title} onChange={(e)=> setTitle(e.target.value)} placeholder='Title of the product' />
                            <label htmlFor="" id='rt-feed'>Write Review</label> 
-                            <textarea name="" id="" cols="40" rows="10"></textarea>
-                            <button>Submit</button>
+                            <textarea name="" id="" cols="40" rows="10" value={reviewText} onChange={(e)=> setReviewText(e.target.value)}></textarea>
+                            <button type='submit'>Submit</button>
                            </form>
                       </div>)
                             

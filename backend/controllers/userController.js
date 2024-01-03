@@ -154,11 +154,20 @@ const updateProfilePicture =  async (req, res) => {
 
 const addUserReview = async (req,res)=>{
   const productId = req.params.id;
-  const {userId, rating,reviewTitle, reviewData} = req.body
+  
+  const {reviewTitle,rating, reviewText} = req.body.finalReviewDataFromUser;
+  const {userId} = req.body
+  
+ 
+  console.log(req.body)
+  
+  console.log(userId,rating,reviewTitle, reviewText , "jhsdfsdf")
+
 
        try {
          
          const productTobeReview = await ProductModel.findOne({_id:productId})
+         console.log(productTobeReview._id, "tobe  review")
 
           if(!productTobeReview){
             return res.status(400).json({"Message":error.message})
@@ -167,10 +176,13 @@ const addUserReview = async (req,res)=>{
          if(!userWhichIsReviewing){
           return res.status(400).json({"Message":error.message})
          }
-          const checkProductIdInReviewModel = await  ReviewModel.findOne({product:productTobeReview})
+          const checkProductIdInReviewModel = await  ReviewModel.findOne({product:productTobeReview._id})
+           console.log(checkProductIdInReviewModel, "this is product in review asd")
           if(!checkProductIdInReviewModel){
-              const productReivew = new ReviewModel({product:productId, reviews:[{user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewData}]})
-
+         
+            console.log("Hey i am able to reach here")
+              const productReivew = new ReviewModel({product:productId, reviews:[{user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewText}]})
+                   console.log(productReivew)
               await productReivew.save()
          return  res.status(200).send({"Message":"Product review added Successfully"})
           }
@@ -181,7 +193,7 @@ const addUserReview = async (req,res)=>{
                       return el.user == userId
           })
           console.log(isUseridAvailable, "sifsdaf auad")
-          if(isUseridAvailable){
+          if(isUseridAvailable || isUseridAvailable == undefined){
             return res.status(200).send({"Message":"User already Given the reviews you can edit only"})
           }
 
@@ -193,6 +205,7 @@ const addUserReview = async (req,res)=>{
        } catch (error) {
         return res.status(400).json({"Message":error.message})
        }
+
 }
 
 
