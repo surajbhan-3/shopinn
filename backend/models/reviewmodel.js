@@ -9,7 +9,8 @@ const reviewSchema = mongoose.Schema({
         user:{type:Schema.Types.ObjectId, ref:"User"},
         rating:{type:Number, min:1, max:5},
         reviewTitle:{type:String, required:true},
-        reviewData:{type:String, required:true}
+        reviewData:{type:String, required:true},
+        reviewDate:{type:Date, default:Date.now}
     }],
     createdAt: { type: Date,default: Date.now },
     updatedAt: { type: Date },

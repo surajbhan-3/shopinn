@@ -26,7 +26,7 @@ function Product() {
 }))
 
 
-console.log(___cartProducts, "cartpreoda")
+
 
 const __wishlistProducts = useSelector((state) => {
   return state.ProductReducer.wishlistData;
@@ -73,6 +73,9 @@ if(checkProductInWishlist){
             console.error("Error fetching data:", error.response || error);
             // Handle errors (e.g., set error state)
           }
+
+          const today =  new Date();
+          const findReviewDate = new Date(reviewData.reviewDate)
         };
       
         getSingleProduct();
@@ -138,6 +141,28 @@ const finalReviewDataFromUser ={
  }
 
 
+
+
+const userReviewedTime =(time)=>{
+
+  const currentTime = new Date();
+  const reviwedTime = new Date(time);
+  const difference = currentTime.getTime() - reviwedTime.getTime();
+  const seconds = Math.floor(difference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  return days > 0
+  ? `${days} days ago`
+  : hours > 0
+  ? `${hours} hours ago`
+  : minutes > 0
+  ? `${minutes} minutes ago`
+  : `${seconds} seconds ago`;
+
+}
+
+
   return (
     <div className='product_page'>
      
@@ -198,9 +223,9 @@ const finalReviewDataFromUser ={
                                       /* Available Props */
                                     />
                             <label id='rt-title'>Title</label>
-                            <input type="text" value={title} onChange={(e)=> setTitle(e.target.value)} placeholder='Title of the product' />
+                            <input type="text" value={title} onChange={(e)=> setTitle(e.target.value)} maxLength={40} placeholder='Title of the product' />
                            <label htmlFor="" id='rt-feed'>Write Review</label> 
-                            <textarea name="" id="" cols="40" rows="10" value={reviewText} onChange={(e)=> setReviewText(e.target.value)}></textarea>
+                            <textarea name="" id="" cols="40" rows="10" maxLength={250} value={reviewText} onChange={(e)=> setReviewText(e.target.value)}></textarea>
                             <button type='submit'>Submit</button>
                            </form>
                       </div>)
@@ -220,8 +245,28 @@ const finalReviewDataFromUser ={
                                   <img src={el.user.avtar} alt="" />
                                 </div>
                                 <div className='userGivenReviews'>
-                                   <div className="userName">{el.user.username}<span>{el.rating}</span></div> 
-                                     <div className="reviewTitle"><p><i>{el.reviewTitle}</i></p></div>
+                                   <div className="userName">
+
+                                       <div>
+                                       {el.user.username}
+                                       </div>
+                                      <div>
+                                      <span>{userReviewedTime(el.reviewDate)}</span>
+                                      </div>
+                                   </div> 
+                            
+                                     <div className="reviewTitle">
+                                      
+                                      <div id='htpd'><i>{el.reviewTitle}</i></div> 
+                                      <div>
+                                      {
+                                     el.rating==5?<span>⭐⭐⭐⭐⭐</span>:el.rating==4?<span>⭐⭐⭐⭐</span>:el.rating==3?<span>⭐⭐⭐</span>
+                                     :el.rating==2?<span>⭐⭐</span>:el.rating==1?<span>⭐</span>:null
+                                     } 
+                                      </div>
+                                     
+                                     </div>
+                                    
                                      <div className="reviewData"><p>{el.reviewData}</p></div>
                                 </div>
                                 </div>

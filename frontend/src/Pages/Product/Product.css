@@ -95,13 +95,14 @@
 }
 
 .allReviews{
-    border: 1px solid black;
+    border: 1px solid grey;
     height: auto;
     width: auto;
     display: flex;
     margin: 10px;
     padding: 10px;
     border-radius: 12px;
+    background-color: rgb(185, 184, 184);
     
     
 }
@@ -109,6 +110,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 1px solid grey;
+    
   
    
 }
@@ -120,12 +123,22 @@
 }
 .userGivenReviews{
     margin-left: 5px;
-  
+    width: 90%;
+    font-size: 14px;
 }
 .userGivenReviews .userName{
     margin-top: 5px ;
+    display: flex;
+    justify-content: space-between;
 }
 
+
+
+.reviewTitle{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
 
 
 .writeReview form{
@@ -170,4 +183,8 @@
     border: none;
     background-color: #ff4e5c;
     color: white;
+}
+#htpd{
+    margin-left: 10px;
+    
 }

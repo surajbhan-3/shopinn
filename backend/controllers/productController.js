@@ -46,7 +46,8 @@ const getSingleProduct = async (req,res)=>{
                user:{username:el.user.username, avtar:el.user.avtar},
                rating: el.rating,
                reviewTitle: el.reviewTitle,
-               reviewData: el.reviewData
+               reviewData: el.reviewData,
+               reviewDate:el.reviewDate
              }
           })
            console.log(reviewDetails)
