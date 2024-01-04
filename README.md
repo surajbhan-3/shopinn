@@ -8,55 +8,55 @@
 
 # File Structure:
 
-ShopInn
-|
-|----- backend/
-|         |----- config/
-|         |         |----- db.js
-|         |----- controllers/
-|         |         |----- productController.js
-|         |         |----- userController.js
-|         |----- middleware/
-|         |         |----- authorization.js
-|         |         |----- multer.middleware.js
-|         |----- models/
-|         |         |----- addressmodel.js
-|         |         |----- blacklistmodel.js
-|         |         |----- cartmodel.js
-|         |         |----- ordermodel.js
-|         |         |----- paymentmodel.js
-|         |         |----- productmodel.js
-|         |         |----- reviewmodel.js
-|         |         |----- usermodel.js
-|         |         |----- userUpdatemodel.js
-|         |         |----- wishlistmodel.js
-|         |----- public/
-|         |----- temp/
-|         |----- routes/
-|         |         |----- productRoutes.js
-|         |         |----- userRoutes.js   
-|         |----- utils/
-|         |         |----- cloudinary.js
-|         |
-|         |----- index.js
-|         |----- pakage-lock.json
-|         |----- package.json
-|  
-|----- frontend/
-|         |----- public/
-|         |----- src/
-|         |----- assets/
-|         |----- Component/
-|         |----- Context/
-|         |----- Pages/
-|         |----- Redux/
-|         |----- App.css
-|         |----- App.jsx
-|         |----- index.js
-|         |----- package-lock.json
-|         |----- package.json
-|
-|
+        ShopInn
+        |
+        |----- backend/
+        |         |----- config/
+        |         |         |----- db.js
+        |         |----- controllers/
+        |         |         |----- productController.js
+        |         |         |----- userController.js
+        |         |----- middleware/
+        |         |         |----- authorization.js
+        |         |         |----- multer.middleware.js
+        |         |----- models/
+        |         |         |----- addressmodel.js
+        |         |         |----- blacklistmodel.js
+        |         |         |----- cartmodel.js
+        |         |         |----- ordermodel.js
+        |         |         |----- paymentmodel.js
+        |         |         |----- productmodel.js
+        |         |         |----- reviewmodel.js
+        |         |         |----- usermodel.js
+        |         |         |----- userUpdatemodel.js
+        |         |         |----- wishlistmodel.js
+        |         |----- public/
+        |         |----- temp/
+        |         |----- routes/
+        |         |         |----- productRoutes.js
+        |         |         |----- userRoutes.js   
+        |         |----- utils/
+        |         |         |----- cloudinary.js
+        |         |
+        |         |----- index.js
+        |         |----- pakage-lock.json
+        |         |----- package.json
+        |  
+        |----- frontend/
+        |         |----- public/
+        |         |----- src/
+        |         |----- assets/
+        |         |----- Component/
+        |         |----- Context/
+        |         |----- Pages/
+        |         |----- Redux/
+        |         |----- App.css
+        |         |----- App.jsx
+        |         |----- index.js
+        |         |----- package-lock.json
+        |         |----- package.json
+        |
+        |
 
 
 ##### Environment Variables
