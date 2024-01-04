@@ -41,26 +41,40 @@
     font-size: 16px;
     padding: 15px;
     border-radius: 6px;
-    border: none;
     outline: none;
-    background-color:#ff4e5c;
-    color: white;
+    border:2px solid #ff4e5c;
+    color: black;
     width: 45%;
 }
 #lf #bt-4{
   text-align:center;
     width: 45%;
     font-size: 16px;
-   
     border-radius: 6px;
-    border: none;
     outline: none;
-    background-color:#ff4e5c;
-    color: white;
+    border:2px solid #ff4e5c;
+    color: black;
    
 }
 
 #lf-di{
     display: flex;
     justify-content: space-between;
+}
+
+.guest-user{
+  margin-top: 10px;
+  height: auto
+
+}
+.guest-user button{
+    text-align:center;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    background-color:#ff4e5c;
+    color: white;
+    padding: 15px;
 }

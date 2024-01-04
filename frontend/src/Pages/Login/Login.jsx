@@ -80,7 +80,10 @@ const handleLogin= async(e)=>{
               <input type="password" name="" id="password" value={password}  onChange={(e)=>setPassword(e.target.value)} placeholder='Password' />
               <div id='lf-di'>
               <button id='bt-3' type='submit'>Log In</button>
-              <button id='bt-4' > Forget Password? </button>
+              <button id='bt-4' type='submit' > Forget Password? </button>
+              </div>
+              <div className="guest-user">
+                 <button type='submit' onClick={()=>{setEmail("ironman@gmail.com"); setPassword("ironman12345")}} >SignIn as Guest</button>
               </div>
            </form>
       </div>
