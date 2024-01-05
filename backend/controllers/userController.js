@@ -192,15 +192,16 @@ const addUserReview = async (req,res)=>{
 
           const allReviewsdata = checkProductIdInReviewModel.reviews
           console.log(allReviewsdata, "all reviewsdata")
+          console.log(userId,"this is userId")
           const isUseridAvailable = allReviewsdata.find((el)=>{
                       return el.user == userId
           })
           console.log(isUseridAvailable, "sifsdaf auad")
-          if(isUseridAvailable || isUseridAvailable == undefined){
+          if(isUseridAvailable){
             return res.status(200).send({"Message":"User already Given the reviews you can edit only"})
           }
 
-        checkProductIdInReviewModel.reviews.push({user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewData} );
+        checkProductIdInReviewModel.reviews.push({user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewText} );
               await  checkProductIdInReviewModel.save()
         
          return  res.status(200).send({"Message":"Product review added Successfully"})
@@ -210,6 +211,7 @@ const addUserReview = async (req,res)=>{
        }
 
 }
+
 
 
 

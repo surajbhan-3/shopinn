@@ -76,7 +76,7 @@ const handleLogin= async(e)=>{
            <form id='lf' action="" onSubmit={handleLogin}>
               <h1>Log in to ShopInn</h1>
               <p>Enter your details below</p>
-              <input type="email" placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)} />
+              <input type="email" placeholder='Email : For easy access try as guest login' value={email} onChange={(e)=>setEmail(e.target.value)} />
               <input type="password" name="" id="password" value={password}  onChange={(e)=>setPassword(e.target.value)} placeholder='Password' />
               <div id='lf-di'>
               <button id='bt-3' type='submit'>Log In</button>
