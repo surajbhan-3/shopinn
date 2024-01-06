@@ -285,39 +285,34 @@ const getAllReivewsGiven = async (req, res) =>{
     console.log(userId)
            console.log("all reivews")
           
-         //   const allData = await ReviewModel.aggregate([{$unwind:"$reviews"},{$match:{"reviews.user":userId}},{$project:{rating:1, reviewTitle:1}}])
-            
-      const allData = await   ReviewModel.aggregate(
-          
-         [
-
-
-            {
-               $match: {
-                 "reviews.user": objectId
-               }
-             } ,
-              {
-               $unwind: "$reviews"  // Deconstruct the "reviews" array
-             },
-           
-              {
-               $match: {
-                 "reviews.user": objectId
-               }
-             },
-             {
-               $project: {
-                 "review": "$reviews",  // Project only the matching review object
-                 "_id": 0  
-               }
-             }
-             
-           
-           ]
-      )
-         console.log(allData)
+   
         try {
+         
+         const allData = await   ReviewModel.aggregate(  [   {
+                  $match: { "reviews.user": objectId   }  } ,
+                 {    $unwind: "$reviews"    },   
+                {      $match: {     "reviews.user": objectId    }   },
+                {  $project: {   "review": "$reviews",  // Project only the matching review object
+                     "productId":"$product",
+                    "_id": 0   } }, 
+                        
+               ]   )
+
+// Doing this because currently not able to make a query
+
+          const promises =  allData.map(async(el)=>{
+
+            const productData= await ProductModel.findOne({_id:el.productId})
+           
+            return{
+               ...el, productData
+            }
+          })
+       const data = await Promise.all(promises)
+          
+               console.log(data)
+            // console.log(allData[0].productId)
+            return res.status(200).send(data)
          
         } catch (error) {
          

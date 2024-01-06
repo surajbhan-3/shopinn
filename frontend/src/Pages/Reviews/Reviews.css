@@ -1,29 +1,91 @@
-.reviews-userGivenReviews{
-
-
-}
 
 .reviews-userGivenReviews .r-1-d{
 
-    border: 1px solid black;
     width: 70%;
     margin: auto;
     height: auto;
+    margin-top: 130px;
 }
 
-.reviews-userGivenReviews .r-product-div{
 
-      width: 70%;
-      margin: auto;
+.uReviews{
+    border: 1px solid grey;
+    height: auto;
+    width: auto;
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: rgb(185, 184, 184);
+    
+    
+}
+.uReviews .user-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid grey;
+    
+  
+   
+}
+.uReviews .user-image img{
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit:cover;
+}
+.r-1-d .userGivenReviews{
+    margin-left: 5px;
+    width: 90%;
+    font-size: 14px;
+}
+.r-1-d .userGivenReviews .productName{
+    margin-top: 5px ;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.uReviews .reviewTitle{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.uReviews .reviewData{
+    margin-left: 10px;
+}
+.uReviews .writeReview form{
+     display: flex;
+     flex-direction: column;
+     margin: 10px;
+}
+
+#delbutton{
+   display: flex;
+   justify-content: space-between;
+
 
 }
-.reviews-userGivenReviews .r-product-image{
-
-    width: 200px;
-    height: 300px;
+#dd{
+    
+    visibility: hidden;
 }
-.reviews-userGivenReviews  img{
+#delbutton>button+button{
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
 
-    width: 100%;
-    height: 100%;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: #ff4e5c;
 }
+
+
+
+

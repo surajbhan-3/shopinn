@@ -17,13 +17,6 @@ const ___cartInitialPrice = (useSelector((state)=>{
   return state.ProductReducer.cartInitialPrice;    
 }))
 console.log(___cartInitialPrice, "hello inirial price")
-const ___cartDiscountedPrice = (useSelector((state)=>{
-return state.ProductReducer.cartDiscountedPrice
-}))
-
-const ___cartTotalPrice = (useSelector((state)=>{
-return state.ProductReducer.cartTotalPrice
-}))
 
     const dispatch = useDispatch();
 
@@ -41,7 +34,7 @@ return state.ProductReducer.cartTotalPrice
         try {
           console.log("decrement", key, intialcount)
           const count = intialcount-1;
-          if(count==0){
+          if(count===0){
             return setCount(1)
           }
           setCount(intialcount-1)
@@ -62,7 +55,7 @@ return state.ProductReducer.cartTotalPrice
 
 const handleProductIncrement = async(key,price) =>{
 try {
-    if(intialcount==10){
+    if(intialcount===10){
       alert("out of stock product list")
       return setCount(10)
     }
@@ -150,7 +143,7 @@ const moveProducToWishlist = async (productId) => {
           }
         }
       );
-        setInitialPrice(initialPrice-price)
+      
       console.log(response, "wishlist response");
       dispatch(cartProducts());
     } catch (err) {

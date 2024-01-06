@@ -4,7 +4,7 @@ const {UserModel} = require("../models/usermodel")
 const {ProductModel} = require("../models/productmodel")
 
 const cartSchema = new mongoose.Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'UserModel' },
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
     products: [{ type: Schema.Types.ObjectId, ref: 'product' }],
     
   });
