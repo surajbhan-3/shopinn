@@ -169,7 +169,7 @@
 #deliverycharges>div+div{
     color: rgb(15, 65, 15);
 }
-#discountprice{
+.discountprice{
     display: flex;
     justify-content: space-between;
     padding: 10px;  

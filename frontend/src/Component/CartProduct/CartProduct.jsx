@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { Store } from 'react-notifications-component'
 import axios from 'axios'
-import { cartProducts, wishlistProducts } from '../../Redux/ProductReducer/Action'
+import { cartProducts, wishlistProducts, incrementCartData } from '../../Redux/ProductReducer/Action'
 import { useDispatch, useSelector } from 'react-redux'
 import "./CartProduct.css"
 function CartProduct({productId,name, brand, imageUrl, price}) {
 
     
     const [intialcount , setCount] = useState(1)
+  
 
-    const ___cartProducts = (useSelector((state)=>{
-        return state.ProductReducer.cartData
+
+
+
+const ___cartInitialPrice = (useSelector((state)=>{
+  return state.ProductReducer.cartInitialPrice;    
 }))
+console.log(___cartInitialPrice, "hello inirial price")
+const ___cartDiscountedPrice = (useSelector((state)=>{
+return state.ProductReducer.cartDiscountedPrice
+}))
+
+const ___cartTotalPrice = (useSelector((state)=>{
+return state.ProductReducer.cartTotalPrice
+}))
+
     const dispatch = useDispatch();
 
       useEffect(()=>{
@@ -19,6 +32,9 @@ function CartProduct({productId,name, brand, imageUrl, price}) {
          dispatch(cartProducts());
 
 },[])
+
+
+
 
 
     const handleProductDecrement = async(key) =>{
@@ -29,6 +45,14 @@ function CartProduct({productId,name, brand, imageUrl, price}) {
             return setCount(1)
           }
           setCount(intialcount-1)
+        
+        const cartInitialPriceUpdate = ___cartInitialPrice-price;
+        const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
+        const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
+        
+          
+          dispatch(incrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
+
 
         } catch (error) {
           
@@ -36,16 +60,21 @@ function CartProduct({productId,name, brand, imageUrl, price}) {
 }
 
 
-const handleProductIncrement = async(key) =>{
+const handleProductIncrement = async(key,price) =>{
 try {
-    console.log("increment",key);
     if(intialcount==10){
       alert("out of stock product list")
       return setCount(10)
     }
     setCount(intialcount+1)
-} catch (error) {
   
+       const cartInitialPriceUpdate = ___cartInitialPrice+price;
+       const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
+       const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
+       dispatch(incrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
+
+} catch (error) {
+   console.log(error);
 }
 }
 
@@ -121,7 +150,7 @@ const moveProducToWishlist = async (productId) => {
           }
         }
       );
-  
+        setInitialPrice(initialPrice-price)
       console.log(response, "wishlist response");
       dispatch(cartProducts());
     } catch (err) {
@@ -145,11 +174,16 @@ const moveProducToWishlist = async (productId) => {
     }
   }
   
-  const handleRemoveFromCart = async (key)=>{
+  const handleRemoveFromCart = async (key,price)=>{
+    if(intialcount!==1){
+      alert("decreased to 1")
+      return null;
+      
+    }
   
     try {
       console.log("handleng fromwishlist")
-     await removeProductFromCart(key);
+     await removeProductFromCart(key,price);
     
     } catch (error) {
        console.log(error)
@@ -176,14 +210,14 @@ const moveProducToWishlist = async (productId) => {
             </div>
            
              <div className="increment-divs-button">
-                 <button onClick={()=>{handleProductDecrement(productId)}} >-</button>
+                 <button onClick={()=>{handleProductDecrement(productId,price)}} >-</button>
                   <button>{intialcount}</button>
-                 <button onClick={()=>{handleProductIncrement(productId)}}>+</button>
+                 <button onClick={()=>{handleProductIncrement(productId,price)}}>+</button>
              </div>
     
             <div className='move-remove-btn-cartpage'>
                 <div>
-                    <button  onClick={()=>{handleRemoveFromCart(productId)}}  >Remove</button>
+                    <button  onClick={()=>{handleRemoveFromCart(productId,price)}}  >Remove</button>
                 </div>
                 <div>
                   <button onClick={() => { handleMoveToWishlist(productId); handleRemoveFromCart(productId) }} >Move to wishlist</button>
