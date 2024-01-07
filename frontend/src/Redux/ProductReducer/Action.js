@@ -113,3 +113,18 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
 }
 
 
+export const incrementQuantity = (productId,incrementCount)=>{
+  console.log("he action.js, ", productId)
+    return{
+      type:ActionTypes.INCREMENT_QUANTITY,
+       payload:{productId,incrementCount}
+    }
+}
+
+export const decrementQuantity = (productId,decrementCount)=>{
+           console.log(productId, decrementCount, "hiiiiiiiii")
+  return{
+    type:ActionTypes.DECREMENT_QUANTITY,
+     payload:{productId,decrementCount}
+  }
+}

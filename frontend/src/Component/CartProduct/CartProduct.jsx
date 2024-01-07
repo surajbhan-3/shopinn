@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Store } from 'react-notifications-component'
 import axios from 'axios'
-import { cartProducts, wishlistProducts, incrementCartData } from '../../Redux/ProductReducer/Action'
+import { cartProducts, wishlistProducts, incrementCartData, decrementCartData } from '../../Redux/ProductReducer/Action'
+import { incrementQuantity,decrementQuantity } from '../../Redux/ProductReducer/Action'
 import { useDispatch, useSelector } from 'react-redux'
 import "./CartProduct.css"
 function CartProduct({productId,name, brand, imageUrl, price}) {
@@ -30,24 +31,29 @@ console.log(___cartInitialPrice, "hello inirial price")
 
 
 
-    const handleProductDecrement = async(key) =>{
+    const handleProductDecrement = async(key,price) =>{
         try {
-          console.log("decrement", key, intialcount)
-          const count = intialcount-1;
-          if(count===0){
-            return setCount(1)
-          }
-          setCount(intialcount-1)
-        
-        const cartInitialPriceUpdate = ___cartInitialPrice-price;
-        const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
-        const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
-        
+           const count=intialcount-1
+          if(count===0 ){
           
-          dispatch(incrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
-
-
+           setCount(intialcount)
+          
+          }else{
+            setCount(intialcount-1)
+            const cartInitialPriceUpdate = ___cartInitialPrice-price;
+            const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
+            const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
+            const productId=key
+            const decrementCount= intialcount-1
+              console.log("hasdfkas dkfasdlkfjasd;flkj")
+              dispatch(decrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
+            console.log("hello mistaack   ")
+              dispatch(decrementQuantity(productId,decrementCount))
+          }
+         
         } catch (error) {
+
+          console.log(error)
           
         }
 }
@@ -60,11 +66,16 @@ try {
       return setCount(10)
     }
     setCount(intialcount+1)
+    
   
        const cartInitialPriceUpdate = ___cartInitialPrice+price;
        const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
        const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
+       const productId=key
+       const incrementCount= intialcount+1
        dispatch(incrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
+       dispatch(incrementQuantity(productId,incrementCount))
+
 
 } catch (error) {
    console.log(error);

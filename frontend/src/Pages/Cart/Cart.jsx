@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {useNavigate} from "react-router"
 import "./Cart.css";
 import { useSelector } from 'react-redux';
 import CartProduct from '../../Component/CartProduct/CartProduct'
@@ -19,6 +19,13 @@ const ___cartDiscountedPrice = (useSelector((state)=>{
 const ___cartTotalPrice = (useSelector((state)=>{
   return state.ProductReducer.cartTotalPrice
 }))
+
+
+const navigate = useNavigate()
+const handleCheckout = ()=>{
+               navigate("/my_order")
+      
+}
 
       return (
         <div className='cart-section'>
@@ -68,7 +75,7 @@ const ___cartTotalPrice = (useSelector((state)=>{
                    <div>   Rs. {___cartTotalPrice}  </div>
               </div>
               
-              <button id='checkoutbutton'>Check Out </button>
+              <button onClick={handleCheckout} id='checkoutbutton'>Check Out </button>
               
               </div>
               </div>

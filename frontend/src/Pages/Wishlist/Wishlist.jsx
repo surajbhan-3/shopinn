@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { wishlistProducts } from "../../Redux/ProductReducer/Action";
 import { cartProducts } from '../../Redux/ProductReducer/Action';
 import { useDispatch, useSelector } from "react-redux";
+import { incrementQuantity } from '../../Redux/ProductReducer/Action';
 import axios from "axios";
 import { Store } from 'react-notifications-component';
 
@@ -36,7 +37,7 @@ function Wishlist() {
         }
       ).catch((err)=>{
 
-
+     
       Store.addNotification({
         title: "Product Already In  Cart",
         message: "Produc has been  in cart",
@@ -55,6 +56,8 @@ function Wishlist() {
         console.log(err)
 
       });
+      dispatch(incrementQuantity(productId, 1))
+  
        if(response){
       Store.addNotification({
         title: "Product Added To Cart",

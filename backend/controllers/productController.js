@@ -43,7 +43,7 @@ const getSingleProduct = async (req,res)=>{
 
           const reviewDetails = allReviews.map((el)=>{
            return   {
-               user:{username:el.user.username, avtar:el.user.avtar},
+               user:{username:el.user.username, avtar:el.user.avtar, userId:el.user._id},
                rating: el.rating,
                reviewTitle: el.reviewTitle,
                reviewData: el.reviewData,

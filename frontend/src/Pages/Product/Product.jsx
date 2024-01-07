@@ -55,6 +55,7 @@ if(checkProductInWishlist){
 
 
     const __productKey = localStorage.getItem("shopinn-product-key")
+    const userId = localStorage.getItem("userId")
     
 
 
@@ -69,18 +70,23 @@ if(checkProductInWishlist){
             console.log(response);
             setData(response.data[0]);
             setReviewData(response.data[1]);
+  
           } catch (error) {
             console.error("Error fetching data:", error.response || error);
             // Handle errors (e.g., set error state)
           }
 
-          const today =  new Date();
-          const findReviewDate = new Date(reviewData.reviewDate)
         };
       
         getSingleProduct();
     },[__productKey])
     
+console.log(userId, "hii user id")
+const userAlreadyReviewed = reviewData.find((el)=>{
+     return el.user.userId === userId;
+})
+console.log(userAlreadyReviewed, "hi user t his")
+    console.log(reviewData, "this is review data")
 
 const handleAddReview = async ()=>{
 
@@ -163,6 +169,7 @@ const userReviewedTime =(time)=>{
 }
 
 
+
   return (
     <div className='product_page'>
      
@@ -203,10 +210,13 @@ const userReviewedTime =(time)=>{
                           </div>
                           <div className="addReviewButton">
 
-                            <button onClick={handleAddReview} >
-                              {reviewAddBox ? "Adding Review" : "Add Review"}
-                              </button>
-                            
+                              {
+                                userAlreadyReviewed? null:  <button onClick={handleAddReview} >
+                                {reviewAddBox ? "Adding Review" : "Add Review"}
+                                </button>
+                              }
+                              
+                              
                           </div>
                          
                           {

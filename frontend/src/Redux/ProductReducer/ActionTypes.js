@@ -9,7 +9,8 @@ export const ActionTypes = {
      DISCOUNTED_PRICE:"Discounted_Price",
      TOTAL_CART_PRICE:"Total_Cart_Price",
      INCREMENT_CART_DATA:"Increment_Cart_Data",
-     DECREMENT_CART_DATA:"Decrement_Cart_Data"
-     
+     DECREMENT_CART_DATA:"Decrement_Cart_Data",
+     INCREMENT_QUANTITY:"Increment_Quantity",
+     DECREMENT_QUANTITY:"Decrement_Quantity"     
    
 }
