@@ -1,7 +1,6 @@
 .mo-main{
 
-    height: 100vh;
-    background-color: rebeccapurple;
+    height: auto;
     width: 100%;
     padding-top:100px;
     
@@ -10,28 +9,26 @@
 
     width: 80%;
     margin: auto;
-    border: 1px solid red;
     text-align: center;
 }
 
 .mo-details{
     width: 80%;
     margin: auto;
-    border: 1px solid yellow;
   
 }
 .mo-details>div{
-    border: 1px solid green;
     width: 50%;
     margin: auto;
-
-
- 
+    padding: 15px;
+    background-color:rgb(190, 183, 183);
+    border-radius: 12px;
 }
 .iniq{
-    border: 1px solid red;
+    border: 1px solid black;
     display: flex;
     justify-content: space-between;
     padding: 10px;
     margin: 10px;
+    background-color:rgb(190, 183, 183);
 }

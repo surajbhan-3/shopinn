@@ -1,17 +1,23 @@
 const express = require("express");
+const Razorpay = require("razorpay")
 const { connection } = require("./config/db");
 const cors = require("cors")
 require("dotenv").config();
 const Port = process.env.PORT;
 
 
-
-
 const app = express();
 app.use(express.json())
 app.use(cors())
+
+ const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_API_KEY,
+  key_secret: process.env.RAZORPAY_SECRET_KEY,
+});
+module.exports ={instance}
 const userRoutes =require("./routes/userRoutes");
 const productRouter = require("./routes/productRoutes");
+const paymentRouter = require("./routes/paymentRoutes")
 
 
 app.get("/", async(req, res)=>{
@@ -28,9 +34,11 @@ app.get("/", async(req, res)=>{
 })
 
 
+
+
 app.use("/api/user",userRoutes)
 app.use("/api/products", productRouter)
-
+app.use("/api/payment", paymentRouter)
 app.listen(Port, async () => {
   try {
     await connection;

@@ -53,7 +53,7 @@ export const reducer = (state = intialState, { type, payload }) => {
     case ActionTypes.INCREMENT_QUANTITY:{
          let itemCountUpdate;
             if(state.cartItemsAndCount.length===0){
-               state.cartItemsAndCount.push({productId:payload.productId, count:payload.incrementCount})
+               state.cartItemsAndCount.push({productId:payload.productId, count:payload.incrementCount, productName:payload.name})
                itemCountUpdate =[...state.cartItemsAndCount]
             }
             const geItemIndex  = state.cartItemsAndCount.findIndex((el)=>{
@@ -69,7 +69,7 @@ export const reducer = (state = intialState, { type, payload }) => {
                  })
                  itemCountUpdate = [...data]
              }else{
-              const data = state.cartItemsAndCount.push({productId:payload.productId, count:payload.incrementCount})
+              const data = state.cartItemsAndCount.push({productId:payload.productId, count:payload.incrementCount, productName:payload.name})
               itemCountUpdate = [...data]
              }
             console.log(payload, 'hii this is payload')

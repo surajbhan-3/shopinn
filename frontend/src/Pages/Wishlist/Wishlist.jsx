@@ -23,7 +23,7 @@ function Wishlist() {
                dispatch(wishlistProducts());
     },[])
 
-  const updateCartProduct = async (productId) => {
+  const updateCartProduct = async (productId,name) => {
       const response = await axios.post(
         `http://localhost:4500/api/products/cart/add_to_cart`,
         {
@@ -56,7 +56,7 @@ function Wishlist() {
         console.log(err)
 
       });
-      dispatch(incrementQuantity(productId, 1))
+      dispatch(incrementQuantity(productId, 1, name))
   
        if(response){
       Store.addNotification({
@@ -109,9 +109,9 @@ function Wishlist() {
    
 
 
-const handleAddToCart = async (key) =>{
+const handleAddToCart = async (key,name) =>{
   try {
-   await updateCartProduct(key);
+   await updateCartProduct(key,name);
   } catch (error) {
      console.log(error)
   }
@@ -148,7 +148,7 @@ const handleRemoveFromWhislist = async (key) =>{
             </div>
             <div className='move-remove-btn-wishlist'>
                <div>
-               <button  onClick={() => { handleAddToCart(products._id); handleRemoveFromWhislist(products._id) }}>Move to cart</button>
+               <button  onClick={() => { handleAddToCart(products._id,products.name); handleRemoveFromWhislist(products._id) }}>Move to cart</button>
                </div>
                <div>
                   <button  onClick={()=>{handleRemoveFromWhislist(products._id)}}>Remove</button>
