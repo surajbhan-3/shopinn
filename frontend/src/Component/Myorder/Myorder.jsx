@@ -82,11 +82,12 @@ const placeOrder = async()=>{
        rzp1.open().then((response)=>{
          console.log(response, 'hhhere y re')
        });
-          
         } catch (error) {
           
         }     
 }
+
+
 
   return (
     <div className='mo-main'>

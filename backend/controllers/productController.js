@@ -3,6 +3,7 @@ const {WishlistModel} = require("../models/wishlistmodel")
 const {CartModel} = require("../models/cartmodel")
 const {ReviewModel} = require("../models/reviewmodel")
 const mongoose = require("mongoose")
+const { OrderModel } = require("../models/ordermodel")
 
 
 const getProduct = async(req,res)=>{
@@ -320,6 +321,25 @@ const getAllReivewsGiven = async (req, res) =>{
 }
 
 
+const saveOrderDetails = async (req,res) =>{
+       const {userId, data} = req.body;
+       console.log(data,"this sis data")
+        try {
+
+         const findUser = await OrderModel.findOne({user:userId})
+          if(!findUser){
+
+               const orderData = new OrderModel({user:userId,products:data})
+               await orderData.save()
+               return res.send("userData saved")
+          }
+         
+        } catch (error) {
+         
+             return res.send(error)
+        }
+}
+
 
 
 
@@ -334,5 +354,6 @@ module.exports = {addProduct,
       getSingleProduct,
       removeSingleProductFromWishlist,
       removeSingleProductFromCart,
-      getAllReivewsGiven
+      getAllReivewsGiven,
+      saveOrderDetails
    }

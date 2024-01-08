@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { wishlistProducts } from "../../Redux/ProductReducer/Action";
 import { cartProducts } from '../../Redux/ProductReducer/Action';
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import { Store } from 'react-notifications-component';
 import "./Wishlist.css"
 
 function Wishlist() {
-   let data = true;
+ 
 
     const __wishlistProducts = useSelector((state) => {
         return state.ProductReducer.wishlistData;
@@ -19,9 +19,6 @@ function Wishlist() {
       const dispatch = useDispatch();
     
 
-    useEffect(()=>{
-               dispatch(wishlistProducts());
-    },[])
 
   const updateCartProduct = async (productId,name) => {
       const response = await axios.post(
@@ -131,7 +128,7 @@ const handleRemoveFromWhislist = async (key) =>{
 
   return (
     <div className='wishlist-section'>
-          {__wishlistProducts?__wishlistProducts.map((products) => {
+          {__wishlistProducts && __wishlistProducts.length>0?__wishlistProducts.map((products) => {
         return (
           <div className="t-inner-card" key={products._id}>
             <div id="t-image-div">

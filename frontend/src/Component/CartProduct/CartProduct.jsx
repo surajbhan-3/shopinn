@@ -1,18 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Store } from 'react-notifications-component'
 import axios from 'axios'
 import { cartProducts, wishlistProducts, incrementCartData, decrementCartData } from '../../Redux/ProductReducer/Action'
 import { incrementQuantity,decrementQuantity } from '../../Redux/ProductReducer/Action'
 import { useDispatch, useSelector } from 'react-redux'
 import "./CartProduct.css"
+
+
 function CartProduct({productId,name, brand, imageUrl, price}) {
 
-    
-    const [intialcount , setCount] = useState(1)
+    // const [intialcount , setCount] = useState(1)
   
 
+   const __orderDetails = (useSelector((state)=>{
+      return state.ProductReducer.cartItemsAndCount
+    }))
 
+    console.log(__orderDetails, "this is top of the order detail")
+    let productInfo = __orderDetails.find((el)=>{
+       return el.productId === productId
+    })
+    console.log(productInfo)
+    console.log(productInfo.count, "this si sdflkasdfjklasfd")
 
+    const productCount = Number(productInfo.count)
+
+    console.log(__orderDetails,"here his the order detaisl")
 
 const ___cartInitialPrice = (useSelector((state)=>{
   return state.ProductReducer.cartInitialPrice;    
@@ -25,7 +38,7 @@ console.log(___cartInitialPrice, "hello inirial price")
        
          dispatch(cartProducts());
 
-},[])
+},[dispatch])
 
 
 
@@ -33,18 +46,23 @@ console.log(___cartInitialPrice, "hello inirial price")
 
     const handleProductDecrement = async(key,price) =>{
         try {
-           const count=intialcount-1
+
+          const productInfo = __orderDetails.filter((el)=>{
+            if(el.productId === key)
+            return  el;
+     })
+           const count=productInfo[0].count-1
           if(count===0 ){
-          
-           setCount(intialcount)
+           alert("remove item")
+            // dispatch(decrementQuantity(productId,decrementCount)) 
           
           }else{
-            setCount(intialcount-1)
+          
             const cartInitialPriceUpdate = ___cartInitialPrice-price;
             const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
             const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
             const productId=key
-            const decrementCount= intialcount-1
+            const decrementCount= productInfo[0].count-1
               console.log("hasdfkas dkfasdlkfjasd;flkj")
               dispatch(decrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
             console.log("hello mistaack   ")
@@ -61,20 +79,28 @@ console.log(___cartInitialPrice, "hello inirial price")
 
 const handleProductIncrement = async(key,price) =>{
 try {
-    if(intialcount===10){
+    const productInfo = __orderDetails.filter((el)=>{
+           if(el.productId === key)
+           return  el;
+    })
+        console.log(productInfo, "this is product Incremetn tog lsfisd")
+        console.log(productInfo[0].count, productInfo.productId,"ladf asdfa sdlkfjal;sdkfjsdlkfj l")
+ console.log(productInfo.count,"this is product count")
+    if(productInfo[0].count===10){
       alert("out of stock product list")
-      return setCount(10)
     }
-    setCount(intialcount+1)
+
+  
     
   
        const cartInitialPriceUpdate = ___cartInitialPrice+price;
        const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
        const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
        const productId=key
-       const incrementCount= intialcount+1
+       const incrementCount= Number(productInfo[0].count)+1
+       console.log(incrementCount,"thsi si increment coutn")
        dispatch(incrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
-       dispatch(incrementQuantity(productId,incrementCount))
+      dispatch(incrementQuantity(productId,incrementCount))
 
 
 } catch (error) {
@@ -133,7 +159,6 @@ const moveProducToWishlist = async (productId) => {
         }
      
       });
-      // dispatch(wishlistProducts())
   
      }
      
@@ -155,7 +180,7 @@ const moveProducToWishlist = async (productId) => {
         }
       );
       
-      console.log(response, "wishlist response");
+      // console.log(response, "wishlist response");
       dispatch(cartProducts());
     } catch (err) {
       console.log(err);
@@ -169,7 +194,7 @@ const moveProducToWishlist = async (productId) => {
   const handleMoveToWishlist = async (key)=>{
   
     try {
-      console.log("handleng fromwishlist")
+      // console.log("handleng fromwishlist")
      await moveProducToWishlist(key);
      await removeProductFromCart(key);
     
@@ -179,7 +204,7 @@ const moveProducToWishlist = async (productId) => {
   }
   
   const handleRemoveFromCart = async (key,price)=>{
-    if(intialcount!==1){
+    if(productInfo.count!==1){
       alert("decreased to 1")
       return null;
       
@@ -215,7 +240,7 @@ const moveProducToWishlist = async (productId) => {
            
              <div className="increment-divs-button">
                  <button onClick={()=>{handleProductDecrement(productId,price)}} >-</button>
-                  <button>{intialcount}</button>
+                  <button>{productCount}</button>
                  <button onClick={()=>{handleProductIncrement(productId,price)}}>+</button>
              </div>
     

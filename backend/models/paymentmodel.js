@@ -3,8 +3,8 @@ const mongoose = require("mongoose")
 
 const paymentSchema = mongoose.Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User' },
-    cardNumber: String,
-    expirationDate: String,
+    razorpayOrderId:{type:String},
+    razorpayPaymentId:{type:String},
   
   });
   
