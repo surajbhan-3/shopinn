@@ -124,6 +124,17 @@
 .date-div span{
     width: 60%;
     margin-left: 5px;
-    color: grey;
+}
+#updateAddressButton{
+
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin-top: 10px;
+    background-color: #ff4e5c;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 

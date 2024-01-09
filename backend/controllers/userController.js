@@ -105,7 +105,7 @@ const userSettings = async(req,res) =>{
              try {
               const userPrimaryDetails = await UserModel.findOne({_id:userId})
               const userSecondaryDetails  = await UserUpdateModel.find({user:userId})
-              const userAddressDetails = await AddressModel.find({User:userId})
+              const userAddressDetails = await AddressModel.find({user:userId})
               const {username, avtar, email} = userPrimaryDetails
               console.log(userPrimaryDetails)
               console.log(userSecondaryDetails)
@@ -151,6 +151,42 @@ const editUserProfileSettings = async(req,res)=>{
           return res.status(500).send({"Message":"Internal Server error",Error:error.message})
   
         }
+}
+
+const editUserAddressSettings = async(req,res)=>{
+  const {address, city, postalCode, landmark} = req.body;
+  const {userId} = req.body;
+  console.log(req.body)
+  console.log(address, city, postalCode, landmark);
+  console.log(userId)
+       try {
+            const checkUserUpdateProfile = await AddressModel.findOne({user:userId});
+            console.log(checkUserUpdateProfile,"update profile")
+     
+             if(checkUserUpdateProfile === null ){
+               console.log("hello")
+               const updateUserData = new AddressModel({user:userId,address, city, postalCode, landmark});
+               console.log("hello", updateUserData)
+                  await updateUserData.save()
+                  return res.status(200).send({"Message":"data has been updated"})
+             }else{
+
+                 console.log("User profile already exists, performing update");
+              
+                 checkUserUpdateProfile.address = address;
+                 checkUserUpdateProfile.city= city;
+                 checkUserUpdateProfile.postalCode = postalCode;
+                 checkUserUpdateProfile.landmark = landmark;
+         
+                 await checkUserUpdateProfile.save();
+                 return res.status(200).send({ "Message": "Data has been updated coreecty" });
+           
+             }
+       } catch (error) {
+         console.log(error.message)
+         return res.status(500).send({"Message":"Internal Server error",Error:error.message})
+ 
+       }
 }
 
 const updateProfilePicture =  async (req, res) => {
@@ -255,5 +291,6 @@ module.exports = {
   userSettings, 
   addUserReview,
  updateProfilePicture,
- editUserProfileSettings
+ editUserProfileSettings,
+ editUserAddressSettings
 }

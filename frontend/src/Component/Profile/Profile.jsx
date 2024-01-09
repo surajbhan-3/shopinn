@@ -4,14 +4,23 @@ import axios from 'axios'
 import "./Profile.css"
 
 function Profile() {
-
+  const inputStyle = {
+    width: '30%',
+    margin:'0%',
+    marginLeft:'10%'
+  };
   const [data, setData] = useState([])
   const [secondaryData, setSecondaryData] = useState([])
+  const [addressData, setAddressData] = useState([])
   const [selectedFile, setSelectedFile] = useState(null);
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [dateOfBirth, setDateofBirth] = useState("")
-  const [gender, setGender] = useState("")
+  const [gender, setGender] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalcode]= useState("");
+  const [landmark, setLandmark]= useState("");
 
 
   const handleImagechange = async (event) =>{
@@ -38,6 +47,7 @@ function Profile() {
         console.log(response.data.userSecondaryDetails, "hello herere posdf")
         setData(response.data.userData);
         setSecondaryData(response.data.userSecondaryDetails)
+        setAddressData(response.data.userAddressDetails)
         console.log(secondaryData, "hey tehre secondary data here") // due to asycchronous 
         
         // setSecondaryData({firstname:"sureaj"})
@@ -64,9 +74,27 @@ function Profile() {
       setDateofBirth(secondaryData[0].dateOfBirth);
       setGender(secondaryData[0].gender);
   }
-}, [secondaryData,setFirstname,setLastname, setDateofBirth, setGender]); // dependencies 
+  if (addressData && addressData.length > 0) {
+    setAddress(addressData[0].address);
+    setCity(addressData[0].city);
+    setPostalcode(addressData[0].postalCode);
+    setLandmark(addressData[0].landmark);
+}
+}, [
+  secondaryData,
+  setFirstname,
+  setLastname,
+   setDateofBirth, 
+   setGender, 
+   addressData,
+    setAddress,
+    setCity,
+    setPostalcode,
+    setLandmark
+  ]); // dependencies 
 
 console.log(secondaryData.length, "hey length here")
+console.log(addressData.length, "addres length here")
   const handleUploadImage = async () =>{
 
     try {
@@ -127,15 +155,46 @@ console.log(secondaryData.length, "hey length here")
   }
 
 
-  const inputStyle = {
-    width: '30%',
-    margin:'0%',
-    marginLeft:'10%'
-  };
-  console.log(firstname,lastname,dateOfBirth,gender, "haey tehre")
+  const handleUpdateAddressInfo = async (e) =>{
+    e.preventDefault()
 
-  console.log(data, "this is data ")
-  console.log(data.username, "userdata")
+   console.log(address,city, postalCode, landmark, "hello gys ")
+
+   try {
+     
+     const response = await axios.patch(
+       `http://localhost:4500/api/user/update_address_info`,
+       {
+         
+           address,
+           city,
+           postalCode,
+           landmark
+       
+       },
+       {
+         headers: {
+           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+         },
+   
+       }
+       
+     );
+   console.log(response)
+   } catch (error) {
+     console.log(error)
+     
+   }
+
+   
+}
+
+
+
+
+ 
+
+
   return (
     <div className='profile-main-section'>
            <div className="profile-user-section">
@@ -164,34 +223,37 @@ console.log(secondaryData.length, "hey length here")
                      type="text"
                     value={firstname} 
                     onChange={(e)=>{setFirstname(e.target.value)}} 
-                    placeholder={secondaryData.length>0 ? secondaryData[0].firstname:"Enter Your First Name"} />
+                    placeholder={firstname? firstname:"Enter Your First Name"} />  {/*  empty string`""` is falsy value  */}
                   <label htmlFor="">Last Name</label>
-                  <input type="text" value={lastname} onChange={(e)=>{setLastname(e.target.value)}} placeholder={secondaryData.length==0? "Enter Your Last Name":secondaryData[0].lastname} />
+                  <input type="text" value={lastname} onChange={(e)=>{setLastname(e.target.value)}} placeholder={lastname?lastname:"Enter Your Last Name"} />
                   <label htmlFor="">Date Of Birth</label>
-                   <div className="date-div">
-                    <span>{secondaryData.length>0 ? secondaryData[0].dateOfBirth:"Select your dob"}</span>
-                   <input style={inputStyle}  type="date" name="" id="date-id" value={dateOfBirth} 
+                   
+    
+                   <input  type="date" name="" id="" value={dateOfBirth} 
                    onChange={(e)=>{setDateofBirth(e.target.value)}} 
                    max={(new Date()).toISOString().split('T')[0]} 
                    
                   />
-                   </div>
                   
                   <label htmlFor="">Gender</label>
-                   <input type="text" value={gender} onChange={(e)=>{setGender(e.target.value)}} placeholder={secondaryData.length==0? "Enter Your Last Name":secondaryData[0].gender} /> 
+                   <input type="text" value={gender} onChange={(e)=>{setGender(e.target.value)}} placeholder={gender?gender:"Enter Your Gender"} /> 
           
                    <button id="updateProfileButton">Update Profile</button>
                  </form>
 
-                 <form action="">
+                 <form action="" onSubmit={handleUpdateAddressInfo}>
                    <h3>Edit Address</h3>
-                   <label htmlFor="">Adress line 1</label>
-                   <input type="text" placeholder='' />
-                   <label htmlFor="">Adress line2</label>
-                   <input type="text" placeholder='' />
+                   <label htmlFor="">Adress</label>
+                   <input type="text" maxLength={100} value={address} onChange={(e)=>{setAddress(e.target.value)}} placeholder={address?address:"Enter your addres"} />
+               
                    <label htmlFor="">City</label>
+                   <input type="text" maxLength={20} value={city} onChange={(e)=>{setCity(e.target.value)}} placeholder={"Enter city name"} />
                    <label htmlFor="">Postal code</label>
-                   <input type="text" maxLength={6} />
+                   <input type="text" maxLength={6} value={postalCode} onChange={(e)=>{setPostalcode(e.target.value)}} placeholder={postalCode?postalCode:"Enter six digit pin"} />
+                   <label htmlFor=""  >Landmark</label>
+                   <input type="text" maxLength={20} value={landmark} onChange={(e)=>{setLandmark(e.target.value)}} name="" id="" placeholder={landmark?landmark:"Enter landmark"} />
+
+                   <button id="updateAddressButton">Update Address</button>
                  </form>
            </div>
            <div className='fbottom'>
