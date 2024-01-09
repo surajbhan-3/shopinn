@@ -26,7 +26,6 @@ function Profile() {
   const handleImagechange = async (event) =>{
         event.preventDefault()
         setSelectedFile(event.target.files[0])
-
   }
 
   useEffect(()=>{
@@ -42,15 +41,10 @@ function Profile() {
           },
           
         );
-        console.log(response);
-        console.log(response.data.userAddressDetails)
-        console.log(response.data.userSecondaryDetails, "hello herere posdf")
         setData(response.data.userData);
         setSecondaryData(response.data.userSecondaryDetails)
         setAddressData(response.data.userAddressDetails)
         console.log(secondaryData, "hey tehre secondary data here") // due to asycchronous 
-        
-        // setSecondaryData({firstname:"sureaj"})
 
       } catch (error) {
         console.error("Error fetching data:", error.response || error);
@@ -59,9 +53,6 @@ function Profile() {
     };
   
     getUserDetails();
-
- 
-     
 
   },[])
 
@@ -73,28 +64,27 @@ function Profile() {
       setLastname(secondaryData[0].lastname);
       setDateofBirth(secondaryData[0].dateOfBirth);
       setGender(secondaryData[0].gender);
-  }
+    }
   if (addressData && addressData.length > 0) {
     setAddress(addressData[0].address);
     setCity(addressData[0].city);
     setPostalcode(addressData[0].postalCode);
     setLandmark(addressData[0].landmark);
-}
-}, [
-  secondaryData,
-  setFirstname,
-  setLastname,
-   setDateofBirth, 
-   setGender, 
-   addressData,
-    setAddress,
-    setCity,
-    setPostalcode,
-    setLandmark
-  ]); // dependencies 
+  }
+ }, [
+     secondaryData,
+     setFirstname,
+     setLastname,
+     setDateofBirth, 
+     setGender, 
+     addressData,
+     setAddress,
+     setCity,
+     setPostalcode,
+     setLandmark
+    ]); // dependencies 
 
-console.log(secondaryData.length, "hey length here")
-console.log(addressData.length, "addres length here")
+
   const handleUploadImage = async () =>{
 
     try {
@@ -221,19 +211,24 @@ console.log(addressData.length, "addres length here")
                   <label htmlFor="">First Name</label>
                    <input
                      type="text"
-                    value={firstname} 
-                    onChange={(e)=>{setFirstname(e.target.value)}} 
-                    placeholder={firstname? firstname:"Enter Your First Name"} />  {/*  empty string`""` is falsy value  */}
+                     value={firstname} 
+                     onChange={(e)=>{setFirstname(e.target.value)}} 
+                     placeholder={firstname? firstname:"Enter Your First Name"} 
+                    />  {/*  empty string`""` is falsy value  */}
                   <label htmlFor="">Last Name</label>
-                  <input type="text" value={lastname} onChange={(e)=>{setLastname(e.target.value)}} placeholder={lastname?lastname:"Enter Your Last Name"} />
+                  <input type="text"
+                     value={lastname} 
+                     onChange={(e)=>{setLastname(e.target.value)}} 
+                     placeholder={lastname?lastname:"Enter Your Last Name"} 
+                    />
+
                   <label htmlFor="">Date Of Birth</label>
+                   <input  type="date" 
+                          name="" id="" value={dateOfBirth} 
+                        onChange={(e)=>{setDateofBirth(e.target.value)}} 
+                       max={(new Date()).toISOString().split('T')[0]} 
                    
-    
-                   <input  type="date" name="" id="" value={dateOfBirth} 
-                   onChange={(e)=>{setDateofBirth(e.target.value)}} 
-                   max={(new Date()).toISOString().split('T')[0]} 
-                   
-                  />
+                    />
                   
                   <label htmlFor="">Gender</label>
                    <input type="text" value={gender} onChange={(e)=>{setGender(e.target.value)}} placeholder={gender?gender:"Enter Your Gender"} /> 
@@ -244,14 +239,24 @@ console.log(addressData.length, "addres length here")
                  <form action="" onSubmit={handleUpdateAddressInfo}>
                    <h3>Edit Address</h3>
                    <label htmlFor="">Adress</label>
-                   <input type="text" maxLength={100} value={address} onChange={(e)=>{setAddress(e.target.value)}} placeholder={address?address:"Enter your addres"} />
+                   <input type="text" maxLength={100} value={address}
+                    onChange={(e)=>{setAddress(e.target.value)}} 
+                    placeholder={address?address:"Enter your addres"} />
                
                    <label htmlFor="">City</label>
-                   <input type="text" maxLength={20} value={city} onChange={(e)=>{setCity(e.target.value)}} placeholder={"Enter city name"} />
+                   <input type="text" maxLength={20}
+                    value={city} onChange={(e)=>{setCity(e.target.value)}}
+                     placeholder={"Enter city name"} />
+
                    <label htmlFor="">Postal code</label>
-                   <input type="text" maxLength={6} value={postalCode} onChange={(e)=>{setPostalcode(e.target.value)}} placeholder={postalCode?postalCode:"Enter six digit pin"} />
+                   <input type="text" maxLength={6} value={postalCode}
+                   onChange={(e)=>{setPostalcode(e.target.value)}} 
+                   placeholder={postalCode?postalCode:"Enter six digit pin"} />
+                   
                    <label htmlFor=""  >Landmark</label>
-                   <input type="text" maxLength={20} value={landmark} onChange={(e)=>{setLandmark(e.target.value)}} name="" id="" placeholder={landmark?landmark:"Enter landmark"} />
+                   <input type="text" maxLength={20} 
+                   value={landmark} onChange={(e)=>{setLandmark(e.target.value)}} 
+                   name="" id="" placeholder={landmark?landmark:"Enter landmark"} />
 
                    <button id="updateAddressButton">Update Address</button>
                  </form>
