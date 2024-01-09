@@ -47,7 +47,10 @@ const handleLogin= async(e)=>{
          }else if(data.Token && data.Role==="admin"){
            console.log(data.Token, data.Role)
            localStorage.setItem("shopin-token",data.Token);
+           localStorage.setItem("userId", data.userId);
+           localStorage.setItem("shopinn-user-profile-image", data.avtar)
            alert("user login succesfully")
+           handleIsLoggedIn()
         navigate("/admin")
          }
        }).catch((error)=>{

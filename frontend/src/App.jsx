@@ -19,8 +19,8 @@ import Loader from "./Component/Loader/Loader";
 import { showLoader, stopLoader } from "./Redux/LoaderReducer/Action";
 import Category from "./Component/Category/Category";
 import Reviews from "./Pages/Reviews/Reviews";
-import AdminNavbar from "./Pages/Admin/Adminnavbar/Adminnavbar";
-import Dashboard from "./Pages/Admin/Pages/Dashboard/Dashboard";
+import AdminNavbar from "./Admin/Components/Adminnavbar/Adminnavbar"
+import Dashboard from "./Admin/Pages/Dashboard/Dashboard";
 import Privateroute from "./Component/Private/Privateroute";
 import Mypurchase from "./Pages/Mypurchase/Mypurchase";
 

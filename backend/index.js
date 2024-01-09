@@ -17,7 +17,8 @@ app.use(cors())
 module.exports ={instance}
 const userRoutes =require("./routes/userRoutes");
 const productRouter = require("./routes/productRoutes");
-const paymentRouter = require("./routes/paymentRoutes")
+const paymentRouter = require("./routes/paymentRoutes");
+const adminRouter = require("./routes/adminRoutes");
 
 
 app.get("/", async(req, res)=>{
@@ -39,6 +40,9 @@ app.get("/", async(req, res)=>{
 app.use("/api/user",userRoutes)
 app.use("/api/products", productRouter)
 app.use("/api/payment", paymentRouter)
+app.use("/api/admin", adminRouter)
+
+
 app.listen(Port, async () => {
   try {
     await connection;

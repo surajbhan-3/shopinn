@@ -1,0 +1,19 @@
+
+.user-details-co{
+
+    height: 100px;
+    width: 300px;
+    background-color: plum;
+    display: flex;
+
+}
+
+.userimage-div-a{
+    width: 40px;
+    height: 40px;
+    
+}
+.username-div-a{
+    height: 100px;
+    border: 1px solid black;
+}

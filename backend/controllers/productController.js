@@ -59,46 +59,8 @@ const getSingleProduct = async (req,res)=>{
 
 }
 
-const addProduct = async(req,res)=>{
-
-   
-
-      try {
-
-        const newProduct = new ProductModel(req.body);
-      //   console.log(newProduct)
-        await newProduct.save();
-        return res.status(200).json({"Message":"Data has benn added Successfully"})
 
 
-        
-      } catch (error) {
-         return res.status(500).json({"Message":"Internal Server Error"})
-
-      }
-      
-}
-
-
-const deleteProduct = async(req,res)=>{
-   const productId = req.body.params;
-     
-     try {
-        const deleteSingleProduct = await ProductModel.findByIdDelete({_id:productId})
-        res.status(200).send({"Message":"Product delete successfully"});
-     } catch (error) {
-        
-     }
-}
-
-const updateProduct  = async(req,res)=>{
-
-     try {
-        
-     } catch (error) {
-        
-     }
-}
 
 const addProductToWishList =async (req,res) =>{
      const {userId, productId} = req.body;
@@ -405,10 +367,11 @@ const getPurchaseItems = async(req,res)=>{
 
 
 
-module.exports = {addProduct,
-      deleteProduct,
+module.exports = {
+   
+    
        getProduct,
-       updateProduct,
+    
        addProductToWishList,
         getProductFromWishlist,
       addProductToCart,

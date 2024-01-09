@@ -99,6 +99,7 @@ const  logoutUser = async(req,res)=>{
 }
 
 
+
 const userSettings = async(req,res) =>{
            const {userId} = req.body;
 
