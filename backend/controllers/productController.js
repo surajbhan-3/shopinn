@@ -321,6 +321,32 @@ const getAllReivewsGiven = async (req, res) =>{
 }
 
 
+
+const deleteReview = async (req, res) =>{
+
+    const {userId,reviewId} = req.body;
+        try {
+               
+         const updateReviewData =    await ReviewModel.updateOne(
+            { "reviews.user": objectId },
+            { $pull: { reviews: { _id: reviewId } } }
+          );
+           
+           
+            console.log(userId, reviewId)
+          
+               console.log(updateReviewData, "udated review")
+          return  res.status(200).send({"Message":"Data deleted successfully"})
+         
+        } catch (error) {
+         return  res.status(500).send({"Message":"Internal server error"})
+        }
+}
+
+
+
+
+
 const saveOrderDetails = async (req,res) =>{
        const {userId, data} = req.body;
        console.log(data,"this sis data")
@@ -340,6 +366,42 @@ const saveOrderDetails = async (req,res) =>{
         }
 }
 
+const getPurchaseItems = async(req,res)=>{
+
+   const {userId} = req.body;
+  
+    try {
+
+     const findUser = await OrderModel.findOne({user:userId})
+     console.log(findUser)
+         //   const purchaseItems = await OrderModel.find 
+         //   await orderData.save()
+        if(!findUser){
+           return res.status(404).send({Message:"No data found"})
+        } 
+
+      //   const allData = await   ReviewModel.aggregate(  [   {
+      //    $match: { "reviews.user": objectId   }  } ,
+      //   {    $unwind: "$reviews"    },   
+      //  {      $match: {     "reviews.user": objectId    }   },
+      //  {  $project: {   "review": "$reviews",  // Project only the matching review object
+      //       "productId":"$product",
+      //      "_id": 0   } }, 
+               
+      // ]   )
+        const userPurchaseItems = await OrderModel.aggregate([{$match:{user:userId}},{$unwind:"$products"}])
+        console.log(userPurchaseItems)
+
+      return res.send("userData saved")
+      
+     
+    } catch (error) {
+     
+         return res.send(error)
+    }
+}
+
+
 
 
 
@@ -355,5 +417,7 @@ module.exports = {addProduct,
       removeSingleProductFromWishlist,
       removeSingleProductFromCart,
       getAllReivewsGiven,
-      saveOrderDetails
+      deleteReview,
+      saveOrderDetails,
+      getPurchaseItems
    }

@@ -57,6 +57,30 @@ function Reviews() {
     
     }
 
+const handleDeleteReview = async(key)=>{
+
+    console.log("raeivew item id", key )
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:4500/api/products/reviews/delete_reveiw`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+          },
+          // this data keyword is neccessary in axios when using delete method 
+          data: {
+            reviewId: key
+          }
+        })
+        console.log(response)
+    } catch (error) {
+
+       console.log(error)
+      
+    }
+
+}
 
   return (
     <div className='reviews-userGivenReviews'>
@@ -97,7 +121,7 @@ function Reviews() {
                          <div className="reviewData"><p>{el.review.reviewData}</p></div>
                          <div id='delbutton'>
                            <button id='dd'>lk</button>
-                          <button>Delete</button> 
+                          <button onClick={()=>{handleDeleteReview(el.review._id)}}>Delete</button> 
                           
                          </div>
                     </div>

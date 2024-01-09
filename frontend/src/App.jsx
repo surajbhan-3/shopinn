@@ -22,6 +22,7 @@ import Reviews from "./Pages/Reviews/Reviews";
 import AdminNavbar from "./Pages/Admin/Adminnavbar/Adminnavbar";
 import Dashboard from "./Pages/Admin/Pages/Dashboard/Dashboard";
 import Privateroute from "./Component/Private/Privateroute";
+import Mypurchase from "./Pages/Mypurchase/Mypurchase";
 
 
 
@@ -68,6 +69,7 @@ useEffect(() => {
                 <Route path="/cart"          element={ <React.Fragment> <Offer /> <Navbar /> <Cart     /> <Footer/> </React.Fragment> } />
                 <Route path="/settings"      element={ <React.Fragment> <Offer /> <Navbar /> <Profile  /> <Footer/> </React.Fragment> } />
                 <Route path="/my_order"      element={ <React.Fragment> <Offer /> <Navbar /> <Myorder  /> <Footer/> </React.Fragment> } />
+                <Route path="/my_purchase"   element={ <React.Fragment> <Offer /> <Navbar /> <Mypurchase/> <Footer/> </React.Fragment> } />
                 <Route path="/reviews_given" element={ <React.Fragment> <Offer /> <Navbar /> <Reviews  /> <Footer/> </React.Fragment> } />
               
                 <Route path="/admin"         element={ <React.Fragment> <AdminNavbar /> <Dashboard /> </React.Fragment> } />

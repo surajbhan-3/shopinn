@@ -153,7 +153,7 @@ const avtar = localStorage.getItem("shopinn-user-profile-image")
                         </Link>
                       </div>
                       <div>
-                        <Link className="psts" id="myod" to="/about">
+                        <Link className="psts" id="myod" to="/my_purchase">
                           <div>
                             <IoBagHandleOutline />{" "}
                           </div>{" "}
