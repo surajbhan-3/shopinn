@@ -4,11 +4,11 @@ const {OrderModel} = require("../models/ordermodel")
 const { Schema } = mongoose;
 
 const  userUpdateSchema =  mongoose.Schema({
-    user:{type:Schema.Types.ObjectId, ref:"User"},
+    user:{type:Schema.Types.ObjectId, ref:"User",required:true},
     firstname:{type:String, required:true,minlength:4, maxlength:50},
     lastname:{type:String, required:true,minlength:4, maxlength:50},
-    dateOfbirth:{type:Date},
-    gender:{type:String, enum:["male","female", "other"], default:"NA"},
+    dateOfBirth:{type:String, required:true},
+    gender:{type:String, enum:["male","female", "other"], default:"NA", required:true},
     createdAt: { type: Date,default: Date.now },
     updatedAt: { type: Date },
 

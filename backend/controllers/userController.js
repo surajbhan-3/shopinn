@@ -117,12 +117,39 @@ const userSettings = async(req,res) =>{
 }
 
 
-const editUserSettings = async(req,res)=>{
-
+const editUserProfileSettings = async(req,res)=>{
+   const {firstname, lastname, gender, dateOfBirth} = req.body;
+   const {userId} = req.body;
+   console.log(req.body)
+   console.log(firstname,lastname,gender,dateOfBirth);
+   console.log(userId)
         try {
+             const checkUserUpdateProfile = await UserUpdateModel.findOne({user:userId});
+             console.log(checkUserUpdateProfile,"update profile")
+      
+              if(checkUserUpdateProfile === null ){
+                console.log("hello")
+                const updateUserData = new UserUpdateModel({user:userId,firstname,lastname,gender, dateOfBirth});
+                console.log("hello", updateUserData)
+                   await updateUserData.save()
+                   return res.status(200).send({"Message":"data has been updated"})
+              }else{
+
+                  console.log("User profile already exists, performing update");
+               
+                  checkUserUpdateProfile.firstname = firstname;
+                  checkUserUpdateProfile.lastname = lastname;
+                  checkUserUpdateProfile.gender = gender;
+                  checkUserUpdateProfile.dateOfBirth = dateOfBirth;
           
+                  await checkUserUpdateProfile.save();
+                  return res.status(200).send({ "Message": "Data has been updated" });
+            
+              }
         } catch (error) {
-          
+          console.log(error.message)
+          return res.status(500).send({"Message":"Internal Server error",Error:error.message})
+  
         }
 }
 
@@ -221,4 +248,12 @@ const addUserReview = async (req,res)=>{
 
 
 
-module.exports = {registerUser, loginUser,logoutUser, userSettings, addUserReview, updateProfilePicture}
+module.exports = {
+  registerUser, 
+  loginUser,
+  logoutUser, 
+  userSettings, 
+  addUserReview,
+ updateProfilePicture,
+ editUserProfileSettings
+}
