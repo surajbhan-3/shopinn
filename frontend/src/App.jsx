@@ -24,6 +24,7 @@ import Dashboard from "./Admin/Pages/Dashboard/Dashboard";
 import Privateroute from "./Component/Private/Privateroute";
 import Mypurchase from "./Pages/Mypurchase/Mypurchase";
 import Addproduct from "./Admin/Pages/Addproducts/Addproduct";
+import Productupdate from "./Admin/Pages/Productupdate/Productupdate";
 
 
 
@@ -75,6 +76,7 @@ useEffect(() => {
               
                 <Route path="/admin"               element={ <React.Fragment> <AdminNavbar /> <Dashboard /> </React.Fragment> } />
                 <Route path="/admin/add_products"  element={ <React.Fragment> <AdminNavbar /> <Addproduct /> </React.Fragment> } />
+                <Route path="/admin/product_changes"  element={ <React.Fragment> <AdminNavbar /> <Productupdate /> </React.Fragment> } />
             
               </Route>   {/* Private or Protected routes ends here */}
 

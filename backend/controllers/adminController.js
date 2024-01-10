@@ -64,23 +64,58 @@ const addProduct = async(req,res)=>{
 
 
 const deleteProduct = async(req,res)=>{
- const productId = req.body.params;
+ const {productId} = req.body;
    
    try {
-      const deleteSingleProduct = await ProductModel.findByIdDelete({_id:productId})
+      const deleteSingleProduct = await ProductModel.findByIdAndDelete({_id:productId})
+       
       res.status(200).send({"Message":"Product delete successfully"});
    } catch (error) {
-      
+      res.status(500).send({"Message":"Internal Server Error"})
    }
 }
 
 const updateProduct  = async(req,res)=>{
+  const { productName,
+    productBrand,
+    price,category,
+    subcategory,
+   description,
+   gender  , productId   } = req.body 
 
    try {
+     const product  = await ProductModel.findOne({_id:productId})
+
+      if(!product){
+          return res.status(404).send("User not foung")
+      }
+      product.name = productName,
+      product.brand = productBrand,
+      product.subcategory = subcategory,
+      product.price = price,
+      product.category = category,
+      product.description = description,
+      product.gender = gender,
+
+      await product.save()
+      return res.status(200).send({"Message":"Data has beeen saved"})
       
    } catch (error) {
-      
+      return res.status(500).send({"Message":"Internal server error"})
    }
+}
+const singleProduct = async (req,res)=>{
+     const productId = req.params.id
+     console.log(req.body)
+          try {
+              console.log(productId, "hey i have reached here")
+            const product = await ProductModel.findOne({_id:productId})
+             return res.status(200).send(product)
+            
+          } catch (error) {
+            console.log(error)
+            return res.status(500).send({"Message":"Internal Server Error"})
+          }
 }
 
 const getProductsByCategory = async(req,res)=>{
@@ -94,11 +129,34 @@ const getProductsByCategory = async(req,res)=>{
 }
 
 
+const  updateProductImage = async(req,res)=>{
+        const {productId} = req.body;
+              try {
+                const product = await ProductModel.findOne({_id:productId})
+                if (!product) {
+                  return res.status(404).json({ error: 'Product not found' });
+                }
+                const avtarFilePath = req.file.path 
+                const avtar =   await uploadImageToCloudinary(avtarFilePath)
+                if(!avtar){
+                  return res.status(500).send({"message":"there is issume in image upload ot cloudinamry"})
+                } 
+                product.imageUrl = avtar.url;
+
+                await product.save();
+             
+              } catch (error) {
+                return res.status(200).send()
+              }
+}
+
 module.exports = {
   getAllusers,
    deleteProduct, 
    updateProduct, 
    addProduct,
-   getProductsByCategory
+   getProductsByCategory,
+   singleProduct,
+   updateProductImage
 
    }

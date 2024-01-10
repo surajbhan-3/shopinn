@@ -11,6 +11,7 @@ function Dashboard() {
  const [data, setData] = useState([])
  const [electronicsData , setElectronicsData] = useState([])
  const [shoesData, setShoesData] = useState([])
+ const [booksData, setBooksData] = useState([])
   useEffect(()=>{
 
      const getUserInfo = async()=>{
@@ -80,6 +81,27 @@ function Dashboard() {
     }
 }
 getShoesProducts()
+const getBooksProducts = async()=>{
+
+  try {
+   const response = await axios.get(
+     `http://localhost:4500/api/admin/products/books`,
+     {
+       headers: {
+         Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+       },
+
+       
+     })
+     console.log(response)
+     setBooksData(response.data)
+     console.log(data, "here shoes  data")
+   
+  } catch (error) {
+    console.log(error)
+  }
+}
+getBooksProducts()
 
 
   },[])
@@ -146,8 +168,8 @@ getShoesProducts()
                     <div>
                     <div>
                         <h4>Books</h4>
-                      {shoesData ? (
-                     shoesData.map((el) => (
+                      {booksData ? (
+                     booksData.map((el) => (
                       <Shoes key={el._id} productId={el._id} name={el.name} avtar={el.imageUrl} />
                     ))
                   ) : (

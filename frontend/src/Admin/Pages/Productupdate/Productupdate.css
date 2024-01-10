@@ -1,0 +1,131 @@
+
+
+.userProfile-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px;
+}
+
+.userProfile-wrapper .userName{
+   font-size: 24px;
+}
+.profile-user-section{
+    border: 1px solid  rgb(189, 181, 181);;
+    height: 200px;
+    width: 100%;
+    margin-top:150px;
+    background-color: rgb(189, 181, 181);
+    border-radius: 12px 12px 0px 0px;
+
+}
+.userProfilePicture{
+
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+.userProfilePicture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#updateImage{
+    margin-left: 10px;
+}
+
+.updateImageButton button{
+
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin: 10px;
+    background-color: #ff4e5c;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.updateProductInfo{
+    border: 1px solid  rgb(189, 181, 181);;
+    height: auto;
+    width: 100%;
+    padding-top: 30px;
+
+}
+.updateProductInfo form{
+
+    /* border: 1px solid red; */
+   
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+}
+.updateProductInfo form label{
+    margin-top: 5px;
+
+}
+.updateProductInfo form input{
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 5px;
+    outline-color: #ff4e5c;
+    border-radius: 0px 12px 0px 12px;
+    border: 1px solid grey;
+
+
+
+}
+.fbottom{
+
+    border: 1px solid  rgb(189, 181, 181);;
+    height: 100px;
+    width: 100%;
+    background-color: rgb(189, 181, 181);
+    border-radius: 0px 0px 12px 12px;
+    margin-bottom: 30px;
+}
+
+#updateProductButton,#deleteProductButton{
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin-top: 20px;
+    background-color: #ff4e5c;
+    color: black;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.dele-div{
+    width: 50%;
+    margin: auto;
+}
+#deleteProductButton{
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: grey;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+#text-a{
+    color: black;
+}
+
+
+

@@ -2,7 +2,7 @@ import React from 'react'
 import "./Shoes.css"
 import {useNavigate} from "react-router"
 
-function Shoes({productId, name, avtar}) {
+function Books({productId, name, avtar}) {
 
   const navigate = useNavigate()
   const handleMakeChange = async () =>{
@@ -10,7 +10,7 @@ function Shoes({productId, name, avtar}) {
                   
              navigate("/admin/product_changes")
   }
-    //  Shoes: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop
+    //  Books: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop
   return (
     <div className='item-details-co' key={productId}>
     
@@ -29,4 +29,4 @@ function Shoes({productId, name, avtar}) {
   )
 }
 
-export default Shoes
+export default Books
