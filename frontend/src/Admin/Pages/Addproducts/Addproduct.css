@@ -1,0 +1,115 @@
+.main-addproduct-container{
+
+     margin-top: 20px;
+     
+
+     
+}
+
+
+
+
+
+#updateImage{
+    margin-left: 10px;
+}
+
+.updateImageButton button{
+
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin: 10px;
+    background-color: #ff4e5c;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.addproductDetails-div{
+    border: 1px solid  rgb(189, 181, 181);;
+    height: auto;
+    width: 70%;
+    margin: auto;
+    margin-top: 70px;
+
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+
+}
+.addproductDetails-div form{
+
+    /* border: 1px solid red; */
+       width: 70%;
+       margin: auto;
+       margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    padding: 10px;
+}
+.addproductDetails-div form label{
+    margin-top: 5px;
+
+}
+.addproductDetails-div form input,select, textarea{
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 5px;
+    outline-color: #ff4e5c;
+    border-radius: 0px 12px 0px 12px;
+    border: 1px solid grey;
+
+
+
+}
+.fbottom{
+
+    border: 1px solid  rgb(189, 181, 181);;
+    height: 100px;
+    width: 100%;
+    background-color: rgb(189, 181, 181);
+    border-radius: 0px 0px 12px 12px;
+    margin-bottom: 30px;
+}
+
+#updateProfileButton{
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin-top: 10px;
+    background-color: #ff4e5c;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.date-div{
+    border: 1px solid grey;
+    border-radius: 0px  12px 0px 12px;
+    display: flex;
+    align-items: center;
+    height: 27px;
+    font-size: 14px;
+    margin-top: 3px;
+}
+.date-div span{
+    width: 60%;
+    margin-left: 5px;
+}
+#updateAddressButton{
+
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin-top: 10px;
+    background-color: #ff4e5c;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+

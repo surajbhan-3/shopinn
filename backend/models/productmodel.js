@@ -8,11 +8,9 @@ const productSchema = mongoose.Schema({
     brand:{type:String, required:true, trim:true},
     imageUrl:{type:String, required:true},
     price:{type:Number, required:true, min:0},
-    category:{type:String, required:true, enum:["electronics", "shoes", "clothing", "furniture","Books"]},
+    category:{type:String, required:true, enum:["electronics", "shoes", "clothing", "furniture","books"]},
     subcategory:{type:String , required:true},
     gender:{type:String, enum:["male", "female", "unisex"] , required:true},
-    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
-    user:{type:Schema.Types.ObjectId, ref:"User"},
     createdAt: { type: Date,default: Date.now },
     updatedAt: { type: Date },
 

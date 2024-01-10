@@ -4,6 +4,7 @@ const {CartModel} = require("../models/cartmodel")
 const {ReviewModel} = require("../models/reviewmodel")
 const { OrderModel } = require("../models/ordermodel")
 const {UserModel} = require("../models/usermodel")
+const {uploadImageToCloudinary} = require("../utils/adminCloudinary")
 
 
 // *** admin route
@@ -21,12 +22,32 @@ const getAllusers = async(req,res)=>{
 }
 
 const addProduct = async(req,res)=>{
-
-   
+     
+     const { productName,
+             productBrand,
+             price,category,
+             subcategory,
+            description,
+            gender      } = req.body 
 
     try {
+      const avtarFilePath = req.file.path
+      const avtar =   await uploadImageToCloudinary(avtarFilePath)
+      if(!avtar){
+        return res.status(500).send({"message":"there is issume in image upload ot cloudinamry"})
+      } 
 
-      const newProduct = new ProductModel(req.body);
+      const newProduct = new ProductModel({
+                                              name:productName,
+                                              brand:productBrand,
+                                              imageUrl:avtar.url,
+                                              price:price,
+                                              description:description,
+                                              category:category,
+                                              subcategory:subcategory,
+                                              gender:gender
+
+                                             });
     //   console.log(newProduct)
       await newProduct.save();
       return res.status(200).json({"Message":"Data has benn added Successfully"})
@@ -34,6 +55,7 @@ const addProduct = async(req,res)=>{
 
       
     } catch (error) {
+      console.log(error)
        return res.status(500).json({"Message":"Internal Server Error"})
 
     }
