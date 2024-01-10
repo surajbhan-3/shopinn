@@ -3,6 +3,7 @@ const {WishlistModel} = require("../models/wishlistmodel")
 const {CartModel} = require("../models/cartmodel")
 const {ReviewModel} = require("../models/reviewmodel")
 const { OrderModel } = require("../models/ordermodel")
+const {UserModel} = require("../models/usermodel")
 
 
 // *** admin route
@@ -60,4 +61,22 @@ const updateProduct  = async(req,res)=>{
    }
 }
 
-module.exports = {getAllusers, deleteProduct, updateProduct, addProduct }
+const getProductsByCategory = async(req,res)=>{
+      const {category} = req.params
+          try {
+            const categoryProducts  =  await ProductModel.find({category:category})
+            return res.status(200).send(categoryProducts);
+          } catch (error) {
+            return res.status(500).send({"Message":"Internal server error"});
+          }
+}
+
+
+module.exports = {
+  getAllusers,
+   deleteProduct, 
+   updateProduct, 
+   addProduct,
+   getProductsByCategory
+
+   }

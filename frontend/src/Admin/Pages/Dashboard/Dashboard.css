@@ -1,41 +1,42 @@
 .dashboard-page{
 
-    display: flex;
     height:auto;
 
-
+    margin-top: 70px;
 }
 
-.dash-left{
-    width: 25%;
-    height: auto;
-    border: 1px solid black;
-    background-color: rgb(192, 188, 188);
 
-
-
-}
 
 
 .dash-right{
-    width: 75%;
+    width: auto;
     border: 1px solid black;
     height: auto;
+    margin: auto;
+
 
 }
 
 .dash-right .top-info-div {
     display:  flex;
     justify-content: space-between;
+    background-color: rgb(177, 166, 166);
+    height: 80px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 12px;
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+
+
+
 }
 .dash-right .top-info-div div{
-     border: 1px solid black;
-     width: 30%;
-     height: 40px;
+     /* border: 1px solid black; */
+     width: 200px;
+     height: 80px;
      background-color: purple;
-     margin-top: 90px;
-     margin-right: 10px;
-     margin-left: 10px;
 
      
 
@@ -44,14 +45,36 @@
 .main-detail-wrapper{
 
     margin:20px;
+    width: auto;
     display: flex;
-    justify-content: space-between;
-    border: 1px solid rebeccapurple;
+    height: auto;
+
 }
 
-.main-detail-wrapper>div{
-    height: 400px;
-    border: 1px solid green;
-    background-color: aliceblue;
+
+.main-detail-wrapper h4{
+    text-align: center;
+}
+.alluserDetails{
+    width: auto;
+}
+.allproducts-wrapper-aa{
+    width: 100%;
+   
+}
+.allproducts-a{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    padding: 10px;
+
+
+}
+.allproducts-a>div{
+   border: 1px solid black;
+   width: auto;
+   background-color: white;
+   padding: 0px 10px 10px 10px;
+   border-radius:12px 0px 12px 0px;
 
 }

@@ -23,6 +23,7 @@ import AdminNavbar from "./Admin/Components/Adminnavbar/Adminnavbar"
 import Dashboard from "./Admin/Pages/Dashboard/Dashboard";
 import Privateroute from "./Component/Private/Privateroute";
 import Mypurchase from "./Pages/Mypurchase/Mypurchase";
+import Addproduct from "./Admin/Pages/Addproducts/Addproduct";
 
 
 
@@ -65,14 +66,15 @@ useEffect(() => {
 
               <Route element={<Privateroute />}>
                     {/* Protected routes */}
-                <Route path="/wishlist"      element={ <React.Fragment> <Offer /> <Navbar /> <Wishlist /> <Footer/> </React.Fragment> } />
-                <Route path="/cart"          element={ <React.Fragment> <Offer /> <Navbar /> <Cart     /> <Footer/> </React.Fragment> } />
-                <Route path="/settings"      element={ <React.Fragment> <Offer /> <Navbar /> <Profile  /> <Footer/> </React.Fragment> } />
-                <Route path="/my_order"      element={ <React.Fragment> <Offer /> <Navbar /> <Myorder  /> <Footer/> </React.Fragment> } />
-                <Route path="/my_purchase"   element={ <React.Fragment> <Offer /> <Navbar /> <Mypurchase/> <Footer/> </React.Fragment> } />
-                <Route path="/reviews_given" element={ <React.Fragment> <Offer /> <Navbar /> <Reviews  /> <Footer/> </React.Fragment> } />
+                <Route path="/wishlist"            element={ <React.Fragment> <Offer /> <Navbar /> <Wishlist /> <Footer/> </React.Fragment> } />
+                <Route path="/cart"                element={ <React.Fragment> <Offer /> <Navbar /> <Cart     /> <Footer/> </React.Fragment> } />
+                <Route path="/settings"            element={ <React.Fragment> <Offer /> <Navbar /> <Profile  /> <Footer/> </React.Fragment> } />
+                <Route path="/my_order"            element={ <React.Fragment> <Offer /> <Navbar /> <Myorder  /> <Footer/> </React.Fragment> } />
+                <Route path="/my_purchase"         element={ <React.Fragment> <Offer /> <Navbar /> <Mypurchase/> <Footer/> </React.Fragment> } />
+                <Route path="/reviews_given"       element={ <React.Fragment> <Offer /> <Navbar /> <Reviews  /> <Footer/> </React.Fragment> } />
               
-                <Route path="/admin"         element={ <React.Fragment> <AdminNavbar /> <Dashboard /> </React.Fragment> } />
+                <Route path="/admin"               element={ <React.Fragment> <AdminNavbar /> <Dashboard /> </React.Fragment> } />
+                <Route path="/admin/add_products"  element={ <React.Fragment> <AdminNavbar /> <Addproduct /> </React.Fragment> } />
             
               </Route>   {/* Private or Protected routes ends here */}
 
