@@ -23,7 +23,6 @@ function Navbar({ hideElements }) {
     return state.ProductReducer.cartData
 }))
 
-console.log(___cartProducts)
 
 const avtar = localStorage.getItem("shopinn-user-profile-image")
 
@@ -77,13 +76,13 @@ const avtar = localStorage.getItem("shopinn-user-profile-image")
             <>
             <Link to={isLoggedIn ? '/wishlist' : '/login'} id="wisl">
             <div id="whislist">
-                <FaRegHeart /> {__wishlistProducts.length>0?<sup>{__wishlistProducts.length}</sup>:null}
+                <FaRegHeart /> {__wishlistProducts &&__wishlistProducts.length>0?<sup>{__wishlistProducts.length}</sup>:null}
               </div>
             </Link>
              
              <Link to="/cart" id="cct">
              <div id="cart-items-nav">
-                <GrCart /> {___cartProducts.length>0?<sup>{___cartProducts.length}</sup>:null}
+                <GrCart /> {___cartProducts && ___cartProducts.length>0?<sup>{___cartProducts.length}</sup>:null}
               </div>
              </Link>
               {!isLoggedIn ? (

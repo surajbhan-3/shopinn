@@ -39,15 +39,6 @@ export const cartProducts = ()=>{
           type:ActionTypes.CART_PRODUCTS,
           payload:response.data.products
       })
-       const productData = response.data.products
-      const newArray = productData.map(({ _id, name}) => ({
-        productId: _id,
-        name,
-        count: 1,
-    
-      }));
-      console.log(newArray, "heythuis is new aray")
-      dispatch(addCartdataTocartItemsAndCount(newArray))
 
     const cartPrice = response.data.products;
 
@@ -121,13 +112,36 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
    
 }
 
- export const  addCartdataTocartItemsAndCount = (cartData) =>{
-            console.log("here cardata i have reacehd here action.jso ", cartData)
+ export const  addCartdataTocartItemsAndCount = () =>{
+          console.log("hey i have reachedd here bogog")
+   return async function (dispatch) {
+    const userId = localStorage.getItem("userId")
+    const response = await axios.get(
+       `http://localhost:4500/api/products/cart/get_cartdata/${userId}`,
+     
+       {
+         headers: {
+           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+         },
+       }
+     ).catch((err)=>{
+       console.log(err)
+     });
+      console.log(response.data.products, "hey response products cart")
+   
+     const productData = response.data.products
+    const newArray = productData.map(({ _id, name}) => ({
+      productId: _id,
+      count: 1,
+      productName:name,}));
 
-           return {
-            type:ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT,
-            payload:cartData
-           }
+    dispatch({
+      type:ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT,
+      payload:newArray
+  })
+  
+    
+ }  
  }
 export const incrementQuantity = (productId,incrementCount,name)=>{
   console.log("he action.js, ", productId)
@@ -146,7 +160,7 @@ export const decrementQuantity = (productId,decrementCount,name)=>{
 }
 
 export const deleteItemFromCartDataAndcount = (productId)=>{
-
+         console.log("productId hrere, action.js", productId)
 return{
 type:ActionTypes.DELETE_CARTITEMS_AND_COUNT,
 payload:productId

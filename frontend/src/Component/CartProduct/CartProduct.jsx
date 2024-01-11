@@ -8,20 +8,17 @@ import { ProductContext } from '../../Context/ProductContext'
 
 
 function CartProduct({productId,name, brand, imageUrl, price}) {
-        const [initialCount, setInitialCount] = useState(1)
+
    const {moveProducToWishlist,removeProductFromCart} = useContext(ProductContext)
 
    const __cartItemsAndCount = (useSelector((state)=>{
       return state.ProductReducer.cartItemsAndCount
     }))
-
-    // let productInfo = __orderDetails.find((el)=>{
-    //    return el.productId === productId
-    // })
-    // console.log(productInfo)
-    // console.log(productInfo.count, "this si sdflkasdfjklasfd")
-
-    // const productCount = Number(productInfo.count)
+console.log(__cartItemsAndCount, "hello  cart Items and count")
+    const  countElement = __cartItemsAndCount.find((el)=>{
+              return (el.productId === productId)
+    })  
+  
 
 
 const ___cartInitialPrice = (useSelector((state)=>{
@@ -46,32 +43,27 @@ console.log(___cartInitialPrice, "hello inirial price")
 
 const handleProductIncrement = async(key,price) =>{
   try {
-     console.log(__cartItemsAndCount)
-     console.log(key, price)
-      const productInfo = __cartItemsAndCount.find((el)=>{
-             if(el.productId === key)
-             return  el;
-      })
-      console.log(productInfo, "hey this is the product info")
-  //         console.log(productInfo, "this is product Incremetn tog lsfisd")
-  //         // console.log(productInfo[0].count, productInfo.productId,"ladf asdfa sdlkfjal;sdkfjsdlkfj l")
-  //  console.log(productInfo.count,"this is product count")
-  //     if(productInfo[0].count===10){
-  //       alert("out of stock product list")
-  //     }
   
-    
+      console.log("hey this is the product info")
+               if(countElement.count === 10){
+                  countElement.count = 10
+                  alert("Out of Stock")
+               }else{
+
+            
+                countElement.count =  countElement.count + 1
+                const cartInitialPriceUpdate = ___cartInitialPrice+price;
+                const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
+                const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
+                const productId=key
       
-    
-         const cartInitialPriceUpdate = ___cartInitialPrice+price;
-         const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
-         const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
-         const productId=key
-        //  const incrementCount= Number(productInfo[0].count)+1
-        //  console.log(incrementCount,"thsi si increment coutn")
-         dispatch(incrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
-        // dispatch(incrementQuantity(productId,incrementCount))
-  
+                const countData = countElement.count
+                dispatch(incrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
+               dispatch(incrementQuantity(productId, countData))
+         
+                
+               }
+          
   
   } catch (error) {
      console.log(error);
@@ -80,29 +72,25 @@ const handleProductIncrement = async(key,price) =>{
 
 
 
-    const handleProductDecrement = async(key,price) =>{
+ const handleProductDecrement = async(key,price) =>{
         try {
 
-    //       let productInfo = __orderDetails.filter((el)=>{
-    //         if(el.productId === key)
-    //         return  el;
-    //  })
-           const count=-1
-          if(count===0 ){
+           
+          if(countElement.count - 1 === 0 ){
+               countElement.count = 1
            alert("remove item")
-            // dispatch(decrementQuantity(productId,decrementCount)) 
           
           }else{
-          
+               
+              countElement.count = countElement.count - 1
             const cartInitialPriceUpdate = ___cartInitialPrice-price;
             const cartDiscountedPriceUpdate = Math.floor(cartInitialPriceUpdate*(5/100))
             const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
             const productId=key
-            const decrementCount= -1
-              console.log("hasdfkas dkfasdlkfjasd;flkj")
               dispatch(decrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
             console.log("hello mistaack   ")
-              dispatch(decrementQuantity(productId,decrementCount))
+            const countData = countElement.count
+              dispatch(decrementQuantity(productId,countData))
           }
          
         } catch (error) {
@@ -134,16 +122,36 @@ const handleProductIncrement = async(key,price) =>{
            
              <div className="increment-divs-button">
                  <button onClick={()=>{handleProductDecrement(productId,price)}} >-</button>
-                  <button>{initialCount}</button>
+                  <button>{countElement &&  countElement.count ? countElement.count: null}</button>
                  <button onClick={()=>{handleProductIncrement(productId,price)}}>+</button>
              </div>
     
             <div className='move-remove-btn-cartpage'>
                 <div>
-                    <button  onClick={()=>{removeProductFromCart(productId,price)}}  >Remove</button>
+                    <button  onClick={
+                      ()=>{
+                         if(countElement.count!==1){
+                          alert("reduce to one")
+                         }else{
+                          removeProductFromCart(productId)
+                         }
+                      }
+                      
+                      }  >Remove</button>
                 </div>
                 <div>
-                  <button onClick={() => { moveProducToWishlist(productId); removeProductFromCart(productId) }} >Move to wishlist</button>
+                  <button onClick={() => {
+                    if(countElement.count!==1){
+                      alert("reduce to one")
+                     }else{
+                      moveProducToWishlist(productId); 
+                      removeProductFromCart(productId,price)
+                     }
+                      
+                   
+                  
+                     
+                     }} >Move to wishlist</button>
                 </div>
             </div>
               </div>

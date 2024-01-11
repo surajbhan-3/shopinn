@@ -69,10 +69,11 @@ export const reducer = (state = intialState, { type, payload }) => {
                  })
                  itemCountUpdate = [...data]
              }else{
-              const data = state.cartItemsAndCount.push({productId:payload.productId, count:payload.incrementCount, productName:payload.name})
-              itemCountUpdate = [...data]
+              const newData = { productId: payload.productId, count: payload.incrementCount, productName: payload.name };
+                  
+              itemCountUpdate = [...state.cartItemsAndCount,newData]
              }
-            console.log(payload, 'hii this is payload')
+         
         return{
           ...state, cartItemsAndCount: itemCountUpdate
         }
@@ -92,18 +93,17 @@ export const reducer = (state = intialState, { type, payload }) => {
      }
  }
   case ActionTypes.DELETE_CARTITEMS_AND_COUNT : {
+         
         const updateCartItemsAndCount = state.cartItemsAndCount.filter((el)=>{
-               return el.productId !== payload.productId
+               return el.productId !== payload
         })
       return {
            ...state, cartItemsAndCount : updateCartItemsAndCount
       }
   }
   case ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT : {
-         if(ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT){
-          console.log('this is true bor')
-         }
-            console.log("here ihave reached here ",payload)
+        
+    
   return {
            
        ...state, cartItemsAndCount : payload

@@ -223,6 +223,7 @@ const moveProducToWishlist = async (productId) => {
     console.log(err, "this sis the error getting")
     
   });
+  dispatch(deleteItemFromCartDataAndcount(productId))
   dispatch(wishlistProducts())
 
   if(response){
@@ -251,6 +252,7 @@ const moveProducToWishlist = async (productId) => {
  
 const removeProductFromCart = async (productId) => {
   try {
+    
     const response = await axios.delete(
       `http://localhost:4500/api/products/cart/remove_cart_items/${productId}`,
       {

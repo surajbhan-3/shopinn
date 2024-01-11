@@ -1,14 +1,16 @@
 
 import {useState, createContext} from "react";
 import { useNavigate } from 'react-router'
+import { useDispatch } from "react-redux";
 import { Store } from 'react-notifications-component';
 import axios from "axios";
-
+import { addCartdataTocartItemsAndCount } from "../Redux/ProductReducer/Action";
 export const AuthContext = createContext();
 
 
 export const AuthContextProvider = ({children})=>{
             const navigate = useNavigate()
+            const dispatch = useDispatch()
             const [emailLogin, setEmailLogin] = useState("");
             const [passwordLogin, setPasswordLogin] = useState("");
             const [emailSignup, setEmailSignup] = useState("");
@@ -73,7 +75,7 @@ export const AuthContextProvider = ({children})=>{
                         }
                      
                       });
-                  
+                      dispatch(addCartdataTocartItemsAndCount())
                     navigate("/")
                       }else if(data.Token && data.Role==="admin"){
                         console.log(data.Token, data.Role)
@@ -157,6 +159,7 @@ export const AuthContextProvider = ({children})=>{
                                 }
                              
                               });
+                              dispatch(addCartdataTocartItemsAndCount())
                          navigate("/")
                            }else if(data.Token && data.Role==="admin"){
                              console.log(data.Token, data.Role)
@@ -165,6 +168,7 @@ export const AuthContextProvider = ({children})=>{
                              localStorage.setItem("shopinn-user-profile-image", data.avtar)
                              alert("user login succesfully")
                              handleIsLoggedIn()
+                             dispatch(addCartdataTocartItemsAndCount())
                           navigate("/admin")
                            }
                          }).catch((error)=>{
