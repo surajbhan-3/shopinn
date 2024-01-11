@@ -65,7 +65,7 @@ console.log(productName, brandName, category, subcategory, gender, price, select
                   <label htmlFor="">Product Name</label>
                    <input
                      type="text"
-              
+                      required
                      value={productName} 
                      maxLength={15}
                      onChange={(e)=>{setProductName(e.target.value)}} 
@@ -74,7 +74,7 @@ console.log(productName, brandName, category, subcategory, gender, price, select
                   <label htmlFor="">Brand Name</label>
                   <input type="text"
                      value={brandName} 
-                
+                     required
                      maxLength={15}
                      onChange={(e)=>{setBrandName(e.target.value)}} 
                      placeholder={"Enter Your Brand Name"} 
@@ -82,6 +82,7 @@ console.log(productName, brandName, category, subcategory, gender, price, select
                       <label htmlFor="">Price</label>
                   <input type="number"
                      value={price} 
+                     required
                      maxLength={10}
                      onChange={(e)=>{setPrice(e.target.value)}} 
                      placeholder={"Enter Your Brand Name"} 
@@ -90,7 +91,7 @@ console.log(productName, brandName, category, subcategory, gender, price, select
                     <label htmlFor="">Description</label>
                      <textarea name="" id="" cols="30" rows="5" onChange={(e)=>{setDescription(e.target.value)}} maxLength={500}></textarea>
                     <label htmlFor="">Category</label>
-                     <select name="" id="" onChange={(e)=>{setCategory(e.target.value)}}>
+                     <select name="" required id="" onChange={(e)=>{setCategory(e.target.value)}}>
                       <option value="default">Choose category</option>
                        <option value="electronics">Electronics</option>
                        <option value="shoes">Shoes</option>
@@ -100,13 +101,14 @@ console.log(productName, brandName, category, subcategory, gender, price, select
                      <label htmlFor="">Subcategory</label>
                   <input type="text"
                      value={subcategory} 
+                     required
                      maxLength={15}
                      onChange={(e)=>{setSubcategory(e.target.value)}} 
                      placeholder={"Enter Your Brand Name"} 
                     />
 
                 <label htmlFor="">Gender</label>
-                   <select name="" id="" onChange={(e)=>{setGender(e.target.value)}}>
+                   <select name="gender" required id="gender" onChange={(e)=>{setGender(e.target.value)}}>
                    <option value="default">Choose Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -114,7 +116,7 @@ console.log(productName, brandName, category, subcategory, gender, price, select
                    </select>
 
                   
-                   <input type="file" onChange={handleImagechange} />
+                   <input required type="file" onChange={handleImagechange} />
                    <button id="updateProfileButton">Add Product</button>
                  </form>
 

@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Home from "../src/Pages/Home/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {  Routes, Route } from "react-router-dom";
 import About from "./Pages/About/About";
 import Navbar from "./Component/Navbar/Navbar";
 import Signup from "./Pages/Signup/Signup";
@@ -48,8 +48,9 @@ useEffect(() => {
   }, [dispatch]);
 
   return (
-    
-    <BrowserRouter>
+    // moved my `Browserrouter` to index.js file  because you cannot use useNavigate inside authprovider file
+    // because  useNavigate should be wrapped within Router component
+    <React.Fragment>
         {isLoading ? <Loader /> :
             <Routes>
               <Route path="/about" element={<About />} />
@@ -82,7 +83,7 @@ useEffect(() => {
 
 
             </Routes>}
-    </BrowserRouter>
+    </React.Fragment>
   );
 }
 

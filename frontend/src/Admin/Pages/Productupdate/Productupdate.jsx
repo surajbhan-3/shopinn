@@ -79,7 +79,7 @@ const handleDelete = async () => {
                         
                        })
                        console.log(response, "hello this is respone")
-                     } catch (error) {
+                        } catch (error) {
                         console.log(error)
     
                        }

@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import "./Navbar.css";
-import axios from "axios";
-import { Store } from "react-notifications-component";
 import { Link } from "react-router-dom";
 import { GrCart } from "react-icons/gr";
 import { FaRegHeart } from "react-icons/fa";
@@ -18,7 +16,7 @@ import { wishlistProducts } from "../../Redux/ProductReducer/Action";
 
 // ({ hideElements, isLoggedIn, handleIsLoggedOut })
 function Navbar({ hideElements }) {
-  const {isLoggedIn,handleIsLoggedOut} = useContext(AuthContext);
+  const {isLoggedIn, handleUserLogout} = useContext(AuthContext);
   const __wishlistProducts = useSelector((state) => {
     return state.ProductReducer.wishlistData;
   });
@@ -29,50 +27,8 @@ function Navbar({ hideElements }) {
 console.log(___cartProducts)
 
 const avtar = localStorage.getItem("shopinn-user-profile-image")
- const dispatch = useDispatch()
-//  dispatch(wishlistProducts())
 
 
-
-    const userLogout = async () =>{
-
-        
-    try {
-       const response = await axios.post(`http://localhost:4500/api/user/logout`,
-       {}, 
-       {
-         headers: {
-           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         },
-       }
-       
-       )
-       console.log(response)
-       if(response.status == 200){
-
-         Store.addNotification({
-           title: "Product Already In  Cart",
-           message: "Produc has been  in cart",
-           type: "success",
-           insert: "top",
-           container: "top-right",
-           animationIn: ["animate__animated", "animate__fadeIn"],
-           animationOut: ["animate__animated", "animate__fadeOut"],
-           dismiss: {
-             duration: 2000,
-             onScreen: true
-           }
-        
-         });
-         {handleIsLoggedOut()}
-         window.location.reload()
-       }
-       
-    } catch (error) {
-     console.log(error)
-    }
-
-}
 
 
   return (
@@ -180,10 +136,10 @@ const avtar = localStorage.getItem("shopinn-user-profile-image")
                       <div>
                        
                         <Link className="psts" id="llog" to="/">
-                          <div onClick={userLogout}>
+                          <div onClick={handleUserLogout}>
                             <HiOutlineLogout /> 
                           </div>
-                          <div  onClick={userLogout} >Logout</div>
+                          <div  onClick={handleUserLogout} >Logout</div>
                         </Link>
                       </div>
                     </div>

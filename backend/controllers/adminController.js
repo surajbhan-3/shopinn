@@ -148,6 +148,7 @@ const  updateProductImage = async(req,res)=>{
               } catch (error) {
                 return res.status(200).send()
               }
+              
 }
 
 module.exports = {
