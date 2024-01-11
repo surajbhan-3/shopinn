@@ -78,10 +78,6 @@ export const reducer = (state = intialState, { type, payload }) => {
         }
     }
     case ActionTypes.DECREMENT_QUANTITY:{
-      
-        
-        
-             console.log(payload,'hit this is payload payload')
            const itemCountUpdate = state.cartItemsAndCount.map((el)=>{
              if(el.productId===payload.productId){
                 return {
@@ -90,13 +86,29 @@ export const reducer = (state = intialState, { type, payload }) => {
              }
              return el;
               })
-            console.log(itemCountUpdate, "itemcountupdaet")
-         
-         console.log(payload, 'hii this is payload')
+  
      return{
        ...state, cartItemsAndCount: itemCountUpdate
      }
  }
+  case ActionTypes.DELETE_CARTITEMS_AND_COUNT : {
+        const updateCartItemsAndCount = state.cartItemsAndCount.filter((el)=>{
+               return el.productId !== payload.productId
+        })
+      return {
+           ...state, cartItemsAndCount : updateCartItemsAndCount
+      }
+  }
+  case ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT : {
+         if(ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT){
+          console.log('this is true bor')
+         }
+            console.log("here ihave reached here ",payload)
+  return {
+           
+       ...state, cartItemsAndCount : payload
+  }
+}
     default:
       return state;
   }

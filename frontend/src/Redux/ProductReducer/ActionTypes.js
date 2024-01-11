@@ -11,6 +11,8 @@ export const ActionTypes = {
      INCREMENT_CART_DATA:"Increment_Cart_Data",
      DECREMENT_CART_DATA:"Decrement_Cart_Data",
      INCREMENT_QUANTITY:"Increment_Quantity",
-     DECREMENT_QUANTITY:"Decrement_Quantity"     
+     DECREMENT_QUANTITY:"Decrement_Quantity",
+     ADD_CARTDATA_TO_CARTITMESANDCOUNT : "add_Cartdata_To_DataAndCount",
+     DELETE_CARTITEMS_AND_COUNT:"Delete_CartItemsAndCount_item"     
    
 }

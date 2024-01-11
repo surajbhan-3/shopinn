@@ -33,12 +33,21 @@ export const cartProducts = ()=>{
        ).catch((err)=>{
          console.log(err)
        });
-   
+              console.log(response.data.products, "hey response products cart")
      
         dispatch({
           type:ActionTypes.CART_PRODUCTS,
           payload:response.data.products
       })
+       const productData = response.data.products
+      const newArray = productData.map(({ _id, name}) => ({
+        productId: _id,
+        name,
+        count: 1,
+    
+      }));
+      console.log(newArray, "heythuis is new aray")
+      dispatch(addCartdataTocartItemsAndCount(newArray))
 
     const cartPrice = response.data.products;
 
@@ -112,7 +121,14 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
    
 }
 
+ export const  addCartdataTocartItemsAndCount = (cartData) =>{
+            console.log("here cardata i have reacehd here action.jso ", cartData)
 
+           return {
+            type:ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT,
+            payload:cartData
+           }
+ }
 export const incrementQuantity = (productId,incrementCount,name)=>{
   console.log("he action.js, ", productId)
     return{
@@ -127,4 +143,12 @@ export const decrementQuantity = (productId,decrementCount,name)=>{
     type:ActionTypes.DECREMENT_QUANTITY,
      payload:{productId,decrementCount,name}
   }
+}
+
+export const deleteItemFromCartDataAndcount = (productId)=>{
+
+return{
+type:ActionTypes.DELETE_CARTITEMS_AND_COUNT,
+payload:productId
+}
 }

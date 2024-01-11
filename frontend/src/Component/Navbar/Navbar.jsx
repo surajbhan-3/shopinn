@@ -10,8 +10,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
 import { HiOutlineLogout } from "react-icons/hi";
 import { AuthContext } from "../../Context/AuthContext";
-import { useDispatch, useSelector } from "react-redux";
-import { wishlistProducts } from "../../Redux/ProductReducer/Action";
+import { useSelector } from "react-redux";
 
 
 // ({ hideElements, isLoggedIn, handleIsLoggedOut })
