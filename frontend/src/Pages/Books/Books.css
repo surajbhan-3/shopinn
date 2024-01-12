@@ -15,6 +15,28 @@
     background-color: rgb(170, 165, 165);
 
 }
+.main-books-left-inner-wrapper{
+
+     border: 1px solid black;
+     height: 400px;
+     width: 90%;
+     margin: auto;
+}
+
+.left-cct{
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 5px;
+    outline-color: #ff4e5c;
+    border-radius: 0px 12px 0px 12px;
+    border: 1px solid grey;
+    width: 100%;
+    margin-top: 10px;
+
+}
+
+
+
 .main-books .main-books-right{
      width: 80%;
   
@@ -28,6 +50,16 @@
      gap: 20px;
      margin-left: 20px;
      margin-top: 10px;
+
+}
+
+.pagination-div{
+    /* background-color: red; */
+    width: 20%;
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
 
 }
 

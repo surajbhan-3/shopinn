@@ -111,7 +111,7 @@ console.log(productName, brandName, category, subcategory, gender, price, select
                     <label htmlFor="">Description</label>
                      <textarea name="" id="" cols="30" rows="5" onChange={(e)=>{setDescription(e.target.value)}} maxLength={500}></textarea>
                     <label htmlFor="">Category</label>
-                     <select name="" required id="" onChange={(e)=>{setCategory(e.target.value)}}>
+                     <select name="" required id="cct" onChange={(e)=>{setCategory(e.target.value)}}>
                       <option value="default">Choose category</option>
                        <option value="electronics">Electronics</option>
                        <option value="shoes">Shoes</option>
@@ -128,7 +128,7 @@ console.log(productName, brandName, category, subcategory, gender, price, select
                     />
 
                 <label htmlFor="">Gender</label>
-                   <select name="gender" required id="gender" onChange={(e)=>{setGender(e.target.value)}}>
+                   <select name="gender" required id="cctt" onChange={(e)=>{setGender(e.target.value)}}>
                    <option value="default">Choose Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>

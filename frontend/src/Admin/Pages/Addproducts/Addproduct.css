@@ -55,17 +55,38 @@
     margin-top: 5px;
 
 }
-.addproductDetails-div form input,select, textarea{
+.addproductDetails-div form input, textarea{
     margin-top: 5px;
     font-size: 14px;
     padding: 5px;
     outline-color: #ff4e5c;
     border-radius: 0px 12px 0px 12px;
     border: 1px solid grey;
-
-
-
 }
+
+#cctt{
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 5px;
+    outline-color: #ff4e5c;
+    border-radius: 0px 12px 0px 12px;
+    border: 1px solid grey;
+}
+.cchbox{
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 5px;
+    padding-left: 8px;
+    outline-color: #ff4e5c;
+    border-radius: 0px 12px 0px 12px;
+    border: 1px solid grey;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
 .fbottom{
 
     border: 1px solid  rgb(189, 181, 181);;
