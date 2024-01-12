@@ -62,8 +62,12 @@ const getSingleProduct = async (req,res)=>{
 
 const getProductsByCategory = async(req,res)=>{
    const {category} = req.params
+   const page = req.params.pagenumber
+
+
+         const skipedd =  (parseInt(page) - 1) * 2;
        try {
-         const categoryProducts  =  await ProductModel.find({category:category})
+         const categoryProducts  =  await ProductModel.find({category:category}).skip(skipedd).limit(2)
          return res.status(200).send(categoryProducts);
        } catch (error) {
          return res.status(500).send({"Message":"Internal server error"});

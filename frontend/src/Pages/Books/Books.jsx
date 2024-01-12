@@ -11,7 +11,7 @@ useEffect(()=>{
 
     try {
      const response = await axios.get(
-       `http://localhost:4500/api/products/category/books`,
+       `http://localhost:4500/api/products/category/books/page/1`,
        {
          headers: {
            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
@@ -33,6 +33,28 @@ useEffect(()=>{
 // console.log(booksData, "hey books data")
 
   
+const handlePagination = async(pageNumber) =>{
+  try {
+   const response = await axios.get(
+     `http://localhost:4500/api/products/category/books/page/${pageNumber}`,
+    
+     {
+       headers: {
+         Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+       }, 
+       
+        
+     })
+     console.log(response)
+     setBooksData(response.data)
+     console.log(response.data, "here shoes  data")
+   
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
   return (
     <div className='main-books'>
            <div className="main-books-wrapper">
@@ -50,6 +72,13 @@ useEffect(()=>{
                          ) : (
                             <div>No user Exist</div>
                                   )}
+                             </div>
+
+                             <div className="pagination-div">
+
+                                 <div> <button onClick={()=>{handlePagination(1)}}>Page 1</button></div>
+                                 <div> <button  onClick={()=>{handlePagination(2)}}>Page 2</button></div>
+
                              </div>
 
                      </div>
