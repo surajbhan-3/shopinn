@@ -2,10 +2,11 @@ import React from 'react'
 import './Addproduct.css';
 import axios from 'axios';
 import { useState } from 'react';
+import { Store } from 'react-notifications-component';
 
 
 function Addproduct() {
-
+  // const isLoading = useSelector((state) => state.LoaderReducer.isLoading);
   const [productName, setProductName] = useState("")
   const [brandName, setBrandName] = useState("")
   const [price, setPrice] = useState(0);
@@ -43,8 +44,27 @@ const handleAddProduct = async(event)=>{
         'Content-Type': 'multipart/form-data'
       }
     });
+      if(response.data.status == "success"){
 
-    console.log('Uploaded URL:', response.data.url);
+        Store.addNotification({
+          title: "Product Added",
+          message: "Produc has been addedd",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 2000,
+            onScreen: true
+          }
+       
+        });
+        window.location.reload()
+
+      }
+
+          console.log(response)
     // Handle the uploaded URL (e.g., display the image)
   } catch (error) {
     console.error('Upload failed:', error);

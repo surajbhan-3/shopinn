@@ -50,14 +50,11 @@ const addProduct = async(req,res)=>{
                                              });
     //   console.log(newProduct)
       await newProduct.save();
-      return res.status(200).json({"Message":"Data has benn added Successfully"})
+      return res.status(201).json({status:"success","message":"Data has benn added Successfully"})
 
-
-      
     } catch (error) {
       console.log(error)
-       return res.status(500).json({"Message":"Internal Server Error"})
-
+       return res.status(500).json({status:"error", message:"Internal Server Error", Error:error.message})
     }
     
 }

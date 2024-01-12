@@ -18,6 +18,9 @@ import Product from "./Pages/Product/Product";
 import Loader from "./Component/Loader/Loader";
 import { showLoader, stopLoader } from "./Redux/LoaderReducer/Action";
 import Category from "./Component/Category/Category";
+import Books from "./Pages/Books/Books";
+import Shoes from  "./Pages/Shoes/Shoes"
+import Mobile from "./Pages/Mobile/Mobile"
 import Reviews from "./Pages/Reviews/Reviews";
 import AdminNavbar from "./Admin/Components/Adminnavbar/Adminnavbar"
 import Dashboard from "./Admin/Pages/Dashboard/Dashboard";
@@ -57,9 +60,9 @@ useEffect(() => {
             
 
               <Route path="/"        element={ <React.Fragment> <Offer /> <Navbar /> <Home /> <Category /> <Footer /> </React.Fragment> } />
-              <Route path="/mobiles" element={ <React.Fragment> <Offer /> <Navbar /> <Footer/> </React.Fragment> } />
-              <Route path="/shoes"   element={ <React.Fragment> <Offer /> <Navbar /> <Footer/> </React.Fragment> } />
-              <Route path="/books"   element={ <React.Fragment> <Offer /> <Navbar /> <Footer/> </React.Fragment> } />
+              <Route path="/mobiles" element={ <React.Fragment> <Offer /> <Navbar /> <Mobile /> <Footer/> </React.Fragment> } />
+              <Route path="/shoes"   element={ <React.Fragment> <Offer /> <Navbar /> <Shoes /> <Footer/> </React.Fragment> } />
+              <Route path="/books"   element={ <React.Fragment> <Offer /> <Navbar /> <Books /> <Footer/> </React.Fragment> } />
 
 
               <Route path="/product" element={ <React.Fragment> <Offer /> <Navbar />  <Product /> <Footer/> </React.Fragment>} />

@@ -60,6 +60,16 @@ const getSingleProduct = async (req,res)=>{
 }
 
 
+const getProductsByCategory = async(req,res)=>{
+   const {category} = req.params
+       try {
+         const categoryProducts  =  await ProductModel.find({category:category})
+         return res.status(200).send(categoryProducts);
+       } catch (error) {
+         return res.status(500).send({"Message":"Internal server error"});
+       }
+}
+
 
 
 const addProductToWishList =async (req,res) =>{
@@ -373,6 +383,7 @@ module.exports = {
        getProduct,
     
        addProductToWishList,
+       getProductsByCategory,
         getProductFromWishlist,
       addProductToCart,
       getProductFromCart,

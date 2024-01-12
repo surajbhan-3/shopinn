@@ -6,7 +6,6 @@ import { AuthContextProvider } from './Context/AuthContext';
 import { ProductContextProvider } from './Context/ProductContext';
 import { Provider } from 'react-redux';
 import store, {persistor} from './Redux/Store';
-import Loader from './Component/Loader/Loader';
 import { BrowserRouter } from "react-router-dom";
 
 // import { showLoader,stopLoader } from './Redux/LoaderReducer/Action';

@@ -1,0 +1,34 @@
+.main-books{
+    /* background-color: red; */
+    height: 100vh;
+    padding-top: 105px;
+   
+
+}
+.main-books .main-books-wrapper{
+    display: flex;
+}
+
+.main-books .main-books-left{
+    width: 20%;
+    height: 100vh;
+    background-color: rgb(170, 165, 165);
+
+}
+.main-books .main-books-right{
+     width: 80%;
+  
+}
+
+.main-books .books-container{
+     width: 95%;
+     position: inherit;
+     display: grid;
+     grid-template-columns: repeat(4,1fr);
+     gap: 20px;
+     margin-left: 20px;
+     margin-top: 10px;
+
+}
+
+

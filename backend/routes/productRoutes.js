@@ -1,11 +1,12 @@
 const  express = require("express");
 const productRouter = express.Router()
 const {auth}= require("../middleware/authorization")
-const { getProduct,  addProductToWishList, getProductFromWishlist, addProductToCart, getProductFromCart, getSingleProduct, removeSingleProductFromWishlist, removeSingleProductFromCart, getAllReivewsGiven, saveOrderDetails, getPurchaseItems, deleteReview} = require("../controllers/productController")
+const { getProduct,  addProductToWishList, getProductFromWishlist, addProductToCart, getProductFromCart, getSingleProduct, removeSingleProductFromWishlist, removeSingleProductFromCart, getAllReivewsGiven, saveOrderDetails, getPurchaseItems, deleteReview, getProductsByCategory} = require("../controllers/productController")
 
 
 productRouter.get("/products",getProduct)
 productRouter.get("/product_details/:id", getSingleProduct)
+productRouter.get("/category/:category", auth, getProductsByCategory)
 productRouter.post("/wishlist/add_product", auth, addProductToWishList)
 productRouter.get("/wishlist/get_products/:userId",auth, getProductFromWishlist)
 productRouter.delete("/wishlist/remove_product/:id", auth, removeSingleProductFromWishlist)

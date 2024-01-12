@@ -1,0 +1,22 @@
+.main-part-sweet-loading{
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      left: 0%;
+      background-color: rgba(255, 255, 255, 0.5);
+}
+
+.partsweet-loading{
+    position: relative;
+    width: 50%;
+    margin-left: 45vw;
+   transform: translateY(30vh);
+   background-color: transparent;
+}
+.partsweet-loading h1{
+   /* text-align: center; */
+   transform: translateX(5%);
+}
+.partsweet-loading .loder-e{
+   transform: translateX(50%);
+}
