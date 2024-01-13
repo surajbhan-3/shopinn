@@ -63,14 +63,93 @@ const getSingleProduct = async (req,res)=>{
 const getProductsByCategory = async(req,res)=>{
    const {category} = req.params
    const page = req.params.pagenumber
+   
+   const minPrice = parseInt(req.query.min)
+   const maxPrice = parseInt(req.query.max)
+   const middle = parseInt(req.query.middle)
+   console.log(req.query, req.params)
 
 
-         const skipedd =  (parseInt(page) - 1) * 3;
+         const skipedd =  (parseInt(page) - 1) * 8;
        try {
-         const categoryProducts  =  await ProductModel.find({category:category}).skip(skipedd).limit(3)
+         if(middle){
+            console.log("hheolll")
+            const categoryProducts = await ProductModel.find({
+               category: category,
+               $or: [
+                 { price: { $gte: 100, $lte: 500 } },
+                 { price: { $gte: 1000, $lte: 1999 } }
+            
+               ]
+             }).skip(skipedd).sort({price:1}).limit(8);
+           return res.status(200).send(categoryProducts);
+          
+         }                
+      if(!minPrice || !maxPrice ){
+         console.log("good")
+         const categoryProducts  =  await ProductModel.find({category:category}).skip(skipedd).limit(8)
+         return res.status(200).send(categoryProducts);
+
+
+      }
+      if(minPrice && maxPrice){
+         const categoryProducts  =  await ProductModel.find({category:category,price: { $gte: minPrice, $lte: maxPrice }}).sort({price:1}).skip(skipedd).limit(8)
+         return res.status(200).send(categoryProducts);
+        
+      }
+       
+         const categoryProducts  =  await ProductModel.find({category:category}).skip(skipedd).limit(8)
          return res.status(200).send(categoryProducts);
        } catch (error) {
          return res.status(500).send({"Message":"Internal server error"});
+       }
+}
+
+const getProductsBySubCategory = async(req,res)=>{
+   const {category, subcategory} = req.params
+   const page = req.params.pagenumber;
+   const minPrice = parseInt(req.query.min)
+   const maxPrice = parseInt(req.query.max)
+   const middle = parseInt(req.query.middle)
+   console.log(req.query, "get gqyer")
+   console.log(category, subcategory, page, minPrice, middle)
+
+
+
+         const skipedd =  (parseInt(page) - 1) * 8;
+       try {
+                // triple eual will not work because  javascript comparies ojbect with refrence so vale always be falsey 
+                // but {} empty object is a truethy
+
+                if(middle){
+                  console.log("hheolll")
+                  const categoryProducts = await ProductModel.find({
+                     category: category,
+                     subcategory: subcategory,
+                     $or: [
+                       { price: { $gte: 100, $lte: 500 } },
+                       { price: { $gte: 1000, $lte: 1999 } }
+                  
+                     ]
+                   }).skip(skipedd).sort({price:1}).limit(8);
+                 return res.status(200).send(categoryProducts);
+                
+               }                
+            if(!minPrice || !maxPrice ){
+               console.log("good")
+               const categoryProducts  =  await ProductModel.find({category:category,subcategory:subcategory}).skip(skipedd).limit(8)
+               return res.status(200).send(categoryProducts);
+
+
+            }
+             
+               const categoryProducts  =  await ProductModel.find({category:category,subcategory:subcategory,price: { $gte: minPrice, $lte: maxPrice }}).skip(skipedd).limit(8)
+              return res.status(200).send(categoryProducts);
+             
+             
+               
+       } catch (error) {
+         return res.status(500).send({"Message":"Internal server error",Error:error.message});
        }
 }
 
@@ -388,6 +467,7 @@ module.exports = {
     
        addProductToWishList,
        getProductsByCategory,
+       getProductsBySubCategory,
         getProductFromWishlist,
       addProductToCart,
       getProductFromCart,

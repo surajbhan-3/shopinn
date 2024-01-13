@@ -1,6 +1,7 @@
 .main-books{
     /* background-color: red; */
-    height: 100vh;
+    min-height: 100vh;
+    max-height: auto;
     padding-top: 105px;
    
 
@@ -11,8 +12,10 @@
 
 .main-books .main-books-left{
     width: 20%;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: auto;
     background-color: rgb(170, 165, 165);
+  
 
 }
 .main-books-left-inner-wrapper{
@@ -21,6 +24,9 @@
      height: 400px;
      width: 90%;
      margin: auto;
+     position: fixed;
+     width: 20%;
+
 }
 
 .left-cct{
@@ -39,6 +45,7 @@
 
 .main-books .main-books-right{
      width: 80%;
+     height: auto;
   
 }
 
@@ -69,6 +76,7 @@
     border-radius: 6px;
     border: 1px solid grey;
     background-color: rgb(224, 214, 214);
+    margin-bottom: 20px;
 
 
 }

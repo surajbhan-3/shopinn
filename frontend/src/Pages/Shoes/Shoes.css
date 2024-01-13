@@ -1,6 +1,7 @@
 .main-shoes{
     /* background-color: red; */
-    height: 100vh;
+    min-height: 100vh;
+    max-height: auto;
     padding-top: 105px;
    
 
@@ -21,6 +22,8 @@
      height: 400px;
      width: 90%;
      margin: auto;
+     position: fixed;
+     width: 20%;
 }
 
 .left-cct{

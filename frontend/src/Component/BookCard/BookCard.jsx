@@ -9,12 +9,7 @@ function BookCard({productId, imageUrl, name, price}) {
  const isLoading = partLoader
 
 const handleSingleProductPage = async () =>{
-          setPartLoader(true)
-        setTimeout(() => {
-              setPartLoader(false)
-            console.log("hello")
-          }, 2000);
-    
+        
 
 }
 
