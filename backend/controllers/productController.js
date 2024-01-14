@@ -50,7 +50,6 @@ const getSingleProduct = async (req, res) => {
         reviewDate: el.reviewDate,
       };
     });
-    console.log(reviewDetails);
     return res.status(200).send([singleProduct, reviewDetails]);
   } catch (error) {
    return res.status(500).json({status: "error",message: "Internal Server Error",Error: error.message});
@@ -64,12 +63,10 @@ const getProductsByCategory = async (req, res) => {
   const minPrice = parseInt(req.query.min);
   const maxPrice = parseInt(req.query.max);
   const middle = parseInt(req.query.middle);
-  console.log(req.query, req.params);
 
   const skipedd = (parseInt(page) - 1) * 8;
   try {
     if (middle) {
-      console.log("hheolll");
       const categoryProducts = await ProductModel.find({
         category: category,
         $or: [
@@ -83,7 +80,6 @@ const getProductsByCategory = async (req, res) => {
       return res.status(200).send(categoryProducts);
     }
     if (!minPrice || !maxPrice) {
-      console.log("good");
       const categoryProducts = await ProductModel.find({ category: category })
         .skip(skipedd)
         .limit(8);
@@ -115,8 +111,7 @@ const getProductsBySubCategory = async (req, res) => {
   const minPrice = parseInt(req.query.min);
   const maxPrice = parseInt(req.query.max);
   const middle = parseInt(req.query.middle);
-  console.log(req.query, "get gqyer");
-  console.log(category, subcategory, page, minPrice, middle);
+
 
   const skipedd = (parseInt(page) - 1) * 8;
   try {
@@ -124,7 +119,6 @@ const getProductsBySubCategory = async (req, res) => {
     // but {} empty object is a truethy
 
     if (middle) {
-      console.log("hheolll");
       const categoryProducts = await ProductModel.find({
         category: category,
         subcategory: subcategory,
@@ -139,7 +133,6 @@ const getProductsBySubCategory = async (req, res) => {
       return res.status(200).send(categoryProducts);
     }
     if (!minPrice || !maxPrice) {
-      console.log("good");
       const categoryProducts = await ProductModel.find({
         category: category,
         subcategory: subcategory,
@@ -173,19 +166,19 @@ const addProductToWishList = async (req, res) => {
 
     if (!wishlist) {
       wishlist = new WishlistModel({ user: userId, products: [productId] });
-      // console.log("datasaved")
+     
       await wishlist.save();
       return res.status(200).json({ Message: "Added Successfully" });
     } else {
-      //   console.log("wishlist is true")
+    
       if (!wishlist.products.includes(productId)) {
         wishlist.products.push(productId);
-        //   console.log(productId, "product id push to product array")
+      
         await wishlist.save();
 
         return res.status(200).json({ Message: "Added Successfully" });
       } else {
-        // console.log("used", productId)
+      
 
         return res
           .status(409)
@@ -203,11 +196,10 @@ const getProductFromWishlist = async (req, res) => {
     const wishlist = await WishlistModel.findOne({ user: userId }).populate(
       "products"
     );
-    console.log(wishlist);
+
     if (!wishlist) {
       return res.status(404).json({ message: "Wishlist not found" });
     }
-    //    await wishlist.populate('products').execPopulate();
 
     return res.status(200).send(wishlist);
   } catch (error) {
@@ -218,10 +210,7 @@ const getProductFromWishlist = async (req, res) => {
 const removeSingleProductFromWishlist = async (req, res) => {
   const productId = req.params.id;
   const { userId } = req.body;
-  console.log(userId, "sadf");
-  console.log(productId);
 
-  console.log("hel csfsd");
   try {
     const wishlist = await WishlistModel.findOne({ user: userId });
 
@@ -246,32 +235,31 @@ const removeSingleProductFromWishlist = async (req, res) => {
 
 const addProductToCart = async (req, res) => {
   const { userId, productId } = req.body;
-  // console.log("productId", productId)
-  // console.log("userId", userId)
+
 
   try {
     if (!userId || !productId) {
       return send({ message: "falult at various level" });
     }
     let cartData = await CartModel.findOne({ user: userId });
-    //  console.log(cartData, "this one is cart data")
+
 
     if (!cartData) {
       cartData = new CartModel({ user: userId, products: [productId] });
-      //  console.log("datasaved")
+      
       await cartData.save();
      return  res.status(200).json({ status: "success", message: "Product added successfully" });
 
     } else {
-      // console.log("cartdata is true is true")
+   
       if (!cartData.products.includes(productId)) {
         cartData.products.push(productId);
-        // console.log(productId, "product id push to product array")
+
         await cartData.save();
 
         return res.status(200).json({ Message: "Added Successfully" });
       } else {
-        //  console.log("used", productId)
+
         return res.status(409).json({ Message: "Product is already in cart" });
       }
     }
@@ -286,11 +274,11 @@ const getProductFromCart = async (req, res) => {
     const cartData = await CartModel.findOne({ user: userId }).populate(
       "products"
     );
-    //  console.log(cartData)
+
     if (!cartData) {
       return res.status(404).json({ message: "CartData not found" });
     }
-    //    await wishlist.populate('products').execPopulate();
+
 
     return res.status(200).send(cartData);
   } catch (error) {
@@ -301,10 +289,7 @@ const getProductFromCart = async (req, res) => {
 const removeSingleProductFromCart = async (req, res) => {
   const productId = req.params.id;
   const { userId } = req.body;
-  console.log(userId, "sadf");
-  console.log(productId);
 
-  console.log("hel csfsd");
   try {
     const cartData = await CartModel.findOne({ user: userId });
 
@@ -327,8 +312,7 @@ const removeSingleProductFromCart = async (req, res) => {
 const getAllReivewsGiven = async (req, res) => {
   const { userId } = req.body;
   const objectId = new mongoose.Types.ObjectId(userId);
-  console.log(userId);
-  console.log("all reivews");
+
 
   try {
     const allData = await ReviewModel.aggregate([
@@ -358,8 +342,6 @@ const getAllReivewsGiven = async (req, res) => {
     });
     const data = await Promise.all(promises);
 
-    console.log(data);
-    // console.log(allData[0].productId)
     return res.status(200).send(data);
   } catch (error) {}
 };
@@ -372,9 +354,7 @@ const deleteReview = async (req, res) => {
       { $pull: { reviews: { _id: reviewId } } }
     );
 
-    console.log(userId, reviewId);
 
-    console.log(updateReviewData, "udated review");
     res.status(200).json({ status: "success", message: "Review deleted successfully" });
 
    } catch (error) {
@@ -384,7 +364,6 @@ const deleteReview = async (req, res) => {
 
 const saveOrderDetails = async (req, res) => {
   const { userId, data } = req.body;
-  console.log(data, "this sis data");
   try {
     const findUser = await OrderModel.findOne({ user: userId });
     if (!findUser) {
@@ -402,9 +381,8 @@ const getPurchaseItems = async (req, res) => {
 
   try {
     const findUser = await OrderModel.findOne({ user: userId });
-    console.log(findUser);
-    //   const purchaseItems = await OrderModel.find
-    //   await orderData.save()
+
+
     if (!findUser) {
       return res.status(404).send({ Message: "No data found" });
     }
