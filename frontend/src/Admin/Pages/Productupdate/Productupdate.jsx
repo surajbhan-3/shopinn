@@ -1,100 +1,24 @@
 import React from 'react'
 import './Productupdate.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
-
+import { useContext } from 'react';
+import { AdminContext } from '../../../Context/AdminContext';
+import PartLoader from '../../../Component/PartLoader/PartLoader';
 function Productupdate() {
 
-  const [productName, setProductName] = useState("")
-  const [brandName, setBrandName] = useState("")
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
-  const [subcategory, setSubcategory] = useState("")
-  const [gender, setGender] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [description, setDescription]= useState("")
-  const [data, setData] = useState([])
+  const {
+         productName,    brandName,    price,     category,    subcategory,    gender, selectedFile, description,
+         setProductName, setBrandName, setPrice,  setCategory, setSubcategory, setGender, setSelectedFile, setDescription,
+         handleDeleteProduct, handleUpdateProduct, handleImagechange, handleUdateProductImage, data, setData, isLoading
+         
+     } = useContext(AdminContext)
 
- 
-
-  useEffect(()=>{
-        const productId = localStorage.getItem("productId")
-      const  getSingleProduct = async()=>{
-
-                try {
-                       const response = await axios.get(`http://localhost:4500/api/admin/product_details/${productId}`,
-                       
-                       {
-                      
-                        headers:{
-                           Authorization:`Bearer ${localStorage.getItem("shopin-token")}`
-                        }
-                         
-                       })
-                       console.log(response, "hello this is respone")
-                       setData(response.data)
-                       setProductName(response.data.name)
-                       setBrandName(response.data.brand)
-                       setPrice(response.data.price)
-                       setCategory(response.data.category)
-                       setSubcategory(response.data.subcategory)
-                       setDescription(response.data.description)
-                       setGender(response.data.gender)
-                } catch (error) {
-                  console.log(error)
-                }
-        }
-        getSingleProduct();
-     
-  },[])
-  
-
-
-
-const handleUploadImage = async(event)=>{
-  event.preventDefault()
-
-   
-  
-
-}
-
-const handleUpdateProduct = async()=>{
-
-  
-}
-const handleDelete = async () => {
-      const productId = localStorage.getItem("productId")
-
-  try {
-    const response = await axios.delete(`http://localhost:4500/api/admin/product_details/${productId}`,
-                       
-                       {
-                         
-                        headers:{
-                           Authorization:`Bearer ${localStorage.getItem("shopin-token")}`
-                        },
-                        data: productId
-                        
-                       })
-                       console.log(response, "hello this is respone")
-                        } catch (error) {
-                        console.log(error)
-    
-                       }
-      
-}
-
-const handleImagechange = async (event) =>{
-  event.preventDefault()
-  setSelectedFile(event.target.files[0])
-}
 
   return (
   
     <div className='profile-main-section'>
-           <div className="profile-user-section">
+           {isLoading?<PartLoader />:
+             <React.Fragment>
+              <div className="profile-user-section">
                   <div className='userProfile-wrapper'> 
                         <div className="userProfilePicture">
                          <img src= {data.imageUrl} alt="" />
@@ -105,7 +29,7 @@ const handleImagechange = async (event) =>{
 
                        <div className='updateImageButton'>
                           <input type="file" onChange={handleImagechange} />
-                         <button onClick={handleUploadImage}>Update Image</button>
+                         <button onClick={handleUdateProductImage}>Update Image</button>
                        </div>
 
                   </div>
@@ -129,35 +53,37 @@ const handleImagechange = async (event) =>{
                      onChange={(e)=>{setBrandName(e.target.value)}} 
                      placeholder={brandName?brandName:null} 
                     />
+                         <label htmlFor="">Price</label>
+                  <input required type="number"
+                     value={price} 
+                     onChange={(e)=>{setPrice(e.target.value)}} 
+                     placeholder={price?price:null} 
+                    />
+
                    <label htmlFor="">Description</label>
-                     <textarea required name="" id="text-a" cols="30" rows="5" onChange={(e)=>{setDescription(e.target.value)}} 
+                     <textarea required name="" value={description} id="text-a" cols="30" rows="5" onChange={(e)=>{setDescription(e.target.value)}} 
                      maxLength={500}
                      placeholder={description?description:null} 
                      ></textarea>
 
-                      <label htmlFor="">Price</label>
-                  <input required type="number"
-                     value={price} 
-                     onChange={(e)=>{setBrandName(e.target.value)}} 
-                     placeholder={price?price:null} 
-                    />
-
+                 
                   
-
-                     <label htmlFor="">Subcategory</label>
-                  <input required type="text"
-                     value={subcategory} 
-                     onChange={(e)=>{setBrandName(e.target.value)}} 
-                     placeholder={subcategory?subcategory:null} 
-                    />
-
-                       <label htmlFor="">Category</label>
+                    <label htmlFor="">Category</label>
                      <select required name="" id="" value={category} onChange={(e)=>{setCategory(e.target.value)}}>
                       <option value="default">Choose category</option>
                        <option value="electronics">Electronics</option>
                        <option value="shoes">Shoes</option>
                        <option value="books">Books</option>
                      </select>
+
+                     <label htmlFor="">Subcategory</label>
+                  <input required type="text"
+                     value={subcategory} 
+                     onChange={(e)=>{setSubcategory(e.target.value)}} 
+                     placeholder={subcategory?subcategory:null} 
+                    />
+
+                    
                   
                   
                   <label htmlFor="">Gender</label>
@@ -174,7 +100,7 @@ const handleImagechange = async (event) =>{
                                      
                  </form>
                   <div className='dele-div'>
-                  <button onClick={handleDelete} id='deleteProductButton'>Delete</button>
+                  <button onClick={handleDeleteProduct} id='deleteProductButton'>Delete</button>
                   </div>
 
                 
@@ -184,6 +110,8 @@ const handleImagechange = async (event) =>{
            <div className='fbottom'>
 
            </div>
+             </React.Fragment>
+           }
     </div>
   )
 }

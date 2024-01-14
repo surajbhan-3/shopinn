@@ -9,7 +9,10 @@ const { OrderModel } = require("../models/ordermodel")
 const getProduct = async(req,res)=>{
     
      try {
-          const allProducts = await ProductModel.find()
+         //  const allProducts = await ProductModel.find().limit(6)
+         const allProducts = await ProductModel.aggregate([
+            { $sample: { size: 6 } }
+          ]);
       return res.status(200).send(allProducts)
         
      } catch (error) {

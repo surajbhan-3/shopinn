@@ -11,7 +11,7 @@ adminRouter.post("/add_product", isAdmin, upload.single('avtar'), addProduct)
 
 adminRouter.post("/delete_product", isAdmin, deleteProduct)
 
-adminRouter.post("/update_product", isAdmin, updateProduct)
+adminRouter.patch("/update_product", isAdmin, updateProduct)
 adminRouter.get("/products/:category", isAdmin, getProductsByCategory)
 adminRouter.get("/product_details/:id", isAdmin, singleProduct)
 adminRouter.patch("/update/product_image", isAdmin,  upload.single('avtar'), updateProductImage)

@@ -1,4 +1,14 @@
 
+/* 
+   # Functions available 
+    
+    1.  handleAddProductToWishlist 
+    2.  handleSingleProductPage
+
+
+*/ 
+
+
 import { createContext, useContext} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router'

@@ -73,21 +73,23 @@ const deleteProduct = async(req,res)=>{
 }
 
 const updateProduct  = async(req,res)=>{
+  console.log('heelo')
   const { productName,
-    productBrand,
+    brandName,
     price,category,
     subcategory,
    description,
    gender  , productId   } = req.body 
-
+   console.log(req.body, "this is reqbody")
    try {
      const product  = await ProductModel.findOne({_id:productId})
-
+    
       if(!product){
-          return res.status(404).send("User not foung")
+          return res.status(404).send("Product not foung")
       }
+
       product.name = productName,
-      product.brand = productBrand,
+      product.brand = brandName,
       product.subcategory = subcategory,
       product.price = price,
       product.category = category,
@@ -98,8 +100,35 @@ const updateProduct  = async(req,res)=>{
       return res.status(200).send({"Message":"Data has beeen saved"})
       
    } catch (error) {
-      return res.status(500).send({"Message":"Internal server error"})
+    console.log(error)
+      return res.status(500).send({"Message":"Internal server error",Error:error.message})
    }
+}
+
+
+const  updateProductImage = async(req,res)=>{
+   console.log("update image")
+  const {productId} = req.body;
+        try {
+          const product = await ProductModel.findOne({_id:productId})
+          if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+          }
+          const avtarFilePath = req.file.path 
+          const avtar =   await uploadImageToCloudinary(avtarFilePath)
+          if(!avtar){
+            return res.status(500).send({"message":"there is issume in image upload ot cloudinamry"})
+          } 
+          console.log(avtar.url)
+          product.imageUrl = avtar.url;
+
+          await product.save();
+          return res.send({"Message":"Image has been updated"})
+       
+        } catch (error) {
+          return res.status(200).send()
+        }
+        
 }
 const singleProduct = async (req,res)=>{
      const productId = req.params.id
@@ -126,27 +155,7 @@ const getProductsByCategory = async(req,res)=>{
 }
 
 
-const  updateProductImage = async(req,res)=>{
-        const {productId} = req.body;
-              try {
-                const product = await ProductModel.findOne({_id:productId})
-                if (!product) {
-                  return res.status(404).json({ error: 'Product not found' });
-                }
-                const avtarFilePath = req.file.path 
-                const avtar =   await uploadImageToCloudinary(avtarFilePath)
-                if(!avtar){
-                  return res.status(500).send({"message":"there is issume in image upload ot cloudinamry"})
-                } 
-                product.imageUrl = avtar.url;
 
-                await product.save();
-             
-              } catch (error) {
-                return res.status(200).send()
-              }
-              
-}
 
 module.exports = {
   getAllusers,
