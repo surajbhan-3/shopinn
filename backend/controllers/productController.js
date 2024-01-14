@@ -400,7 +400,6 @@ const getPurchaseItems = async (req, res) => {
 
 module.exports = {
   getProduct,
-
   addProductToWishList,
   getProductsByCategory,
   getProductsBySubCategory,

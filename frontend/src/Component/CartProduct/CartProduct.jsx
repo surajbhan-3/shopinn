@@ -14,17 +14,13 @@ function CartProduct({productId,name, brand, imageUrl, price}) {
    const __cartItemsAndCount = (useSelector((state)=>{
       return state.ProductReducer.cartItemsAndCount
     }))
-console.log(__cartItemsAndCount, "hello  cart Items and count")
-    const  countElement = __cartItemsAndCount.find((el)=>{
-              return (el.productId === productId)
-    })  
+
   
 
 
 const ___cartInitialPrice = (useSelector((state)=>{
   return state.ProductReducer.cartInitialPrice;    
 }))
-console.log(___cartInitialPrice, "hello inirial price")
 
     const dispatch = useDispatch();
 
@@ -44,7 +40,7 @@ console.log(___cartInitialPrice, "hello inirial price")
 const handleProductIncrement = async(key,price) =>{
   try {
   
-      console.log("hey this is the product info")
+   
                if(countElement.count === 10){
                   countElement.count = 10
                   alert("Out of Stock")
@@ -88,7 +84,7 @@ const handleProductIncrement = async(key,price) =>{
             const cartTotalPriceUpdate = cartInitialPriceUpdate - cartDiscountedPriceUpdate
             const productId=key
               dispatch(decrementCartData(cartInitialPriceUpdate, cartDiscountedPriceUpdate,cartTotalPriceUpdate))
-            console.log("hello mistaack   ")
+           
             const countData = countElement.count
               dispatch(decrementQuantity(productId,countData))
           }

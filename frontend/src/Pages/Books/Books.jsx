@@ -400,7 +400,7 @@ getProductsByPriceRange()
   
   
   }
-   console.log(targetValue, "hey target value")
+   
   if(targetValue=="default"){
      
     if(checkboxStates.checkbox1 && !checkboxStates.checkbox2 && !checkboxStates.checkbox3){
@@ -429,7 +429,7 @@ getProductsByPriceRange()
      }else if(checkboxStates.checkbox1 && checkboxStates.checkbox2 && !checkboxStates.checkbox3){
            
       const getProductsByPriceRange = async () =>{
-        console.log("here i reached here")
+       
     try {
      const response = await axios.get(
        `http://localhost:4500/api/products/category/books/page/1?min=100&max=999`,
@@ -441,9 +441,9 @@ getProductsByPriceRange()
          
           
        })
-       console.log(response)
+   
        setBooksData(response.data)
-       console.log(response.data, "here shoes  data")
+     
      
     } catch (error) {
       console.log(error)
@@ -453,9 +453,9 @@ getProductsByPriceRange()
     
     
      }else if(checkboxStates.checkbox1 && checkboxStates.checkbox2 && checkboxStates.checkbox3){
-      console.log("heelllo ")
+    
       if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
-         console.log('hello brother ')
+        
       }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
         console.log("hey both are true");
       }

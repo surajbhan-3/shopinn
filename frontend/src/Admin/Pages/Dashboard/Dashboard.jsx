@@ -26,9 +26,9 @@ function Dashboard() {
       
               
             })
-            console.log(response)
+         
             setData(response.data)
-            console.log(data, "here useEffect data")
+           
           
          } catch (error) {
            console.log(error)
@@ -49,9 +49,8 @@ function Dashboard() {
    
            
          })
-         console.log(response)
          setElectronicsData(response.data)
-         console.log(data, "here electronics  data")
+    
        
       } catch (error) {
         console.log(error)
@@ -72,10 +71,9 @@ function Dashboard() {
  
          
        })
-       console.log(response)
-       setShoesData(response.data)
-       console.log(data, "here shoes  data")
      
+       setShoesData(response.data)
+  
     } catch (error) {
       console.log(error)
     }
@@ -93,9 +91,9 @@ const getBooksProducts = async()=>{
 
        
      })
-     console.log(response)
+    
      setBooksData(response.data)
-     console.log(data, "here shoes  data")
+    
    
   } catch (error) {
     console.log(error)
@@ -105,8 +103,6 @@ getBooksProducts()
 
 
   },[])
-
-  console.log(data, "here is data sf isofdsdkl")
 
 
 

@@ -80,10 +80,10 @@ const placeOrder = async()=>{
       };
       const rzp1 = new  window.Razorpay(options);
        rzp1.open().then((response)=>{
-         console.log(response, 'hhhere y re')
+         console.log(response)
        });
         } catch (error) {
-          
+          console.log(error)
         }     
 }
 
