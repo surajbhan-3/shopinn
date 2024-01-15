@@ -58,133 +58,50 @@
         |         |         |----- Admin/
         |         |         |         |----- Component/
         |         |         |         |         |----- Adminnavbar/
-        |         |         |         |         |         |----- Adminnavbar.css/
-        |         |         |         |         |         |----- Adminnavbar.jsx/
-        |         |         |         |         |
         |         |         |         |         |----- Books/
-        |         |         |         |         |         |----- Books.css
-        |         |         |         |         |         |----- Books.jsx 
         |         |         |         |         |----- Electronics/
-        |         |         |         |         |         |----- Electronics.css
-        |         |         |         |         |         |----- Electronic.jsx  
         |         |         |         |         |----- Shoes/
-        |         |         |         |         |         |----- Shoes.css
-        |         |         |         |         |         |----- Shoes.jsx    
-        |         |         |         |         |----- UserCard/
-        |         |         |         |         |         |----- UserCard.css
-        |         |         |         |         |         |----- UserCard.jsx                                     
+        |         |         |         |         |----- UserCard/                                
         |         |         |         |----- Pages/
         |         |         |         |         |
         |         |         |         |         |-----  Addproducts/
-        |         |         |         |         |          |----- Addproducts.css
-        |         |         |         |         |          |----- Addproduct.jsx  
         |         |         |         |         |-----  Dashboard/
-        |         |         |         |         |          |----- Dashboard.css
-        |         |         |         |         |          |----- Dashboard.jsx  
         |         |         |         |         |-----  Productupdate/
-        |         |         |         |         |          |----- Productupdate.css
-        |         |         |         |         |          |----- Productupdate.jsx  
-        |         |         |         |
         |         |         |----- assets/
         |         |         |----- Component/
         |         |         |         |----- BookCard/
-        |         |         |         |         |----- BookCard.css
-        |         |         |         |         |----- BookCard.jsx
         |         |         |         |----- CartProduct/
-        |         |         |         |         |----- CartProduct.css
-        |         |         |         |         |----- CartProduct.jsx
         |         |         |         |----- Category/
-        |         |         |         |         |----- Category.css
-        |         |         |         |         |----- Category.jsx
         |         |         |         |----- Footer/
-        |         |         |         |         |----- Footer.css
-        |         |         |         |         |----- Footer.jsx
         |         |         |         |----- Hero/
-        |         |         |         |         |----- Hero.css
-        |         |         |         |         |----- Hero.jsx     
-        |         |         |         |----- Loader/
-        |         |         |         |         |----- Loader.css
-        |         |         |         |         |----- Loader.jsx      
+        |         |         |         |----- Loader/   
         |         |         |         |----- MobileCard/
-        |         |         |         |         |----- MobileCard.css
-        |         |         |         |         |----- MobileCard.jsx
         |         |         |         |----- Myorder/
-        |         |         |         |         |----- Myorder.css
-        |         |         |         |         |----- Myorder.jsx
         |         |         |         |----- Navbar/
-        |         |         |         |         |----- Navbar.css
-        |         |         |         |         |----- Navbar.jsx
-        |         |         |         |----- Offer/
-        |         |         |         |         |----- Offer.css
-        |         |         |         |         |----- Offer.jsx        
+        |         |         |         |----- Offer/       
         |         |         |         |----- PartLoader/
-        |         |         |         |         |----- PartLoader.css
-        |         |         |         |         |----- PartLoader.jsx
         |         |         |         |----- Private/
-        |         |         |         |         |----- Private.jsx
         |         |         |         |----- Profile/
-        |         |         |         |         |----- Profile.css
-        |         |         |         |         |----- Profile.jsx
         |         |         |         |----- ShoeCard/
-        |         |         |         |         |----- ShoeCard.css
-        |         |         |         |         |----- ShoeCard.jsx
-        |         |         |         |----- Today/
-        |         |         |         |         |----- Today.css
-        |         |         |         |         |----- Today.jsx                                                
-        |         |         |         |                        
+        |         |         |         |----- Today/                                                  
         |         |         |----- Config/
-        |         |         |         |----- apiConfig.js
-        |         |         |         |----- apiService.js
-        |         |         |----- Context/
-        |         |         |         |----- AdminContext.js
-        |         |         |         |----- AuthContext.js
-        |         |         |         |----- ProductContext.js
-        |         |         |         |----- UserContext.js                        
+        |         |         |----- Context/                   
         |         |         |----- Pages/
         |         |         |         |----- About/     
-        |         |         |         |         |----- About.jsx
-        |         |         |         |----- Books/
-        |         |         |         |         |----- Books.css  
-        |         |         |         |         |----- Books.jsx                
-        |         |         |         |----- Cart/
-        |         |         |         |         |----- Cart.css  
-        |         |         |         |         |----- Cart.jsx                
-        |         |         |         |----- Home/
-        |         |         |         |         |----- Home.css  
-        |         |         |         |         |----- Home.jsx                
-        |         |         |         |----- Login/
-        |         |         |         |         |----- Login.css  
-        |         |         |         |         |----- Login.jsx           
-        |         |         |         |----- Mobile/
-        |         |         |         |         |----- Mobile.css  
-        |         |         |         |         |----- Mobile.jsx           
+        |         |         |         |----- Books/         
+        |         |         |         |----- Cart/            
+        |         |         |         |----- Home/               
+        |         |         |         |----- Login/      
+        |         |         |         |----- Mobile/     
         |         |         |         |----- Mypurchase/
-        |         |         |         |         |----- Mypurchase.css  
-        |         |         |         |         |----- Mypurchase.jsx           
-        |         |         |         |----- Product/
-        |         |         |         |         |----- Product.css  
-        |         |         |         |         |----- Product.jsx           
-        |         |         |         |----- Reviews/
-        |         |         |         |         |----- Reviews.css  
-        |         |         |         |         |----- Reviews.jsx           
-        |         |         |         |----- Shoes/
-        |         |         |         |         |----- Shoes.css  
-        |         |         |         |         |----- Shoes.jsx           
-        |         |         |         |----- Signup/
-        |         |         |         |         |----- Signup.css  
-        |         |         |         |         |----- Signup.jsx           
-        |         |         |         |----- Wishlist/ 
-        |         |         |         |         |----- Wishlist.css  
-        |         |         |         |         |----- Wishlist.jsx                                
+        |         |         |         |----- Product/       
+        |         |         |         |----- Reviews/       
+        |         |         |         |----- Shoes/        
+        |         |         |         |----- Signup/      
+        |         |         |         |----- Wishlist/                              
         |         |         |----- Redux/
-        |         |         |         |----- LoaderReducer/
-        |         |         |         |         |----- Action.js  
-        |         |         |         |         |----- ActionTypes.js      
-        |         |         |         |         |----- reducer.js                   
+        |         |         |         |----- LoaderReducer/           
         |         |         |         |----- ProductReducer/ 
-        |         |         |         |         |----- Action.js  
-        |         |         |         |         |----- ActionTypes.js      
-        |         |         |         |         |----- reducer.js   
         |         |         |----- App.css
         |         |         |----- App.jsx
         |         |         |----- index.js
