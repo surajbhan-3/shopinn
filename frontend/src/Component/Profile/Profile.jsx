@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import apiService from '../../Config/apiService'
 import "./Profile.css"
 
 function Profile() {
@@ -31,15 +32,8 @@ function Profile() {
   useEffect(()=>{
     const getUserDetails = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4500/api/user/settings/`,
-          {
-            userId:localStorage.getItem("userId"),
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            },
-          },
-          
+        const response = await apiService.get(
+          `/user/settings/`,
         );
         setData(response.data.userData);
         setSecondaryData(response.data.userSecondaryDetails)
@@ -92,12 +86,7 @@ function Profile() {
       const formData = new FormData();
       formData.append('avtar', selectedFile);
 
-      const response = await axios.post(`http://localhost:4500/api/user/profile_picture/${userId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      const response = await apiService.post(`/user/profile_picture/${userId}`, formData);
 
       console.log('Uploaded URL:', response.data.url);
       // Handle the uploaded URL (e.g., display the image)
@@ -117,8 +106,8 @@ function Profile() {
 
         try {
           
-          const response = await axios.patch(
-            `http://localhost:4500/api/user/update_profile_info`,
+          const response = await apiService.patch(
+            `/user/update_profile_info`,
             {
               
                 firstname,
@@ -126,13 +115,8 @@ function Profile() {
                 gender,
                 dateOfBirth
             
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-              },
-        
             }
+        
             
           );
         console.log(response)
@@ -152,8 +136,8 @@ function Profile() {
 
    try {
      
-     const response = await axios.patch(
-       `http://localhost:4500/api/user/update_address_info`,
+     const response = await apiService.patch(
+       `/api/user/update_address_info`,
        {
          
            address,
@@ -161,12 +145,6 @@ function Profile() {
            postalCode,
            landmark
        
-       },
-       {
-         headers: {
-           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         },
-   
        }
        
      );

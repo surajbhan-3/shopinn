@@ -6,7 +6,7 @@ import axios  from 'axios';
 import "./Cart.css";
 import { useSelector } from 'react-redux';
 import CartProduct from '../../Component/CartProduct/CartProduct'
-import { cartProducts, wishlistProducts } from '../../Redux/ProductReducer/Action';
+import apiService from '../../Config/apiService';
 function Cart() {
 
   const dispatch = useDispatch()
@@ -42,17 +42,11 @@ const handleCheckout = async()=>{
 
   try {
 
-    const  response = await axios.post(`http://localhost:4500/api/products/order_details`,
+    const  response = await apiService.post(`/products/order_details`,
            {
          data:__orderDetails
-        },
-      {
-         headers:{
- 
-               Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-
-             }
-              }
+        }
+    
  )
 console.log(response)
 navigate("/my_order")

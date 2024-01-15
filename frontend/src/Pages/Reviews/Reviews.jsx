@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from "axios"
+import apiService from '../../Config/apiService';
 import "./Reviews.css";
 
 function Reviews() {
@@ -13,12 +14,9 @@ function Reviews() {
        
   const getAllReviews = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:4500/api/products/reviews/get_all_reviews`,
+      const response = await apiService.get(
+        `/products/reviews/get_all_reviews`,
         {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-          },
           // this data keyword is neccessary in axios when using delete method 
           data: {
             userId: localStorage.getItem("userId")
@@ -62,12 +60,9 @@ const handleDeleteReview = async(key)=>{
     console.log("raeivew item id", key )
 
     try {
-      const response = await axios.delete(
-        `http://localhost:4500/api/products/reviews/delete_reveiw`,
+      const response = await apiService.delete(
+        `/products/reviews/delete_reveiw`,
         {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-          },
           // this data keyword is neccessary in axios when using delete method 
           data: {
             reviewId: key

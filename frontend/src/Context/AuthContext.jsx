@@ -2,10 +2,12 @@
 import {useState, createContext} from "react";
 import { useNavigate } from 'react-router'
 import { useDispatch } from "react-redux";
+import { AUTH_BASE_URL } from "../Config/apiConfig";
 import { Store } from 'react-notifications-component';
 import axios from "axios";
 import { addCartdataTocartItemsAndCount } from "../Redux/ProductReducer/Action";
 export const AuthContext = createContext();
+
 
 
 export const AuthContextProvider = ({children})=>{
@@ -46,7 +48,7 @@ export const AuthContextProvider = ({children})=>{
                try {
                  
                       localStorage.setItem("email",emailLogin)
-                      await fetch("http://localhost:4500/api/user/login",{
+                      await fetch(`${AUTH_BASE_URL}/api/user/login`,{
                                method:'POST',
                                headers:{
                                         'Content-Type':'application/json'
@@ -130,7 +132,7 @@ export const AuthContextProvider = ({children})=>{
                     try {
                      
                            localStorage.setItem("email",emailLogin)
-                     await fetch("http://localhost:4500/api/user/login",{
+                     await fetch(`${AUTH_BASE_URL}/api/user/login`,{
                           method:'POST',
                           headers:{
                             'Content-Type':'application/json'
@@ -200,7 +202,7 @@ export const AuthContextProvider = ({children})=>{
                 };
             
                 try {
-                     const response = await fetch("http://localhost:4500/api/user/register",{
+                     const response = await fetch(`${AUTH_BASE_URL}/api/user/register`,{
                       method:'POST',
                       headers:{
                         'Content-Type':'application/json'
@@ -241,7 +243,7 @@ export const AuthContextProvider = ({children})=>{
 
             const handleUserLogout = async () =>{
                 try {
-                    const response = await axios.post(`http://localhost:4500/api/user/logout`,
+                    const response = await axios.post(`${AUTH_BASE_URL}/api/user/logout`,
                     {}, 
                     {
                       headers: {

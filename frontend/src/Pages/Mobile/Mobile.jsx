@@ -1,7 +1,7 @@
 import React from 'react'
 import MobileCard from "../../Component/MobileCard/MoblieCard"
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiService from '../../Config/apiService';
 import "./Mobile.css"
 
 
@@ -28,15 +28,8 @@ const [checkboxStates, setCheckboxStates] = useState({
     const getMobilesProducts = async()=>{
   
       try {
-       const response = await axios.get(
-         `http://localhost:4500/api/products/category/electronics/page/1`,
-         {
-           headers: {
-             Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-           },
-    
-           
-         })
+       const response = await apiService.get(
+         `/products/category/electronics/page/1`,)
          console.log(response)
          setMobilesData(response.data)
   
@@ -54,16 +47,9 @@ const [checkboxStates, setCheckboxStates] = useState({
     
   const handlePagination = async(pageNumber) =>{
     try {
-     const response = await axios.get(
-       `http://localhost:4500/api/products/category/electronics/page/${pageNumber}`,
-      
-       {
-         headers: {
-           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         }, 
-         
-          
-       })
+     const response = await apiService.get(
+       `/products/category/electronics/page/${pageNumber}`,
+      )
        console.log(response)
        setMobilesData(response.data)
        setPageIndex(pageNumber)
@@ -80,15 +66,8 @@ const [checkboxStates, setCheckboxStates] = useState({
     if(subcategory ==="default"){
 
       try {
-        const response = await axios.get(
-          `http://localhost:4500/api/products/category/electronics/page/1`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            },
-     
-            
-          })
+        const response = await apiService.get(
+          `/products/category/electronics/page/1`,)
           console.log(response)
           setMobilesData(response.data)
    
@@ -101,16 +80,8 @@ const [checkboxStates, setCheckboxStates] = useState({
     }else{
 
       try {
-        const response = await axios.get(
-          `http://localhost:4500/api/products/category/electronics/subcategory/${subcategory}/page/1`,
-         
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            }, 
-            
-             
-          })
+        const response = await apiService.get(
+          `/products/category/electronics/subcategory/${subcategory}/page/1`,)
           console.log(response)
           setMobilesData(response.data)
           console.log(response.data, "here shoes  data")
@@ -177,16 +148,9 @@ const [checkboxStates, setCheckboxStates] = useState({
    const getProductsByPriceRange = async () =>{
           console.log("here i reached here")
      try {
-       const response = await axios.get(
-         `http://localhost:4500/api/products/category/electronics/subcategory/${targetValue}/page/1?min=100&max=499`,
-        
-         {
-           headers: {
-             Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-           }, 
-           
-            
-         })
+       const response = await apiService.get(
+         `/products/category/electronics/subcategory/${targetValue}/page/1?min=100&max=499`,
+     )
          console.log(response)
          setMobilesData(response.data)
          console.log(response.data, "here shoes  data")
@@ -206,16 +170,9 @@ const [checkboxStates, setCheckboxStates] = useState({
    const getProductsByPriceRange = async () =>{
      console.log("here i reached here")
  try {
-  const response = await axios.get(
-    `http://localhost:4500/api/products/category/electronics/subcategory/${targetValue}/page/1?min=100&max=999`,
-   
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-      }, 
-      
-       
-    })
+  const response = await apiService.get(
+    `/products/category/electronics/subcategory/${targetValue}/page/1?min=100&max=999`,
+  )
     console.log(response)
     setMobilesData(response.data)
     console.log(response.data, "here shoes  data")
@@ -237,16 +194,9 @@ const [checkboxStates, setCheckboxStates] = useState({
  const getProductsByPriceRange = async () =>{
  console.log("here i reached here")
  try {
- const response = await axios.get(
- `http://localhost:4500/api/products/category/electronics/subcategory/${targetValue}/page/1?min=100&max=1999`,
- 
- {
- headers: {
-  Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
- }, 
- 
- 
- })
+ const response = await apiService.get(
+ `/products/category/electronics/subcategory/${targetValue}/page/1?min=100&max=1999`,
+ )
  console.log(response)
  setMobilesData(response.data)
  console.log(response.data, "here shoes  data")
@@ -264,16 +214,9 @@ const [checkboxStates, setCheckboxStates] = useState({
    const getProductsByPriceRange = async () =>{
    console.log("here i reached here")
    try {
-   const response = await axios.get(
-   `http://localhost:4500/api/products/category/electronics/subcategory/${targetValue}/page/1?middle=1`,
- 
-   {
-   headers: {
-   Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-   }, 
- 
- 
-   })
+   const response = await apiService.get(
+   `/products/category/electronics/subcategory/${targetValue}/page/1?middle=1`,
+ )
    console.log(response)
    setMobilesData(response.data)
    console.log(response.data, "here shoes  data")
@@ -291,16 +234,9 @@ const [checkboxStates, setCheckboxStates] = useState({
      const getProductsByPriceRange = async () =>{
      console.log("here i reached here")
      try {
-     const response = await axios.get(
-     `http://localhost:4500/api/products/category/electronics/subcategory/${targetValue}/page/1`,
-   
-     {
-     headers: {
-     Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-     }, 
-   
-   
-     })
+     const response = await apiService.get(
+     `/products/category/electronics/subcategory/${targetValue}/page/1`,
+   )
      console.log(response)
      setMobilesData(response.data)
      console.log(response.data, "here shoes  data")
@@ -324,16 +260,10 @@ const [checkboxStates, setCheckboxStates] = useState({
    const getProductsByPriceRange = async () =>{
    console.log("here i reached here")
    try {
-   const response = await axios.get(
-   `http://localhost:4500/api/products/category/electronics/subcategory/${targetValue}/page/1?min=500&max=1999`,
+   const response = await apiService.get(
+   `/products/category/electronics/subcategory/${targetValue}/page/1?min=500&max=1999`,
    
-   {
-   headers: {
-    Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-   }, 
-   
-   
-   })
+)
    console.log(response)
    setMobilesData(response.data)
    console.log(response.data, "here shoes  data")
@@ -356,16 +286,10 @@ const [checkboxStates, setCheckboxStates] = useState({
    const getProductsByPriceRange = async () =>{
    console.log("here i reached here")
    try {
-   const response = await axios.get(
-   `http://localhost:4500/api/products/category/electronics/subcategory/${targetValue}/page/1?min=1000&max=1999`,
+   const response = await apiService.get(
+   `/products/category/electronics/subcategory/${targetValue}/page/1?min=1000&max=1999`,
    
-   {
-   headers: {
-    Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-   }, 
-   
-   
-   })
+)
    console.log(response)
    setMobilesData(response.data)
    console.log(response.data, "here shoes  data")
@@ -388,16 +312,10 @@ const [checkboxStates, setCheckboxStates] = useState({
    const getProductsByPriceRange = async () =>{
    console.log("here i reached here")
    try {
-   const response = await axios.get(
-   `http://localhost:4500/api/products/category/electronics/subcategory/${targetValue}/page/1?min=500&max=1000`,
+   const response = await apiService.get(
+   `/products/category/electronics/subcategory/${targetValue}/page/1?min=500&max=1000`,
    
-   {
-   headers: {
-    Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-   }, 
-   
-   
-   })
+)
    console.log(response)
    setMobilesData(response.data)
    console.log(response.data, "here shoes  data")
@@ -417,16 +335,9 @@ const [checkboxStates, setCheckboxStates] = useState({
        const getProductsByPriceRange = async () =>{
               console.log("here i reached here")
          try {
-           const response = await axios.get(
-             `http://localhost:4500/api/products/category/electronics/page/1?min=100&max=499`,
-            
-             {
-               headers: {
-                 Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-               }, 
-               
-                
-             })
+           const response = await apiService.get(
+             `/products/category/electronics/page/1?min=100&max=499`,
+        )
              console.log(response)
              setMobilesData(response.data)
              console.log(response.data, "here shoes  data")
@@ -441,16 +352,9 @@ const [checkboxStates, setCheckboxStates] = useState({
        const getProductsByPriceRange = async () =>{
         
      try {
-      const response = await axios.get(
-        `http://localhost:4500/api/products/category/electronics/page/1?min=100&max=999`,
-       
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-          }, 
-          
-           
-        })
+      const response = await apiService.get(
+        `/products/category/electronics/page/1?min=100&max=999`,
+     )
     
         setMobilesData(response.data)
       
@@ -472,16 +376,10 @@ const [checkboxStates, setCheckboxStates] = useState({
      const getProductsByPriceRange = async () =>{
      console.log("here i reached here")
      try {
-     const response = await axios.get(
-     `http://localhost:4500/api/products/category/electronics/page/1?min=100&max=1999`,
+     const response = await apiService.get(
+     `/products/category/electronics/page/1?min=100&max=1999`,
      
-     {
-     headers: {
-      Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-     }, 
-     
-     
-     })
+  )
      console.log(response)
      setMobilesData(response.data)
      console.log(response.data, "here shoes  data")
@@ -499,16 +397,9 @@ const [checkboxStates, setCheckboxStates] = useState({
        const getProductsByPriceRange = async () =>{
        console.log("here i reached here")
        try {
-       const response = await axios.get(
-       `http://localhost:4500/api/products/category/electronics/page/1?middle=1`,
-     
-       {
-       headers: {
-       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-       }, 
-     
-     
-       })
+       const response = await apiService.get(
+       `/products/category/electronics/page/1?middle=1`,
+     )
        console.log(response)
        setMobilesData(response.data)
        console.log(response.data, "here shoes  data")
@@ -526,16 +417,9 @@ const [checkboxStates, setCheckboxStates] = useState({
          const getProductsByPriceRange = async () =>{
          console.log("here i reached here")
          try {
-         const response = await axios.get(
-         `http://localhost:4500/api/products/category/electronics/page/1`,
-       
-         {
-         headers: {
-         Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         }, 
-       
-       
-         })
+         const response = await apiService.get(
+         `/products/category/electronics/page/1`,
+       )
          console.log(response)
          setMobilesData(response.data)
          console.log(response.data, "here shoes  data")
@@ -559,16 +443,9 @@ const [checkboxStates, setCheckboxStates] = useState({
        const getProductsByPriceRange = async () =>{
        console.log("here i reached here")
        try {
-       const response = await axios.get(
-       `http://localhost:4500/api/products/category/electronics/page/1?min=500&max=1999`,
-       
-       {
-       headers: {
-        Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-       }, 
-       
-       
-       })
+       const response = await apiService.get(
+       `/products/category/electronics/page/1?min=500&max=1999`,
+       )
        console.log(response)
        setMobilesData(response.data)
        console.log(response.data, "here shoes  data")
@@ -591,16 +468,9 @@ const [checkboxStates, setCheckboxStates] = useState({
        const getProductsByPriceRange = async () =>{
        console.log("here i reached here")
        try {
-       const response = await axios.get(
-       `http://localhost:4500/api/products/category/electronics/page/1?min=1000&max=1999`,
-       
-       {
-       headers: {
-        Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-       }, 
-       
-       
-       })
+       const response = await apiService.get(
+       `/products/category/electronics/page/1?min=1000&max=1999`,
+       )
        console.log(response)
        setMobilesData(response.data)
        console.log(response.data, "here shoes  data")
@@ -623,16 +493,9 @@ const [checkboxStates, setCheckboxStates] = useState({
        const getProductsByPriceRange = async () =>{
        console.log("here i reached here")
        try {
-       const response = await axios.get(
-       `http://localhost:4500/api/products/category/electronics/page/1?min=500&max=1000`,
-       
-       {
-       headers: {
-        Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-       }, 
-       
-       
-       })
+       const response = await apiService.get(
+       `/products/category/electronics/page/1?min=500&max=1000`,
+       )
        console.log(response)
        setMobilesData(response.data)
        console.log(response.data, "here shoes  data")

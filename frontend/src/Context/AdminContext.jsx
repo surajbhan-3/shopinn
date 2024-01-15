@@ -2,6 +2,7 @@
 import {useState,useEffect, createContext} from "react";
 import { Store } from 'react-notifications-component';
 import axios from "axios";
+import apiService from "../Config/apiService";
 export const AdminContext = createContext();
 
 
@@ -28,15 +29,7 @@ export const AdminContextProvider = ({children}) =>{
       setPartLoader(true)
     
       try {
-        const response = await axios.get(`http://localhost:4500/api/admin/dashboard/counts`,
-        
-        {
-       
-         headers:{
-            Authorization:`Bearer ${localStorage.getItem("shopin-token")}`
-         }
-          
-        })
+        const response = await apiService.get(`/admin/dashboard/counts`)
         setPartLoader(false)
         setDashbaordCountData(response.data)
         console.log(response, "hello this is respone")
@@ -71,12 +64,7 @@ export const AdminContextProvider = ({children}) =>{
           formData.append('productId', localStorage.getItem("productId"))
         
       
-          const response = await axios.patch(`http://localhost:4500/api/admin/update/product_image`,formData, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-              'Content-Type': 'multipart/form-data'
-            }
-          });
+          const response = await apiService.patch(`/admin/update/product_image`,formData);
             if(response.data.status === "success"){
                   setPartLoader(false)
               Store.addNotification({
@@ -121,12 +109,7 @@ export const AdminContextProvider = ({children}) =>{
      formData.append('subcategory', subcategory)
      formData.append('gender', gender)
  
-     const response = await axios.post(`http://localhost:4500/api/admin/add_product`,formData, {
-       headers: {
-         Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         'Content-Type': 'multipart/form-data'
-       }
-     });
+     const response = await apiService.post(`/admin/add_product`,formData,   );
        if(response.data.status === "success"){
              setPartLoader(false)
          Store.addNotification({
@@ -162,7 +145,7 @@ export const AdminContextProvider = ({children}) =>{
   setPartLoader(true)
 
   try {
-    const response = await axios.patch(`http://localhost:4500/api/admin/update_product`,
+    const response = await apiService.patch(`/admin/update_product`,
     {
         brandName,
         productName,
@@ -198,15 +181,7 @@ console.log(error)
 const  getSingleProduct = async()=>{
 
           try {
-                 const response = await axios.get(`http://localhost:4500/api/admin/product_details/${productId}`,
-                 
-                 {
-                
-                  headers:{
-                     Authorization:`Bearer ${localStorage.getItem("shopin-token")}`
-                  }
-                   
-                 })
+                 const response = await apiService.get(`/admin/product_details/${productId}`)
                  setData(response.data)
                  setProductName(response.data.name)
                  setBrandName(response.data.brand)
@@ -231,13 +206,9 @@ const  getSingleProduct = async()=>{
   const productId = localStorage.getItem("productId")
 
 try {
-     await axios.delete(`http://localhost:4500/api/admin/product_details/${productId}`,
-                   
-                   {
+     await apiService.delete(`/admin/product_details/${productId}`,
+                     {
                      
-                    headers:{
-                       Authorization:`Bearer ${localStorage.getItem("shopin-token")}`
-                    },
                     data: productId
                     
                    })

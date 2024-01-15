@@ -2,6 +2,8 @@ import React from 'react'
 import "./Myorder.css"
 import axios from "axios"
 import { useSelector } from 'react-redux'
+import apiService from '../../Config/apiService'
+import { AUTH_BASE_URL } from '../../Config/apiConfig'
 
 function Myorder() {
   const ___cartProducts = (useSelector((state)=>{
@@ -28,30 +30,17 @@ console.log(__orderDetails, "order details here")
 const placeOrder = async()=>{
 
         try {
-          const response1= await axios.get(`http://localhost:4500/api/payment/get_key`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            }
-          }
-          )
+          const response1= await apiService.get(`/payment/get_key`)
         
 
           const apiKey = response1.data.apiKey
           console.log(apiKey, "hjekk apik key")
   
-         const response = await axios.post(`http://localhost:4500/api/payment/accept_payment`,
+         const response = await apiService.post(`/payment/accept_payment`,
          {
             userId: localStorage.getItem("userId"),
             amount: ___cartTotalPrice,
-         },
-         {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-          }
-          // this data keyword is neccessary in axios when using delete method 
-       
-        })
+         })
         
         console.log(response, "heii this is the respone of data")
 
@@ -64,11 +53,11 @@ const placeOrder = async()=>{
           description: "Test Transaction",
           image: "https://avatars.githubusercontent.com/u/80870870?v=4",
           order_id: response.data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-          callback_url:"http://localhost:4500/api/payment/payment_verification",
+          callback_url:`${AUTH_BASE_URL}/api/payment/payment_verification`,
           redirect: true,
           prefill: {
-              name: "Gaurav Kumar",
-              email: "gaurav.kumar@example.com",
+              name: "Suraj bhan",
+              email: "surajbhan@example.com",
               contact: "9000090000"
           },
           notes: {

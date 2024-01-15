@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import apiService from '../../Config/apiService'
 function Mypurchase() {
 
   
@@ -9,12 +9,7 @@ function Mypurchase() {
         const getPurchaseData = async()=>{
 
              try {
-                const response = await axios.get('http://localhost:4500/api/products/purchase_items',
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-                      }
-                })
+                const response = await apiService.get('/products/purchase_items',)
                console.log(response, "hey resopnse dslkd")
              } catch (error) {
                 

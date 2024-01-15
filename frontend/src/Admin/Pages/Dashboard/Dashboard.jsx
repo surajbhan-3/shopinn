@@ -7,6 +7,7 @@ import Usercard from '../../Components/Usercard/Usercard'
 import Electronics from '../../Components/Electronics/Electronics'
 import Shoes from '../../Components/Shoes/Shoes'
 import { AdminContext } from '../../../Context/AdminContext'
+import apiService from '../../../Config/apiService'
 
 function Dashboard() {
  const [data, setData] = useState([])
@@ -24,15 +25,7 @@ function Dashboard() {
      const getUserInfo = async()=>{
 
          try {
-          const response = await axios.get(
-            `http://localhost:4500/api/admin/alluser`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-              },
-      
-              
-            })
+          const response = await apiService.get(`/admin/alluser`)
          
             setData(response.data)
            
@@ -47,15 +40,7 @@ function Dashboard() {
      const getElectronicsProducts = async()=>{
 
       try {
-       const response = await axios.get(
-         `http://localhost:4500/api/admin/products/electronics`,
-         {
-           headers: {
-             Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-           },
-   
-           
-         })
+       const response = await apiService.get(`/admin/products/electronics`)
          setElectronicsData(response.data)
     
        
@@ -69,15 +54,7 @@ function Dashboard() {
   const getShoesProducts = async()=>{
 
     try {
-     const response = await axios.get(
-       `http://localhost:4500/api/admin/products/shoes`,
-       {
-         headers: {
-           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         },
- 
-         
-       })
+     const response = await apiService.get( `/admin/products/shoes`)
      
        setShoesData(response.data)
   
@@ -89,15 +66,7 @@ getShoesProducts()
 const getBooksProducts = async()=>{
 
   try {
-   const response = await axios.get(
-     `http://localhost:4500/api/admin/products/books`,
-     {
-       headers: {
-         Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-       },
-
-       
-     })
+   const response = await apiService.get(`/admin/products/books`,)
     
      setBooksData(response.data)
     

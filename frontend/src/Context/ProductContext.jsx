@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router'
 import { AuthContext } from "./AuthContext";
 import { Store } from 'react-notifications-component';
-import axios from "axios";
+import apiService from "../Config/apiService";
 import { wishlistProducts,cartProducts } from "../Redux/ProductReducer/Action";
 import { incrementQuantity, deleteItemFromCartDataAndcount } from "../Redux/ProductReducer/Action";
 
@@ -40,17 +40,11 @@ const [partLoader, setPartLoader]= useState(false)
         try {
                  setPartLoader(true)
     
-            const response = await axios.post(
-              `http://localhost:4500/api/products/wishlist/add_product`,
+            const response = await apiService.post(`/products/wishlist/add_product`,
               {
                 userId: localStorage.getItem("userId"),
                 productId: productId,
               },
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-                },
-              }
             ).catch((err)=>{
         
               Store.addNotification({
@@ -110,12 +104,9 @@ const [partLoader, setPartLoader]= useState(false)
     
     const removeProductFromWishlist = async (productId) => {
       try {
-        const response = await axios.delete(
-          `http://localhost:4500/api/products/wishlist/remove_product/${productId}`,
+        const response = await apiService.delete(
+          `/products/wishlist/remove_product/${productId}`,
           {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            },
             // this data keyword is neccessary in axios when using delete method 
             data: {
               userId: localStorage.getItem("userId")
@@ -150,17 +141,13 @@ const [partLoader, setPartLoader]= useState(false)
 
 
     const handleAddProductToCart = async (productId,name) => {
-      const response = await axios.post(
-        `http://localhost:4500/api/products/cart/add_to_cart`,
+      const response = await apiService.post(
+        `/api/products/cart/add_to_cart`,
         {
           userId: localStorage.getItem("userId"),
           productId: productId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-          },
         }
+       
       ).catch((err)=>{
 
      
@@ -210,17 +197,13 @@ const [partLoader, setPartLoader]= useState(false)
 
 const moveProducToWishlist = async (productId) => {
   
-  const response = await axios.post(
-    `http://localhost:4500/api/products/wishlist/add_product`,
+  const response = await apiService.post(
+    `/api/products/wishlist/add_product`,
     {
       userId: localStorage.getItem("userId"),
       productId: productId,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-      },
     }
+    
     
   ).catch((err)=>{
 
@@ -271,12 +254,9 @@ const moveProducToWishlist = async (productId) => {
 const removeProductFromCart = async (productId) => {
   try {
     
-    const response = await axios.delete(
-      `http://localhost:4500/api/products/cart/remove_cart_items/${productId}`,
+    const response = await apiService.delete(
+      `/products/cart/remove_cart_items/${productId}`,
       {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-        },
         // this data keyword is neccessary in axios when using delete method 
         data: {
           userId: localStorage.getItem("userId")

@@ -1,7 +1,7 @@
 import React from 'react'
 import ShoeCard from '../../Component/ShoeCard/ShoeCard';
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import apiService from '../../Config/apiService';
 import "./Shoes.css"
 import { ProductContext } from '../../Context/ProductContext';
 
@@ -29,15 +29,8 @@ function Shoes() {
     const getShoesProducts = async()=>{
   
       try {
-       const response = await axios.get(
-         `http://localhost:4500/api/products/category/shoes/page/1`,
-         {
-           headers: {
-             Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-           },
-    
-           
-         })
+       const response = await apiService.get(
+         `/products/category/shoes/page/1`)
          console.log(response)
          setShoesData(response.data)
   
@@ -55,16 +48,8 @@ function Shoes() {
     
   const handlePagination = async(pageNumber) =>{
     try {
-     const response = await axios.get(
-       `http://localhost:4500/api/products/category/shoes/page/${pageNumber}`,
-      
-       {
-         headers: {
-           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         }, 
-         
-          
-       })
+     const response = await apiService.get(
+       `/products/category/shoes/page/${pageNumber}`)
        console.log(response)
        setShoesData(response.data)
        setPageIndex(pageNumber)
@@ -81,15 +66,8 @@ function Shoes() {
     if(subcategory ==="default"){
 
       try {
-        const response = await axios.get(
-          `http://localhost:4500/api/products/category/shoes/page/1`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            },
-     
-            
-          })
+        const response = await apiService.get(
+          `/products/category/shoes/page/1`,)
           console.log(response)
           setShoesData(response.data)
    
@@ -102,16 +80,9 @@ function Shoes() {
     }else{
 
       try {
-        const response = await axios.get(
-          `http://localhost:4500/api/products/category/shoes/subcategory/${subcategory}/page/1`,
-         
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            }, 
-            
-             
-          })
+        const response = await apiService.get(
+          `/products/category/shoes/subcategory/${subcategory}/page/1`,
+         )
           console.log(response)
           setShoesData(response.data)
           console.log(response.data, "here shoes  data")
@@ -178,16 +149,9 @@ useEffect(() => {
   const getProductsByPriceRange = async () =>{
          console.log("here i reached here")
     try {
-      const response = await axios.get(
-        `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=499`,
-       
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-          }, 
-          
-           
-        })
+      const response = await apiService.get(
+        `/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=499`,
+       )
         console.log(response)
         setShoesData(response.data)
         console.log(response.data, "here shoes  data")
@@ -207,16 +171,8 @@ useEffect(() => {
   const getProductsByPriceRange = async () =>{
     console.log("here i reached here")
 try {
- const response = await axios.get(
-   `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=999`,
-  
-   {
-     headers: {
-       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-     }, 
-     
-      
-   })
+ const response = await apiService.get(
+   `/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=999`,)
    console.log(response)
    setShoesData(response.data)
    console.log(response.data, "here shoes  data")
@@ -238,16 +194,8 @@ getProductsByPriceRange()
 const getProductsByPriceRange = async () =>{
 console.log("here i reached here")
 try {
-const response = await axios.get(
-`http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=1999`,
-
-{
-headers: {
- Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-}, 
-
-
-})
+const response = await apiService.get(
+`/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=1999`,)
 console.log(response)
 setShoesData(response.data)
 console.log(response.data, "here shoes  data")
@@ -265,16 +213,8 @@ getProductsByPriceRange()
   const getProductsByPriceRange = async () =>{
   console.log("here i reached here")
   try {
-  const response = await axios.get(
-  `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?middle=1`,
-
-  {
-  headers: {
-  Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-  }, 
-
-
-  })
+  const response = await apiService.get(
+  `/products/category/shoes/subcategory/${targetValue}/page/1?middle=1`,)
   console.log(response)
   setShoesData(response.data)
   console.log(response.data, "here shoes  data")
@@ -292,16 +232,9 @@ getProductsByPriceRange()
     const getProductsByPriceRange = async () =>{
     console.log("here i reached here")
     try {
-    const response = await axios.get(
-    `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1`,
-  
-    {
-    headers: {
-    Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-    }, 
-  
-  
-    })
+    const response = await apiService.get(
+    `/products/category/shoes/subcategory/${targetValue}/page/1`,
+  )
     console.log(response)
     setShoesData(response.data)
     console.log(response.data, "here shoes  data")
@@ -325,16 +258,9 @@ getProductsByPriceRange()
   const getProductsByPriceRange = async () =>{
   console.log("here i reached here")
   try {
-  const response = await axios.get(
-  `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=500&max=1999`,
-  
-  {
-  headers: {
-   Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-  }, 
-  
-  
-  })
+  const response = await apiService.get(
+  `/products/category/shoes/subcategory/${targetValue}/page/1?min=500&max=1999`,
+  )
   console.log(response)
   setShoesData(response.data)
   console.log(response.data, "here shoes  data")
@@ -357,16 +283,9 @@ getProductsByPriceRange()
   const getProductsByPriceRange = async () =>{
   console.log("here i reached here")
   try {
-  const response = await axios.get(
-  `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=1000&max=1999`,
-  
-  {
-  headers: {
-   Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-  }, 
-  
-  
-  })
+  const response = await apiService.get(
+  `/products/category/shoes/subcategory/${targetValue}/page/1?min=1000&max=1999`,
+  )
   console.log(response)
   setShoesData(response.data)
   console.log(response.data, "here shoes  data")
@@ -389,16 +308,9 @@ getProductsByPriceRange()
   const getProductsByPriceRange = async () =>{
   console.log("here i reached here")
   try {
-  const response = await axios.get(
-  `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=500&max=1000`,
-  
-  {
-  headers: {
-   Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-  }, 
-  
-  
-  })
+  const response = await apiService.get(
+  `/products/category/shoes/subcategory/${targetValue}/page/1?min=500&max=1000`,
+  )
   console.log(response)
   setShoesData(response.data)
   console.log(response.data, "here shoes  data")
@@ -418,16 +330,10 @@ getProductsByPriceRange()
       const getProductsByPriceRange = async () =>{
              console.log("here i reached here")
         try {
-          const response = await axios.get(
-            `http://localhost:4500/api/products/category/shoes/page/1?min=100&max=499`,
+          const response = await apiService.get(
+            `/products/category/shoes/page/1?min=100&max=499`,
            
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-              }, 
-              
-               
-            })
+           )
             console.log(response)
             setShoesData(response.data)
             console.log(response.data, "here shoes  data")
@@ -442,16 +348,10 @@ getProductsByPriceRange()
       const getProductsByPriceRange = async () =>{
        
     try {
-     const response = await axios.get(
-       `http://localhost:4500/api/products/category/shoes/page/1?min=100&max=999`,
+     const response = await apiService.get(
+       `/products/category/shoes/page/1?min=100&max=999`,
       
-       {
-         headers: {
-           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         }, 
-         
-          
-       })
+     )
    
        setShoesData(response.data)
      
@@ -473,16 +373,9 @@ getProductsByPriceRange()
     const getProductsByPriceRange = async () =>{
     console.log("here i reached here")
     try {
-    const response = await axios.get(
-    `http://localhost:4500/api/products/category/shoes/page/1?min=100&max=1999`,
-    
-    {
-    headers: {
-     Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-    }, 
-    
-    
-    })
+    const response = await apiService.get(
+    `/products/category/shoes/page/1?min=100&max=1999`,
+   )
     console.log(response)
     setShoesData(response.data)
     console.log(response.data, "here shoes  data")
@@ -500,16 +393,9 @@ getProductsByPriceRange()
       const getProductsByPriceRange = async () =>{
       console.log("here i reached here")
       try {
-      const response = await axios.get(
-      `http://localhost:4500/api/products/category/shoes/page/1?middle=1`,
-    
-      {
-      headers: {
-      Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-      }, 
-    
-    
-      })
+      const response = await apiService.get(
+      `/products/category/shoes/page/1?middle=1`,
+    )
       console.log(response)
       setShoesData(response.data)
       console.log(response.data, "here shoes  data")
@@ -527,16 +413,9 @@ getProductsByPriceRange()
         const getProductsByPriceRange = async () =>{
         console.log("here i reached here")
         try {
-        const response = await axios.get(
-        `http://localhost:4500/api/products/category/shoes/page/1`,
-      
-        {
-        headers: {
-        Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-        }, 
-      
-      
-        })
+        const response = await apiService.get(
+        `/products/category/shoes/page/1`,
+      )
         console.log(response)
         setShoesData(response.data)
         console.log(response.data, "here shoes  data")
@@ -560,16 +439,9 @@ getProductsByPriceRange()
       const getProductsByPriceRange = async () =>{
       console.log("here i reached here")
       try {
-      const response = await axios.get(
-      `http://localhost:4500/api/products/category/shoes/page/1?min=500&max=1999`,
-      
-      {
-      headers: {
-       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-      }, 
-      
-      
-      })
+      const response = await apiService.get(
+      `/products/category/shoes/page/1?min=500&max=1999`,
+      )
       console.log(response)
       setShoesData(response.data)
       console.log(response.data, "here shoes  data")
@@ -592,16 +464,9 @@ getProductsByPriceRange()
       const getProductsByPriceRange = async () =>{
       console.log("here i reached here")
       try {
-      const response = await axios.get(
-      `http://localhost:4500/api/products/category/shoes/page/1?min=1000&max=1999`,
-      
-      {
-      headers: {
-       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-      }, 
-      
-      
-      })
+      const response = await apiService.get(
+      `/products/category/shoes/page/1?min=1000&max=1999`,
+    )
       console.log(response)
       setShoesData(response.data)
       console.log(response.data, "here shoes  data")
@@ -624,16 +489,8 @@ getProductsByPriceRange()
       const getProductsByPriceRange = async () =>{
       console.log("here i reached here")
       try {
-      const response = await axios.get(
-      `http://localhost:4500/api/products/category/shoes/page/1?min=500&max=1000`,
-      
-      {
-      headers: {
-       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-      }, 
-      
-      
-      })
+      const response = await apiService.get(
+      `/products/category/shoes/page/1?min=500&max=1000`,)
       console.log(response)
       setShoesData(response.data)
       console.log(response.data, "here shoes  data")

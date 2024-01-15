@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from "axios";
+import apiService from '../../Config/apiService';
 import { Rating } from 'react-simple-star-rating'
 import "./Product.css"
 import { useContext } from 'react';
@@ -63,8 +64,8 @@ if(checkProductInWishlist){
       useEffect(()=>{
         const getSingleProduct = async () => {
           try {
-            const response = await axios.get(
-              `http://localhost:4500/api/products/product_details/${__productKey}`,
+            const response = await apiService.get(
+              `/products/product_details/${__productKey}`,
               
             );
             console.log(response);
@@ -124,8 +125,8 @@ const finalReviewDataFromUser ={
 
            try {
             
-            const response = await axios.post(
-              `http://localhost:4500/api/user/products/review/${__productKey}`,
+            const response = await apiService.post(
+              `/user/products/review/${__productKey}`,
               {
                 finalReviewDataFromUser
               },

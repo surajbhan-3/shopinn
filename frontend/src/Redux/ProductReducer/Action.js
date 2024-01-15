@@ -1,5 +1,6 @@
 
 import axios from "axios"
+import apiService from "../../Config/apiService"
 import {ActionTypes} from "./ActionTypes"
 
 
@@ -7,7 +8,7 @@ import {ActionTypes} from "./ActionTypes"
 export const fetchTodayDealProducts =  () => {
 
    return async function (dispatch,getState) {
-      const response = await axios.get(`http://localhost:4500/api/products/products`)
+      const response = await apiService.get(`/products/products`)
   
       dispatch({
              type:ActionTypes.FETCH_TODAYS_DEAL_PRODUCTS,
@@ -22,16 +23,9 @@ export const cartProducts = ()=>{
 
    return async function (dispatch) {
       const userId = localStorage.getItem("userId")
-      const response = await axios.get(
-         `http://localhost:4500/api/products/cart/get_cartdata/${userId}`,
-       
-         {
-           headers: {
-             Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-           },
-         }
-         
+      const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
        ).catch((err)=>{
+          console.log(userId)
          console.log(err)
        });
          
@@ -76,14 +70,7 @@ export const wishlistProducts = ()=>{
 
    return async function (dispatch) {
       const userId = localStorage.getItem("userId")
-      const response = await axios.get(
-         `http://localhost:4500/api/products/wishlist/get_products/${userId}`,
-       
-         {
-           headers: {
-             Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-           },
-         }
+      const response = await apiService.get(`/products/wishlist/get_products/${userId}`,
        ).catch((err)=>{
          console.log(err)
        });
@@ -119,17 +106,11 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
           
    return async function (dispatch) {
     const userId = localStorage.getItem("userId")
-    const response = await axios.get(
-       `http://localhost:4500/api/products/cart/get_cartdata/${userId}`,
-     
-       {
-         headers: {
-           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-         },
-       }
-     ).catch((err)=>{
-       console.log(err)
-     });
+    const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
+                                          ).catch((err)=>{
+                                            console.log(err)
+                                            console.log(apiService)
+                                          });
      
    
      const productData = response.data.products

@@ -4,11 +4,7 @@ import { Link } from "react-router-dom";
 import { GrCart } from "react-icons/gr";
 import { FaRegHeart } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
-import { FiUser } from "react-icons/fi";
-import { IoBagHandleOutline } from "react-icons/io5";
-import { MdOutlineCancel } from "react-icons/md";
-import { FaRegStar } from "react-icons/fa";
-import { HiOutlineLogout } from "react-icons/hi";
+
 
 
 function AdminNavbar({ hideElements }) {
