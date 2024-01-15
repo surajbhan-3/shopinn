@@ -4,8 +4,11 @@
 
   HTML5 | CSS3 | Javascript | React.js | Redux | Redux-thunk |
   Redux-Persist | Axios | JsonWebToken | Node.js | Mongodb 
-  Mongoose | express.js | Multer | Cloudinary 
-  Bcrypt | Cors | Dotenv 
+  Mongoose | express.js | Multer | Cloudinary |
+  Bcrypt | Cors | Dotenv | Razorpay
+
+  -- Node.js version : v20.10.0
+  -- React-router    : v6.20.1
 
 # File Structure:
 
@@ -203,17 +206,19 @@
         |       CLOUDINARY_API_SECRET = "YOUR_CLOUDINARY_API_SECRET" 
                 
 
+##### Testing Card for payment
+     Mastercard	Domestic	5267 3181 8797 5449
+     Visa	       Domestic      4111 1111 1111 1111
 
 
-
-### User Routes 
+##### User Routes 
        |
        |----- http://localhost:4500/  || Your Server URL
        |
        |
-       |----- http://localhost:4500/api/user/register
+       |----- http://localhost:4500/api/user/register      
        |
-       |----- http://localhost:4500/api/user/login
+       |----- http://localhost:4500/api/user/login          
        |
        |----- http://localhost:4500/api/user/logout
        |
@@ -223,15 +228,15 @@
        |
        |----- http://localhost:4500/api/user/products/review/:id
        |
+       |----- http://localhost:4500/api/user/update_profile_info
        |
-       |
-       |
+       |----- http://localhost:4500/api/user/update_address_info
        |
 
 
 
 
-### Products Routes 
+##### Products Routes 
        |
        |----- http://localhost:4500/  || Your Server URL
        |
@@ -254,20 +259,89 @@
        |
        |----  http://localhost:4500/api/products/reviews/get_all_reviews
        |
+       |----  http://localhost:4500/api/products/reviews/delete_review
+       |
+       |----  http://localhost:4500/api/products/category/:category/page/:pagenumber
+       |
+       |----  http://localhost:4500/api/products/category/:category/subcategory/:subcategory/page/:pagenumber
+       |
+       |----  http://localhost:4500/api/products/order_details
+       |
+       |----  http://localhost:4500/api/products/purchase_items
 
 
 
-
-### Admin Routes 
+##### Admin Routes 
        |
        |----- http://localhost:4500/  || Your Server URL
        |
+       |----- http://localhost:4500/api/admin/alluser
+       |----- http://localhost:4500/api/admin/add_product
        |
-       |----- http://localhost:4500/api/products/add_product
+       |----- http://localhost:4500/api/admin/update_product
        |
-       |----- http://localhost:4500/api/products/update_product
+       |----- http://localhost:4500/api/admin/delete_product
        |
-       |----- http://localhost:4500/api/products/delete_product
-       |
+       |----- http://localhost:4500/api/admin/products/:category
+       |----- http://localhost:4500/api/admin/product_details/:id
+       |----- http://localhost:4500/api/admin/update/product_image
+       |----- http://localhost:4500/api/admin/dashboard/counts
      
-    
+
+##### Payment Routes 
+       |
+       |---- http://localhost:4500/api/get_key 
+       |
+       |----  http://localhost:4500/api/accept_payment
+       |
+       |----  http://localhost:4500/api/payment_verification
+
+
+
+
+##### Features 
+  
+    -- USER SIDE FEATURE
+         -- User registration.
+         -- User login.
+         -- User logout.
+         -- User settings.
+         -- User profile picture upload/update.
+         -- Product review submission for a specific product.
+         -- Update user profile information.
+         -- Update user address information.
+         -- Retrieve all products.
+         -- Retrieve details of a specific product.
+         -- Add a product to the wishlist.
+         -- Retrieve wishlist items for a specific user.
+         -- Remove a product from the wishlist.
+         -- Add a product to the cart.
+         -- Retrieve cart data for a specific user.
+         -- Remove items from the cart.
+         -- Retrieve all product reviews.
+         -- Delete a product review.
+         -- Retrieve products by category and page number.
+         -- Retrieve products by category, subcategory, and page number.
+         -- Retrieve order details.
+         -- Purchase items.
+         -- Retrieve payment key.
+         -- Accept payment.
+         -- Payment verification.
+         -- Pagination
+         -- Pagination Navigation
+         -- Category Filtering
+         -- Sorting by Price
+         -- Filtering by Price Range
+         -- Checkbox Handling
+
+    -- ADMIN SIDE FEATURE     
+
+         -- Retrieve all users.
+         -- Add a new product.
+         -- Update product information.
+         -- Delete a product.
+         -- Retrieve products by category.
+         -- Retrieve details of a specific product for admin.
+         -- Update product image.
+         -- Dashboard: Retrieve counts of various entities (e.g., users, products).
+
