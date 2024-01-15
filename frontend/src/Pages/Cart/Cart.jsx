@@ -1,8 +1,6 @@
 import React from 'react'
 import {useNavigate} from "react-router"
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import axios  from 'axios';
 import "./Cart.css";
 import { useSelector } from 'react-redux';
 import CartProduct from '../../Component/CartProduct/CartProduct'
@@ -38,21 +36,16 @@ const __orderDetails = (useSelector((state)=>{
 
 const navigate = useNavigate()
 const handleCheckout = async()=>{
-
+ console.log("hhiower")
 
   try {
 
-    const  response = await apiService.post(`/products/order_details`,
-           {
-         data:__orderDetails
-        }
-    
- )
-console.log(response)
+    // const  response = await apiService.post(`/products/order_details`,{ data:__orderDetails})
+// console.log(response)
 navigate("/my_order")
     
   } catch (error) {
-    
+     console.log(error)
   }
 
                

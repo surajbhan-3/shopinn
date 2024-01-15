@@ -38,7 +38,7 @@ function Profile() {
         setData(response.data.userData);
         setSecondaryData(response.data.userSecondaryDetails)
         setAddressData(response.data.userAddressDetails)
-        console.log(secondaryData, "hey tehre secondary data here") // due to asycchronous 
+        // console.log(secondaryData, "hey tehre secondary data here") // due to asycchronous 
 
       } catch (error) {
         console.error("Error fetching data:", error.response || error);
@@ -88,7 +88,6 @@ function Profile() {
 
       const response = await apiService.post(`/user/profile_picture/${userId}`, formData);
 
-      console.log('Uploaded URL:', response.data.url);
       // Handle the uploaded URL (e.g., display the image)
     } catch (error) {
       console.error('Upload failed:', error);
@@ -102,7 +101,6 @@ function Profile() {
   const handleUpdateProfileInfo = async (e) =>{
          e.preventDefault()
 
-        console.log(firstname,lastname, dateOfBirth, gender, "hello gys ")
 
         try {
           
@@ -119,7 +117,7 @@ function Profile() {
         
             
           );
-        console.log(response)
+
         } catch (error) {
           console.log(error)
           
@@ -132,7 +130,6 @@ function Profile() {
   const handleUpdateAddressInfo = async (e) =>{
     e.preventDefault()
 
-   console.log(address,city, postalCode, landmark, "hello gys ")
 
    try {
      
@@ -148,7 +145,7 @@ function Profile() {
        }
        
      );
-   console.log(response)
+  
    } catch (error) {
      console.log(error)
      

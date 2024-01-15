@@ -24,8 +24,8 @@ function Reviews() {
         }
       );
       
-      console.log(response, "reviews response");
-      console.log(response.data)
+  
+    
       setData(response.data);
      
     } catch (err) {
@@ -57,7 +57,7 @@ function Reviews() {
 
 const handleDeleteReview = async(key)=>{
 
-    console.log("raeivew item id", key )
+  
 
     try {
       const response = await apiService.delete(
@@ -68,7 +68,7 @@ const handleDeleteReview = async(key)=>{
             reviewId: key
           }
         })
-        console.log(response)
+      
     } catch (error) {
 
        console.log(error)

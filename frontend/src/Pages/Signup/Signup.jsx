@@ -14,13 +14,16 @@ function Signup() {
            setEmailSignup,  
            setPasswordSignup, 
            setUsername,
-           handleSingupFormSubmit
+           handleSingupFormSubmit,
+           isLoading
         } = useContext(AuthContext);
 
   return (
       <div id='sign_up' className='sign_up'>
 
-            <div className="s-image">
+           {isLoading?<PartLoader />:
+           <React.Fragment>
+             <div className="s-image">
               <img src={simage} alt="" />
             </div>
             <div className="s-form">
@@ -43,6 +46,7 @@ function Signup() {
 
             </div>
          
+            </React.Fragment>}
      
 
       </div>

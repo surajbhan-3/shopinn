@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import "./Login.css"
 import simage from "../../assets/login.jpg"
 import { AuthContext } from '../../Context/AuthContext'
+import PartLoader from '../../Component/PartLoader/PartLoader'
 
 
 function Login() {
@@ -12,11 +13,15 @@ function Login() {
           passwordLogin,
           setPasswordLogin,
           setEmailLogin,
-          handleGuestLogin
+          handleGuestLogin,
+          isLoading
         } = useContext(AuthContext);
 
   return (
        <div className='loin'>
+            
+           {isLoading?<PartLoader />: <React.Fragment>
+
 
           <div className="l-image">
             <img src={simage} alt="" />
@@ -39,6 +44,7 @@ function Login() {
               </form>
           </div>
          
+           </React.Fragment> }
      
 
        </div>

@@ -16,9 +16,11 @@ export const reducer = (state = intialState, { type, payload }) => {
       return{ ...state, dealsData:payload}
     }
     case ActionTypes.WISHLIST_PRODUCTS:{
+    
       return {...state, wishlistData:payload}
     }
     case ActionTypes.CART_PRODUCTS:{
+      console.log("hey reducer iam here", payload)
       return {
         ...state, cartData:payload
       }

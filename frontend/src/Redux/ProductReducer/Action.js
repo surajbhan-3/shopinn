@@ -1,5 +1,4 @@
 
-import axios from "axios"
 import apiService from "../../Config/apiService"
 import {ActionTypes} from "./ActionTypes"
 
@@ -25,12 +24,11 @@ export const cartProducts = ()=>{
       const userId = localStorage.getItem("userId")
       const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
        ).catch((err)=>{
-          console.log(userId)
+          console.log(userId, 'jhersfd cart{rpdicts')
          console.log(err)
        });
          
          if(response){
-           
         dispatch({
           type:ActionTypes.CART_PRODUCTS,
           payload:response.data.products
@@ -74,13 +72,13 @@ export const wishlistProducts = ()=>{
        ).catch((err)=>{
          console.log(err)
        });
-
-  
    
-      dispatch({
-        type:ActionTypes.WISHLIST_PRODUCTS,
-        payload:response.data.products
-    })
+      if(response){
+        dispatch({
+          type:ActionTypes.WISHLIST_PRODUCTS,
+          payload:response.data.products
+      })
+      }
     
   } 
 
@@ -109,20 +107,22 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
     const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
                                           ).catch((err)=>{
                                             console.log(err)
-                                            console.log(apiService)
+                                         
                                           });
      
    
-     const productData = response.data.products
-    const newArray = productData.map(({ _id, name}) => ({
-      productId: _id,
-      count: 1,
-      productName:name,}));
-
-    dispatch({
-      type:ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT,
-      payload:newArray
-  })
+      if(response){
+        const productData = response.data.products
+        const newArray = productData.map(({ _id, name}) => ({
+          productId: _id,
+          count: 1,
+          productName:name,}));
+    
+        dispatch({
+          type:ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT,
+          payload:newArray
+      })
+      }
   
     
  }  

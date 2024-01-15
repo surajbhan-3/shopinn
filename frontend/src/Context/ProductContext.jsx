@@ -39,6 +39,7 @@ const [partLoader, setPartLoader]= useState(false)
         } else {
         try {
                  setPartLoader(true)
+              
     
             const response = await apiService.post(`/products/wishlist/add_product`,
               {
@@ -61,15 +62,15 @@ const [partLoader, setPartLoader]= useState(false)
                 }
              
               });
-              console.log(err, "this sis the error getting")
+         
               setPartLoader(false)
-              console.log(isLoading, "hey isloading at ro")
+          
               
             });
         
             if(response){
               setPartLoader(false)
-              console.log(isLoading, "hey is loading at response")
+         
               Store.addNotification({
                 title: "Product Added To Wishlist",
                 message: "Product has been added to Wishlist",
@@ -128,7 +129,7 @@ const [partLoader, setPartLoader]= useState(false)
             }
           })};
     
-        console.log(response, "wishlist response");
+       
         dispatch(wishlistProducts());
         
       } catch (err) {
@@ -142,7 +143,7 @@ const [partLoader, setPartLoader]= useState(false)
 
     const handleAddProductToCart = async (productId,name) => {
       const response = await apiService.post(
-        `/api/products/cart/add_to_cart`,
+        `/products/cart/add_to_cart`,
         {
           userId: localStorage.getItem("userId"),
           productId: productId,
@@ -198,7 +199,7 @@ const [partLoader, setPartLoader]= useState(false)
 const moveProducToWishlist = async (productId) => {
   
   const response = await apiService.post(
-    `/api/products/wishlist/add_product`,
+    `/products/wishlist/add_product`,
     {
       userId: localStorage.getItem("userId"),
       productId: productId,
@@ -221,7 +222,6 @@ const moveProducToWishlist = async (productId) => {
       }
    
     });
-    console.log(err, "this sis the error getting")
     
   });
   dispatch(deleteItemFromCartDataAndcount(productId))
@@ -264,7 +264,7 @@ const removeProductFromCart = async (productId) => {
       }
     );
     
-    // console.log(response, "wishlist response");
+   
     dispatch(deleteItemFromCartDataAndcount(productId))
     dispatch(cartProducts());
   } catch (err) {

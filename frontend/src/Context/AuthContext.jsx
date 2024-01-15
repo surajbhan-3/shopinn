@@ -2,7 +2,7 @@
 import {useState, createContext} from "react";
 import { useNavigate } from 'react-router'
 import { useDispatch } from "react-redux";
-import { AUTH_BASE_URL } from "../Config/apiConfig";
+import { AUTH_BASE_URL} from "../Config/apiConfig";
 import { Store } from 'react-notifications-component';
 import axios from "axios";
 import { addCartdataTocartItemsAndCount } from "../Redux/ProductReducer/Action";
@@ -20,6 +20,8 @@ export const AuthContextProvider = ({children})=>{
             const [username, setUsername] = useState("");
             // setting the state of user is logged in or not
             const [isLoggedIn, setLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
+            const [partLoader, setPartLoader] = useState(false)
+             const isLoading = partLoader
 
             // function for changing the `isLoggIn` state
             const handleIsLoggedIn = () => {
@@ -43,9 +45,11 @@ export const AuthContextProvider = ({children})=>{
 
             const handleLoginFormSubmit = async (e) => {
                               e.preventDefault();
+
+                              setPartLoader(true)
                               const user = {  email: emailLogin, password: passwordLogin  };
              
-               try {
+                  try {
                  
                       localStorage.setItem("email",emailLogin)
                       await fetch(`${AUTH_BASE_URL}/api/user/login`,{
@@ -77,7 +81,10 @@ export const AuthContextProvider = ({children})=>{
                         }
                      
                       });
+                      setPartLoader(false)
                       dispatch(addCartdataTocartItemsAndCount())
+                       // doing this window reload because wihout reload the token in config file does not work
+                       window.location.href=`http://localhost:3000/` 
                     navigate("/")
                       }else if(data.Token && data.Role==="admin"){
                         console.log(data.Token, data.Role)
@@ -100,6 +107,8 @@ export const AuthContextProvider = ({children})=>{
                          
                           });
                         handleIsLoggedIn()
+                         // doing this window reload because wihout reload the token in config file does not work
+                         window.location.href=`http://localhost:3000/` 
                      navigate("/admin")
                       }
                     }).catch((error)=>{
@@ -108,7 +117,7 @@ export const AuthContextProvider = ({children})=>{
                     
                
                  
-                     console.log("registration is Sucessful")  
+         
                      setEmailLogin("")
                      setPasswordLogin("")
                      
@@ -121,17 +130,19 @@ export const AuthContextProvider = ({children})=>{
 
 
             const handleGuestLogin  = async ()=>{
-        
+                
                 setEmailLogin("ironman@gmail.com")
                 setPasswordLogin("ironman12345")
                     const user = {
-                      email: emailLogin,
-                      password: passwordLogin
+                      email:"ironman@gmail.com" ,
+                      password: "ironman12345"
                     };
-                  
+           
+                  setPartLoader(true)
                     try {
                      
                            localStorage.setItem("email",emailLogin)
+                        
                      await fetch(`${AUTH_BASE_URL}/api/user/login`,{
                           method:'POST',
                           headers:{
@@ -141,12 +152,14 @@ export const AuthContextProvider = ({children})=>{
                          }).then((res)=>{
                            return res.json()
                          }).then((data)=>{
-                           console.log(data)
+                        
                            if(data.Token && data.Role!=="admin"){
                             localStorage.setItem("shopin-token",data.Token)
                             localStorage.setItem("userId", data.userId);
                             localStorage.setItem("shopinn-user-profile-image", data.avtar)
                             handleIsLoggedIn()
+                            setPartLoader(false)
+                          
                             Store.addNotification({
                                 title: "Login",
                                 message: "User LoggedIn Successfully",
@@ -162,9 +175,11 @@ export const AuthContextProvider = ({children})=>{
                              
                               });
                               dispatch(addCartdataTocartItemsAndCount())
+                              // doing this window reload because wihout reload the token in config file does not work
+                              window.location.href=`http://localhost:3000/` 
                          navigate("/")
                            }else if(data.Token && data.Role==="admin"){
-                             console.log(data.Token, data.Role)
+                            
                              localStorage.setItem("shopin-token",data.Token);
                              localStorage.setItem("userId", data.userId);
                              localStorage.setItem("shopinn-user-profile-image", data.avtar)
@@ -177,14 +192,10 @@ export const AuthContextProvider = ({children})=>{
                           console.log(error)
                          })
                          
-                    
-                      
-                          console.log("registration is Sucessful")  
-                          setEmailLogin("")
-                          setPasswordLogin("")
+                  
                           
                     } catch (error) {
-                      
+                       console.log(error, "errro at authcontext")
                     }
                   
                   
@@ -194,6 +205,7 @@ export const AuthContextProvider = ({children})=>{
 
             const handleSingupFormSubmit = async(e)=>{
                 e.preventDefault();
+                setPartLoader(true)
             
                 const user = {
                   username: username,
@@ -210,10 +222,11 @@ export const AuthContextProvider = ({children})=>{
                       body:JSON.stringify(user)
                      })
             
+                      setPartLoader(false)
                      if (!response.ok) {
                       throw new Error('Network response was not ok.');
                     }
-                        console.log("registration is Sucessful")  
+                      
                         setUsername("")
                         setEmailSignup("")
                         setPasswordSignup("")
@@ -252,7 +265,7 @@ export const AuthContextProvider = ({children})=>{
                     }
                     
                     )
-                    console.log(response)
+         
                     if(response.status === 200){
              
                       Store.addNotification({
@@ -281,7 +294,7 @@ export const AuthContextProvider = ({children})=>{
             return  <AuthContext.Provider value={{ isLoggedIn, 
             handleIsLoggedIn, handleIsLoggedOut, emailLogin, passwordLogin ,emailSignup, passwordSignup,
              setEmailLogin, setPasswordLogin,
-            setEmailSignup, setPasswordSignup, setUsername, 
+            setEmailSignup, setPasswordSignup, setUsername, isLoading,
              handleLoginFormSubmit, handleGuestLogin, handleSingupFormSubmit, handleUserLogout }} >
                 
                         {children}

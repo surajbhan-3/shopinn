@@ -24,7 +24,7 @@ const ___cartTotalPrice = (useSelector((state)=>{
 const __orderDetails = (useSelector((state)=>{
      return state.ProductReducer.cartItemsAndCount
 }))
-console.log(__orderDetails, "order details here")
+
 
 
 const placeOrder = async()=>{
@@ -34,7 +34,7 @@ const placeOrder = async()=>{
         
 
           const apiKey = response1.data.apiKey
-          console.log(apiKey, "hjekk apik key")
+     
   
          const response = await apiService.post(`/payment/accept_payment`,
          {
@@ -42,8 +42,7 @@ const placeOrder = async()=>{
             amount: ___cartTotalPrice,
          })
         
-        console.log(response, "heii this is the respone of data")
-
+    
 
         const options = {
           key: apiKey, // Enter the Key ID generated from the Dashboard

@@ -32,7 +32,7 @@ export const AdminContextProvider = ({children}) =>{
         const response = await apiService.get(`/admin/dashboard/counts`)
         setPartLoader(false)
         setDashbaordCountData(response.data)
-        console.log(response, "hello this is respone")
+      
     } catch (error) {
     console.log(error)
     }
@@ -165,7 +165,7 @@ export const AdminContextProvider = ({children}) =>{
       
     })
     setPartLoader(false)
-    console.log(response, "hello this is respone")
+   
 } catch (error) {
 console.log(error)
 }
@@ -179,7 +179,7 @@ console.log(error)
  useEffect(()=>{
   const productId = localStorage.getItem("productId")
 const  getSingleProduct = async()=>{
-
+         
           try {
                  const response = await apiService.get(`/admin/product_details/${productId}`)
                  setData(response.data)

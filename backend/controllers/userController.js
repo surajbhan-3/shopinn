@@ -54,6 +54,7 @@ console.log(email, password, "ehllo")
       try {
         const isUserPresent = await UserModel.findOne({email});
         
+        
          if(!isUserPresent){
 
            return res.status(401).json({"Message":"Authentication Failed"});
@@ -72,6 +73,7 @@ console.log(email, password, "ehllo")
         
         
       } catch (error) {
+         console.log(error.message)
 
         return res.status(500).json({"Message":"Failed to Authenticate","Error":error.message})
         
@@ -108,8 +110,7 @@ const userSettings = async(req,res) =>{
               const userSecondaryDetails  = await UserUpdateModel.find({user:userId})
               const userAddressDetails = await AddressModel.find({user:userId})
               const {username, avtar, email} = userPrimaryDetails
-              console.log(userPrimaryDetails)
-              console.log(userSecondaryDetails)
+        
               return res.status(200).send({userData:{username:username, avtar:avtar, email:email},userSecondaryDetails, userAddressDetails})
              } catch (error) {
               
@@ -121,9 +122,7 @@ const userSettings = async(req,res) =>{
 const editUserProfileSettings = async(req,res)=>{
    const {firstname, lastname, gender, dateOfBirth} = req.body;
    const {userId} = req.body;
-   console.log(req.body)
-   console.log(firstname,lastname,gender,dateOfBirth);
-   console.log(userId)
+ 
         try {
              const checkUserUpdateProfile = await UserUpdateModel.findOne({user:userId});
              console.log(checkUserUpdateProfile,"update profile")
@@ -157,9 +156,7 @@ const editUserProfileSettings = async(req,res)=>{
 const editUserAddressSettings = async(req,res)=>{
   const {address, city, postalCode, landmark} = req.body;
   const {userId} = req.body;
-  console.log(req.body)
-  console.log(address, city, postalCode, landmark);
-  console.log(userId)
+
        try {
             const checkUserUpdateProfile = await AddressModel.findOne({user:userId});
             console.log(checkUserUpdateProfile,"update profile")
@@ -191,7 +188,6 @@ const editUserAddressSettings = async(req,res)=>{
 }
 
 const updateProfilePicture =  async (req, res) => {
-  console.log("Updating profile picture");
   const userId  = req.params.id;
 
   try {
@@ -225,16 +221,15 @@ const addUserReview = async (req,res)=>{
   const {reviewTitle,rating, reviewText} = req.body.finalReviewDataFromUser;
   const {userId} = req.body
   
- 
-  console.log(req.body)
+
   
-  console.log(userId,rating,reviewTitle, reviewText , "jhsdfsdf")
+
 
 
        try {
          
          const productTobeReview = await ProductModel.findOne({_id:productId})
-         console.log(productTobeReview._id, "tobe  review")
+  
 
           if(!productTobeReview){
             return res.status(400).json({"Message":error.message})
@@ -244,23 +239,17 @@ const addUserReview = async (req,res)=>{
           return res.status(400).json({"Message":error.message})
          }
           const checkProductIdInReviewModel = await  ReviewModel.findOne({product:productTobeReview._id})
-           console.log(checkProductIdInReviewModel, "this is product in review asd")
           if(!checkProductIdInReviewModel){
          
-            console.log("Hey i am able to reach here")
               const productReivew = new ReviewModel({product:productId, reviews:[{user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewText}]})
-                   console.log(productReivew)
               await productReivew.save()
          return  res.status(200).send({"Message":"Product review added Successfully"})
           }
 
           const allReviewsdata = checkProductIdInReviewModel.reviews
-          console.log(allReviewsdata, "all reviewsdata")
-          console.log(userId,"this is userId")
           const isUseridAvailable = allReviewsdata.find((el)=>{
                       return el.user == userId
           })
-          console.log(isUseridAvailable, "sifsdaf auad")
           if(isUseridAvailable){
             return res.status(200).send({"Message":"User already Given the reviews you can edit only"})
           }

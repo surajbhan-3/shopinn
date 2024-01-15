@@ -236,14 +236,13 @@ const removeSingleProductFromWishlist = async (req, res) => {
 const addProductToCart = async (req, res) => {
   const { userId, productId } = req.body;
 
-
   try {
     if (!userId || !productId) {
       return send({ message: "falult at various level" });
     }
     let cartData = await CartModel.findOne({ user: userId });
 
-
+     
     if (!cartData) {
       cartData = new CartModel({ user: userId, products: [productId] });
       

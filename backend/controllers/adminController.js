@@ -139,7 +139,7 @@ const getProductsByCategory = async (req, res) => {
 };
 
 const getDashboardCounts = async (req,res)=>{
-         console.log("hello")
+  
              try {
                const totalUser = await UserModel.find()
                const totalUserCount= totalUser.length

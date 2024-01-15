@@ -68,7 +68,7 @@ if(checkProductInWishlist){
               `/products/product_details/${__productKey}`,
               
             );
-            console.log(response);
+      
             setData(response.data[0]);
             setReviewData(response.data[1]);
   
@@ -86,8 +86,7 @@ console.log(userId, "hii user id")
 const userAlreadyReviewed = reviewData.find((el)=>{
      return el.user.userId === userId;
 })
-console.log(userAlreadyReviewed, "hi user t his")
-    console.log(reviewData, "this is review data")
+
 
 const handleAddReview = async ()=>{
 
@@ -100,7 +99,7 @@ const handleAddReview = async ()=>{
 
 const handleRating = (rate) => {
   setRating(rate)
-     console.log(rating, "this is the stae of rating")
+
   // other logic
 }
 
@@ -118,7 +117,7 @@ const finalReviewDataFromUser ={
 
  const handleWriteReview = async (e) =>{
       e.preventDefault();
-   console.log(finalReviewDataFromUser)
+
          
  
      // when working with axios you don't need to stringfy and dont' need to write body just like we do in fetch 
@@ -136,7 +135,7 @@ const finalReviewDataFromUser ={
                 },
               }
             );
-            console.log(response);
+       
            
               setRating(0)
               setReviewText("")

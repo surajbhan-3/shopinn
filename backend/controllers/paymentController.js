@@ -32,9 +32,7 @@ const acceptPayment = async (req,res)=>{
 
 const paymentVerification = async(req,res)=>{
 const {razorpay_order_id, razorpay_payment_id, razorpay_signature} = req.body;
-console.log(razorpay_order_id, razorpay_payment_id, 'helalsd')
-console.log(req.body)
-console.log(req.rawBody)
+
      try {
         
     //  const   generated_signature = hmac_sha256(razorpay_order_id + "|" + razorpay_payment_id, process.env.RAZORPAY_SECRET_KEY)

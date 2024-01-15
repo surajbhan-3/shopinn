@@ -10,7 +10,7 @@ function Mypurchase() {
 
              try {
                 const response = await apiService.get('/products/purchase_items',)
-               console.log(response, "hey resopnse dslkd")
+        
              } catch (error) {
                 
              }
