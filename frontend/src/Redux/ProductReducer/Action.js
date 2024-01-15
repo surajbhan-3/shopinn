@@ -30,36 +30,41 @@ export const cartProducts = ()=>{
              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
            },
          }
+         
        ).catch((err)=>{
          console.log(err)
        });
-              console.log(response.data.products, "hey response products cart")
-     
+         
+         if(response){
+           
         dispatch({
           type:ActionTypes.CART_PRODUCTS,
           payload:response.data.products
       })
-
-    const cartPrice = response.data.products;
+      const cartPrice = response.data.products;
 
     const initialCartPrice = cartPrice.reduce((acc, el)=>{
            return   acc+el.price   
     },0)
    const discountedPrice = Math.floor(initialCartPrice*(5/100))
    const totalPrice = initialCartPrice-discountedPrice
-   console.log(discountedPrice, "dsocountprice")
-      dispatch({
-        type:ActionTypes.CART_PRODUCTS_PRICE,
-        payload:initialCartPrice
-      })
-      dispatch({
-        type:ActionTypes.DISCOUNTED_PRICE,
-        payload:discountedPrice
-      })
-      dispatch({
-        type:ActionTypes.TOTAL_CART_PRICE,
-        payload:totalPrice
-      })
+   dispatch({
+    type:ActionTypes.CART_PRODUCTS_PRICE,
+    payload:initialCartPrice
+  })
+  dispatch({
+    type:ActionTypes.DISCOUNTED_PRICE,
+    payload:discountedPrice
+  })
+  dispatch({
+    type:ActionTypes.TOTAL_CART_PRICE,
+    payload:totalPrice
+  })
+
+         }
+    
+   
+     
       
    }  
 }
@@ -82,8 +87,6 @@ export const wishlistProducts = ()=>{
        ).catch((err)=>{
          console.log(err)
        });
-       console.log("hello from wishlist proudcts")
-       console.log(response)
 
   
    
@@ -113,7 +116,7 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
 }
 
  export const  addCartdataTocartItemsAndCount = () =>{
-          console.log("hey i have reachedd here bogog")
+          
    return async function (dispatch) {
     const userId = localStorage.getItem("userId")
     const response = await axios.get(
@@ -127,7 +130,7 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
      ).catch((err)=>{
        console.log(err)
      });
-      console.log(response.data.products, "hey response products cart")
+     
    
      const productData = response.data.products
     const newArray = productData.map(({ _id, name}) => ({
@@ -144,7 +147,7 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
  }  
  }
 export const incrementQuantity = (productId,incrementCount,name)=>{
-  console.log("he action.js, ", productId)
+
     return{
       type:ActionTypes.INCREMENT_QUANTITY,
        payload:{productId,incrementCount,name}
@@ -152,7 +155,7 @@ export const incrementQuantity = (productId,incrementCount,name)=>{
 }
 
 export const decrementQuantity = (productId,decrementCount,name)=>{
-           console.log(productId, decrementCount, "hiiiiiiiii")
+          
   return{
     type:ActionTypes.DECREMENT_QUANTITY,
      payload:{productId,decrementCount,name}
@@ -160,7 +163,7 @@ export const decrementQuantity = (productId,decrementCount,name)=>{
 }
 
 export const deleteItemFromCartDataAndcount = (productId)=>{
-         console.log("productId hrere, action.js", productId)
+         
 return{
 type:ActionTypes.DELETE_CARTITEMS_AND_COUNT,
 payload:productId

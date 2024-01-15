@@ -17,10 +17,44 @@ export const AdminContextProvider = ({children}) =>{
     const [description, setDescription]= useState("")  
     const [partLoader, setPartLoader]= useState(false)
     const [data, setData] = useState([])
+    const [dashboardCountData, setDashbaordCountData]=useState({})
     const isLoading = partLoader
    
 
        
+
+    const dashboardCount = async (e)=>{
+
+      setPartLoader(true)
+    
+      try {
+        const response = await axios.get(`http://localhost:4500/api/admin/dashboard/counts`,
+        
+        {
+       
+         headers:{
+            Authorization:`Bearer ${localStorage.getItem("shopin-token")}`
+         }
+          
+        })
+        setPartLoader(false)
+        setDashbaordCountData(response.data)
+        console.log(response, "hello this is respone")
+    } catch (error) {
+    console.log(error)
+    }
+    
+    
+             
+     }
+
+
+
+
+
+
+
+
     const handleImagechange = async (event) =>{
         event.preventDefault()
         setSelectedFile(event.target.files[0])
@@ -63,7 +97,6 @@ export const AdminContextProvider = ({children}) =>{
       
             }
       
-                console.log(response)
           // Handle the uploaded URL (e.g., display the image)
         } catch (error) {
           console.error('Upload failed:', error);
@@ -174,7 +207,6 @@ const  getSingleProduct = async()=>{
                   }
                    
                  })
-                 console.log(response, "hello this is respone")
                  setData(response.data)
                  setProductName(response.data.name)
                  setBrandName(response.data.brand)
@@ -227,7 +259,7 @@ try {
         handleImagechange, handleAddProduct,productName, setProductName, brandName, setBrandName, category,setCategory,
        description,  setDescription, gender, setGender, price, setPrice, handleUpdateProduct,
        subcategory, setSubcategory, isLoading,
-       handleDeleteProduct, data, setData , handleUdateProductImage
+       handleDeleteProduct, data, setData , handleUdateProductImage, dashboardCount, dashboardCountData,
       }} >
                
                        {children}

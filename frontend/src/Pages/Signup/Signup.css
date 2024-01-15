@@ -46,35 +46,19 @@
     background-color:#ff4e5c;
     color: white;
 }
-#sform-form #bt-2{
-    font-size: 16px;
-    margin-bottom: 20px;
-    padding: 15px 15px 5px 15px;
+ #bt-2{
     border-radius: 6px;
-    border: none;
     outline: none;
-    border: 1px solid grey;
-    display: flex;
-    
-  
-
-   
-}
-#bt-2 #fc{
-   width: 40%;
-   text-align: right;
-   padding-top: 3px;
-   margin-left: -15px;
-
-}
-#bt-2 div+div{
-    width: 60%;
-    text-align: left;
-}
-#fc{
-    margin-top: -10px;
+    width: 80%;
+     margin-left: 10%;
+     border: none;
 }
 
+#rlog{
+     width: 80%;
+     margin-left: 10%;
+     text-align: center;
+}
 #lin{
     border: none;
     border-bottom: 2px solid grey;
@@ -86,4 +70,8 @@
 #sform-form div{
     margin-left: 0px;
     text-align: center;
+}
+.idl{
+ text-decoration: none;
+  color: black;
 }

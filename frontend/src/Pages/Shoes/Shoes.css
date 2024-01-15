@@ -12,13 +12,12 @@
 
 .main-shoes .main-shoes-left{
     width: 20%;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: auto;
     background-color: rgb(170, 165, 165);
 
 }
 .main-shoes-left-inner-wrapper{
-
-     border: 1px solid black;
      height: 400px;
      width: 90%;
      margin: auto;

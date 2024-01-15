@@ -1,22 +1,17 @@
 import React, { useState } from 'react'
 import "./BookCard.css"
 import PartLoader from '../PartLoader/PartLoader'
-
+import { useContext } from 'react'
+import { ProductContext } from '../../Context/ProductContext'
 
 function BookCard({productId, imageUrl, name, price}) {
 
- const [partLoader, setPartLoader]= useState(false)
- const isLoading = partLoader
+ 
+ const {handleAddProductToWishlist,handleAddProductToCart, handleSingleProductPage, isLoading} = useContext(ProductContext)
 
-const handleSingleProductPage = async () =>{
-        
 
-}
 
-const handleAddProductToWishlist = async () =>{
 
-    
-}
 // console.log(imageUrl, name, productId)
   return (
           <div className='book-card-container' key={productId}>
@@ -39,7 +34,7 @@ const handleAddProductToWishlist = async () =>{
                           <button onClick={() => handleAddProductToWishlist(productId)}>
                             Add to wishlist
                           </button>
-                          <button onClick={() => handleAddProductToWishlist(productId)}>
+                          <button onClick={() => handleAddProductToCart(productId)}>
                          Add to cart
                           </button>
                         </div>

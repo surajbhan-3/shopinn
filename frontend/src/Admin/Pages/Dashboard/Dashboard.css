@@ -20,10 +20,10 @@
 .dash-right .top-info-div {
     display:  flex;
     justify-content: space-between;
-    background-color: rgb(177, 166, 166);
+    /* background-color: rgb(177, 166, 166); */
     height: 80px;
     padding: 10px;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     border-radius: 12px;
     width: 95%;
     margin: auto;
@@ -32,14 +32,23 @@
 
 
 }
-.dash-right .top-info-div div{
+.dash-right .top-info-div>div{
      /* border: 1px solid black; */
      width: 200px;
      height: 80px;
-     background-color: purple;
+     background-color: rgb(177, 166, 166);
 
-     
+     border-radius: 12px 12px;
+     display: flex;
+     flex-direction: column;
 
+}
+.dash-right .top-info-div>div>div{
+    height: 40%;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 10px;
 }
 
 .main-detail-wrapper{
@@ -57,16 +66,29 @@
 }
 .alluserDetails{
     width: auto;
+    background-color: rgb(168, 158, 158);
+    border-radius: 12px;
 }
 .allproducts-wrapper-aa{
     width: 100%;
+    
    
 }
+.p-heading{
+    background-color: rgb(168, 158, 158);   
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom:5px;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
 .allproducts-a{
     display: flex;
     justify-content: space-between;
     margin-left: 10px;
     padding: 10px;
+    
 
 
 }
@@ -76,5 +98,12 @@
    background-color: white;
    padding: 0px 10px 10px 10px;
    border-radius:12px 0px 12px 0px;
+   background-color: rgb(212, 209, 209);   
 
+
+}
+
+.makeChanges>button:hover{
+     background-color:rgb(189, 86, 86);
+     color: white;
 }

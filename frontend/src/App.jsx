@@ -37,7 +37,6 @@ function App() {
   const dispatch = useDispatch()
 
 
-
 useEffect(() => {
     // Show loader when component mounts
     dispatch(showLoader());

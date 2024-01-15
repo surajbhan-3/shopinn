@@ -1,27 +1,17 @@
 import React, { useState } from 'react'
 import PartLoader from '../PartLoader/PartLoader'
 import "./ShoeCard.css"
-
+import { useContext } from 'react'
+import { ProductContext } from '../../Context/ProductContext'
 
 function ShoeCard({productId, imageUrl, name, price}) {
 
  const [partLoader, setPartLoader]= useState(false)
  const isLoading = partLoader
 
-const handleSingleProductPage = async () =>{
-          setPartLoader(true)
-        setTimeout(() => {
-              setPartLoader(false)
-  
-          }, 2000);
-    
+ const {handleAddProductToWishlist,handleAddProductToCart, handleSingleProductPage} = useContext(ProductContext)
 
-}
 
-const handleAddProductToWishlist = async () =>{
-
-    
-}
 // console.log(imageUrl, name, productId)
   return (
           <div className='shoe-card-container' key={productId}>
@@ -44,7 +34,7 @@ const handleAddProductToWishlist = async () =>{
                           <button onClick={() => handleAddProductToWishlist(productId)}>
                             Add to wishlist
                           </button>
-                          <button onClick={() => handleAddProductToWishlist(productId)}>
+                          <button onClick={() => handleAddProductToCart(productId)}>
                          Add to cart
                           </button>
                         </div>

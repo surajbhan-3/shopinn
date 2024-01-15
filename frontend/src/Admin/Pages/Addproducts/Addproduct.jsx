@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Addproduct.css';
 import { useContext } from 'react';
 import PartLoader from '../../../Component/PartLoader/PartLoader';
@@ -12,6 +12,18 @@ function Addproduct() {
     subcategory, setSubcategory, isLoading
   
   } = useContext(AdminContext);
+
+  
+  useEffect(()=>{
+    setBrandName("")
+    setProductName("")
+    setCategory("")
+    setPrice("")
+    setSubcategory("")
+    setDescription("")
+    
+
+  },[])
 
   return (
     <div className='main-addproduct-container'>

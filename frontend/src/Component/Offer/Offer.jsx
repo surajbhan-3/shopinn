@@ -3,7 +3,7 @@ import "./Offer.css"
 function Offer() {
   return (
     <div className='main-offer'>     
-         Summer sale for  All Swim Suits and Free Express Delivery - OFF 50% Shop Now
+         🌞 Summer Splash Sale: Dive into Savings with 50% OFF on All books + Free Express Delivery! 🚚 Shop Now
 
     </div>
   )

@@ -1,26 +1,18 @@
 import React, { useState } from 'react'
 import PartLoader from '../PartLoader/PartLoader'
 import "./MobileCard.css"
+import { useContext } from 'react'
+import { ProductContext } from '../../Context/ProductContext'
 
 function MobileCard({productId, imageUrl, name, price}) {
 
  const [partLoader, setPartLoader]= useState(false)
  const isLoading = partLoader
+ const {handleAddProductToWishlist,handleAddProductToCart, handleSingleProductPage } = useContext(ProductContext)
 
-const handleSingleProductPage = async () =>{
-          setPartLoader(true)
-        setTimeout(() => {
-              setPartLoader(false)
-   
-          }, 2000);
-    
 
-}
 
-const handleAddProductToWishlist = async () =>{
 
-    
-}
 // console.log(imageUrl, name, productId)
   return (
           <div className='mobile-card-container' key={productId}>
@@ -43,7 +35,7 @@ const handleAddProductToWishlist = async () =>{
                           <button onClick={() => handleAddProductToWishlist(productId)}>
                             Add to wishlist
                           </button>
-                          <button onClick={() => handleAddProductToWishlist(productId)}>
+                          <button onClick={() => handleAddProductToCart(productId)}>
                          Add to cart
                           </button>
                         </div>

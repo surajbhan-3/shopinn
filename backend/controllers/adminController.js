@@ -1,5 +1,7 @@
 const { ProductModel } = require("../models/productmodel");
 const { UserModel } = require("../models/usermodel");
+const {CartModel} = require(".././models/cartmodel")
+const {OrderModel} = require(".././models/ordermodel")
 const { uploadImageToCloudinary } = require("../utils/adminCloudinary");
 
 // *** admin route
@@ -136,6 +138,25 @@ const getProductsByCategory = async (req, res) => {
   }
 };
 
+const getDashboardCounts = async (req,res)=>{
+         console.log("hello")
+             try {
+               const totalUser = await UserModel.find()
+               const totalUserCount= totalUser.length
+               const totalProducts = await ProductModel.find()
+               const totalProductsCount= totalProducts.length
+               const totalCartItems = await CartModel.find()
+               const totalItemsInCart = totalCartItems.length
+               const totalOrderItems = await OrderModel.find()
+              const  totalItemsInOrder = totalOrderItems.length
+
+               return res.status(200).json({totalUserCount, totalProductsCount, totalItemsInCart, totalItemsInOrder}) 
+
+             } catch (error) {
+              return res.status(500).json({status: "error",message: "Internal Server Error",Error: error.message});
+
+             }
+}
 module.exports = {
   getAllusers,
   deleteProduct,
@@ -144,4 +165,5 @@ module.exports = {
   getProductsByCategory,
   singleProduct,
   updateProductImage,
+  getDashboardCounts,
 };

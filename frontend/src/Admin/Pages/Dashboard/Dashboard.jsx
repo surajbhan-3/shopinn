@@ -1,19 +1,26 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
-
+import { useContext  } from 'react'
 import "./Dashboard.css"
 import Usercard from '../../Components/Usercard/Usercard'
 import Electronics from '../../Components/Electronics/Electronics'
 import Shoes from '../../Components/Shoes/Shoes'
+import { AdminContext } from '../../../Context/AdminContext'
 
 function Dashboard() {
  const [data, setData] = useState([])
  const [electronicsData , setElectronicsData] = useState([])
  const [shoesData, setShoesData] = useState([])
  const [booksData, setBooksData] = useState([])
-  useEffect(()=>{
+ const {dashboardCount, dashboardCountData} = useContext(AdminContext)
 
+ useEffect(()=>{
+
+      dashboardCount()
+ },[])
+  useEffect(()=>{
+   
      const getUserInfo = async()=>{
 
          try {
@@ -110,11 +117,27 @@ getBooksProducts()
     <div className='dashboard-page'>
          <div className="dash-right">
              <div className="top-info-div">
-                <div>Totla Number of user</div>
-                <div>Total Number of producst</div>
-                <div>Cart Data</div>
-                <div>Order Data</div>
-                <div>Total Reviews</div>
+                <div>
+                  <div>Number of user</div>
+                <div>{dashboardCountData.totalUserCount}</div>
+                </div>
+
+                <div>
+                  <div>Number of product</div>
+                  <div>{dashboardCountData.totalProductsCount}</div>
+                </div>
+                <div>
+                  <div>Cart Items</div>
+                  <div>{dashboardCountData.totalItemsInCart}</div>
+                </div>
+                <div>
+                  <div>Ordered Items</div>
+                  <div>{dashboardCountData.totalItemsInOrder}</div>
+                </div>
+                <div>
+                  <div>Reviews</div>
+                  <div>4</div>
+                </div>
              </div>
              <div className="main-detail-wrapper">
                  <div className='alluserDetails'>
@@ -130,7 +153,7 @@ getBooksProducts()
                
                  </div>
                  <div className='allproducts-wrapper-aa'>
-                    <h4>All Products</h4>
+                     <div className='p-heading'> <h4>All Products</h4></div>
                     <div className='allproducts-a'>
                      <div>
               

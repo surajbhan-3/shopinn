@@ -9,7 +9,7 @@
 */ 
 
 
-import { createContext, useContext} from "react";
+import { createContext, useContext, useState} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router'
 import { AuthContext } from "./AuthContext";
@@ -24,8 +24,11 @@ export const ProductContext = createContext();
 
 export const ProductContextProvider = ({children})=>{
 const {isLoggedIn} = useContext(AuthContext)
+const [partLoader, setPartLoader]= useState(false)
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const isLoading = partLoader
     
 
     
@@ -35,7 +38,8 @@ const {isLoggedIn} = useContext(AuthContext)
           navigate("/signup");
         } else {
         try {
-  
+                 setPartLoader(true)
+    
             const response = await axios.post(
               `http://localhost:4500/api/products/wishlist/add_product`,
               {
@@ -64,10 +68,14 @@ const {isLoggedIn} = useContext(AuthContext)
              
               });
               console.log(err, "this sis the error getting")
+              setPartLoader(false)
+              console.log(isLoading, "hey isloading at ro")
               
             });
         
             if(response){
+              setPartLoader(false)
+              console.log(isLoading, "hey is loading at response")
               Store.addNotification({
                 title: "Product Added To Wishlist",
                 message: "Product has been added to Wishlist",
@@ -288,7 +296,7 @@ const removeProductFromCart = async (productId) => {
 
 return  <ProductContext.Provider value={{handleAddProductToWishlist, handleSingleProductPage,
 
-           removeProductFromWishlist, handleAddProductToCart,moveProducToWishlist, removeProductFromCart
+           removeProductFromWishlist, handleAddProductToCart,moveProducToWishlist, removeProductFromCart, isLoading
 }} >
                 
                         {children}

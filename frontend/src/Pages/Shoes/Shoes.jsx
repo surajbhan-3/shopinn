@@ -1,16 +1,23 @@
 import React from 'react'
 import ShoeCard from '../../Component/ShoeCard/ShoeCard';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import "./Shoes.css"
-
+import { ProductContext } from '../../Context/ProductContext';
 
 
 
 function Shoes() {
-
+  const {handleAddProductToWishlist} = useContext(ProductContext)
   const [shoesData, setShoesData]= useState([])
   const [pageIndex, setPageIndex] = useState(1)
+  const [targetValue, setTargetValue] = useState("")
+  const [checkboxStates, setCheckboxStates] = useState({
+    checkbox1: false,
+    checkbox2: false,
+    checkbox3: false,
+  });
+
   
   const colorSyle = {
     backgroundColor: '#ff4e5c',
@@ -67,28 +74,616 @@ function Shoes() {
       console.log(error)
     }
   }
+
+  const handleSelectShoes =async (subcategory) =>{
+        
+
+    if(subcategory ==="default"){
+
+      try {
+        const response = await axios.get(
+          `http://localhost:4500/api/products/category/shoes/page/1`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+            },
+     
+            
+          })
+          console.log(response)
+          setShoesData(response.data)
+   
+          console.log(response.data, "here shoes  data")
+        
+       } catch (error) {
+         console.log(error)
+       }
+
+    }else{
+
+      try {
+        const response = await axios.get(
+          `http://localhost:4500/api/products/category/shoes/subcategory/${subcategory}/page/1`,
+         
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+            }, 
+            
+             
+          })
+          console.log(response)
+          setShoesData(response.data)
+          console.log(response.data, "here shoes  data")
+          setCheckboxStates({
+            checkbox1: false,
+            checkbox2: false,
+            checkbox3: false,
+          }) /// putting this at bottom because at top causing rendering problem
+        
+       } catch (error) {
+         console.log(error)
+       }
+    }
+      setTargetValue(subcategory)
+
+   
+    
+
+}
+
+
+const handlePrice  = (key) =>{
+   
+  if(key==="lth"){
+   console.log("hello")
+   const data = [...shoesData]; // Create a shallow copy of the array to avoid mutating the state directly
+                                // if your directly do like data = shoes.data.sort() then it will not re-render 
+   data.sort((a, b) => a.price - b.price);
+
+   console.log(data);
+   setShoesData(data);
+  }else if(key==="htl"){
+   console.log("hello")
+   const data = [...shoesData]; // Create a shallow copy of the array to avoid mutating the state directly
+                                // if your directly do like data = shoes.data.sort() then it will not re-render 
+   data.sort((a, b) => b.price - a.price);
+
+   console.log(data);
+   setShoesData(data);
+  }else if(key===""){
+   const data = [...shoesData]; // Create a shallow copy of the array to avoid mutating the state directly
+                                // if your directly do like data = shoes.data.sort() then it will not re-render 
+   data.sort((a, b) => a.price - b.price);
+
+   console.log(data);
+   setShoesData(data);
+
+  }
+
+       
+}
+
+const handleCheckboxChange = (checkboxName) => {
+  setCheckboxStates((prevStates) => ({
+    ...prevStates,
+    [checkboxName]: !prevStates[checkboxName],
+  }));
+  console.log(checkboxName, 'this is chekcbox')
+};
+
+useEffect(() => {
+ 
+ if(targetValue && checkboxStates.checkbox1 && !checkboxStates.checkbox2 && !checkboxStates.checkbox3){
+  const getProductsByPriceRange = async () =>{
+         console.log("here i reached here")
+    try {
+      const response = await axios.get(
+        `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=499`,
+       
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+          }, 
+          
+           
+        })
+        console.log(response)
+        setShoesData(response.data)
+        console.log(response.data, "here shoes  data")
+      
+     } catch (error) {
+       console.log(error)
+     }
+   }
+   getProductsByPriceRange()
+ }else if(targetValue  && checkboxStates.checkbox1 && checkboxStates.checkbox2 && !checkboxStates.checkbox3){
+        console.log("heelllo ")
+        if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+           console.log('hello brother ')
+        }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+          console.log("hey both are true");
+        }
+  const getProductsByPriceRange = async () =>{
+    console.log("here i reached here")
+try {
+ const response = await axios.get(
+   `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=999`,
+  
+   {
+     headers: {
+       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+     }, 
+     
+      
+   })
+   console.log(response)
+   setShoesData(response.data)
+   console.log(response.data, "here shoes  data")
+ 
+} catch (error) {
+  console.log(error)
+}
+}
+getProductsByPriceRange()
+
+
+ }else if(targetValue  && checkboxStates.checkbox1 && checkboxStates.checkbox2 && checkboxStates.checkbox3){
+  console.log("heelllo ")
+  if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+     console.log('hello brother ')
+  }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+    console.log("hey both are true");
+  }
+const getProductsByPriceRange = async () =>{
+console.log("here i reached here")
+try {
+const response = await axios.get(
+`http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=100&max=1999`,
+
+{
+headers: {
+ Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+}, 
+
+
+})
+console.log(response)
+setShoesData(response.data)
+console.log(response.data, "here shoes  data")
+
+} catch (error) {
+console.log(error)
+}
+}
+getProductsByPriceRange()
+
+
+}
+  else if(targetValue  && checkboxStates.checkbox1 && !checkboxStates.checkbox2 && checkboxStates.checkbox3){
+  
+  const getProductsByPriceRange = async () =>{
+  console.log("here i reached here")
+  try {
+  const response = await axios.get(
+  `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?middle=1`,
+
+  {
+  headers: {
+  Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+  }, 
+
+
+  })
+  console.log(response)
+  setShoesData(response.data)
+  console.log(response.data, "here shoes  data")
+
+  } catch (error) {
+  console.log(error)
+  }
+  }
+  getProductsByPriceRange()
+
+
+  }
+  else if(targetValue  && !checkboxStates.checkbox1 && !checkboxStates.checkbox2 && !checkboxStates.checkbox3){
+  
+    const getProductsByPriceRange = async () =>{
+    console.log("here i reached here")
+    try {
+    const response = await axios.get(
+    `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1`,
+  
+    {
+    headers: {
+    Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+    }, 
+  
+  
+    })
+    console.log(response)
+    setShoesData(response.data)
+    console.log(response.data, "here shoes  data")
+  
+    } catch (error) {
+    console.log(error)
+    }
+    }
+    getProductsByPriceRange()
+  
+  
+    }
+
+  else if(targetValue  && !checkboxStates.checkbox1 && checkboxStates.checkbox2 && checkboxStates.checkbox3){
+    console.log("heelllo ")
+    if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+       console.log('hello brother ')
+    }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+      console.log("hey both are true");
+    }
+  const getProductsByPriceRange = async () =>{
+  console.log("here i reached here")
+  try {
+  const response = await axios.get(
+  `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=500&max=1999`,
+  
+  {
+  headers: {
+   Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+  }, 
+  
+  
+  })
+  console.log(response)
+  setShoesData(response.data)
+  console.log(response.data, "here shoes  data")
+  
+  } catch (error) {
+  console.log(error)
+  }
+  }
+  getProductsByPriceRange()
+  
+  
+  }
+  else if(targetValue  && !checkboxStates.checkbox1 && !checkboxStates.checkbox2 && checkboxStates.checkbox3){
+    console.log("heelllo ")
+    if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+       console.log('hello brother ')
+    }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+      console.log("hey both are true");
+    }
+  const getProductsByPriceRange = async () =>{
+  console.log("here i reached here")
+  try {
+  const response = await axios.get(
+  `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=1000&max=1999`,
+  
+  {
+  headers: {
+   Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+  }, 
+  
+  
+  })
+  console.log(response)
+  setShoesData(response.data)
+  console.log(response.data, "here shoes  data")
+  
+  } catch (error) {
+  console.log(error)
+  }
+  }
+  getProductsByPriceRange()
+  
+  
+  }
+  else if(targetValue  && !checkboxStates.checkbox1 && checkboxStates.checkbox2 && !checkboxStates.checkbox3){
+    console.log("heelllo ")
+    if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+       console.log('hello brother ')
+    }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+      console.log("hey both are true");
+    }
+  const getProductsByPriceRange = async () =>{
+  console.log("here i reached here")
+  try {
+  const response = await axios.get(
+  `http://localhost:4500/api/products/category/shoes/subcategory/${targetValue}/page/1?min=500&max=1000`,
+  
+  {
+  headers: {
+   Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+  }, 
+  
+  
+  })
+  console.log(response)
+  setShoesData(response.data)
+  console.log(response.data, "here shoes  data")
+  
+  } catch (error) {
+  console.log(error)
+  }
+  }
+  getProductsByPriceRange()
+  
+  
+  }
+   
+  if(targetValue=="default"){
+     
+    if(checkboxStates.checkbox1 && !checkboxStates.checkbox2 && !checkboxStates.checkbox3){
+      const getProductsByPriceRange = async () =>{
+             console.log("here i reached here")
+        try {
+          const response = await axios.get(
+            `http://localhost:4500/api/products/category/shoes/page/1?min=100&max=499`,
+           
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+              }, 
+              
+               
+            })
+            console.log(response)
+            setShoesData(response.data)
+            console.log(response.data, "here shoes  data")
+          
+         } catch (error) {
+           console.log(error)
+         }
+       }
+       getProductsByPriceRange()
+     }else if(checkboxStates.checkbox1 && checkboxStates.checkbox2 && !checkboxStates.checkbox3){
+           
+      const getProductsByPriceRange = async () =>{
+       
+    try {
+     const response = await axios.get(
+       `http://localhost:4500/api/products/category/shoes/page/1?min=100&max=999`,
+      
+       {
+         headers: {
+           Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+         }, 
+         
+          
+       })
+   
+       setShoesData(response.data)
+     
+     
+    } catch (error) {
+      console.log(error)
+    }
+    }
+    getProductsByPriceRange()
+    
+    
+     }else if(checkboxStates.checkbox1 && checkboxStates.checkbox2 && checkboxStates.checkbox3){
+    
+      if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+        
+      }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+        console.log("hey both are true");
+      }
+    const getProductsByPriceRange = async () =>{
+    console.log("here i reached here")
+    try {
+    const response = await axios.get(
+    `http://localhost:4500/api/products/category/shoes/page/1?min=100&max=1999`,
+    
+    {
+    headers: {
+     Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+    }, 
+    
+    
+    })
+    console.log(response)
+    setShoesData(response.data)
+    console.log(response.data, "here shoes  data")
+    
+    } catch (error) {
+    console.log(error)
+    }
+    }
+    getProductsByPriceRange()
+    
+    
+    }
+      else if(checkboxStates.checkbox1 && !checkboxStates.checkbox2 && checkboxStates.checkbox3){
+      
+      const getProductsByPriceRange = async () =>{
+      console.log("here i reached here")
+      try {
+      const response = await axios.get(
+      `http://localhost:4500/api/products/category/shoes/page/1?middle=1`,
+    
+      {
+      headers: {
+      Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+      }, 
+    
+    
+      })
+      console.log(response)
+      setShoesData(response.data)
+      console.log(response.data, "here shoes  data")
+    
+      } catch (error) {
+      console.log(error)
+      }
+      }
+      getProductsByPriceRange()
+    
+    
+      }
+      else if( !checkboxStates.checkbox1 && !checkboxStates.checkbox2 && !checkboxStates.checkbox3){
+      
+        const getProductsByPriceRange = async () =>{
+        console.log("here i reached here")
+        try {
+        const response = await axios.get(
+        `http://localhost:4500/api/products/category/shoes/page/1`,
+      
+        {
+        headers: {
+        Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+        }, 
+      
+      
+        })
+        console.log(response)
+        setShoesData(response.data)
+        console.log(response.data, "here shoes  data")
+      
+        } catch (error) {
+        console.log(error)
+        }
+        }
+        getProductsByPriceRange()
+      
+      
+        }
+    
+      else if(!checkboxStates.checkbox1 && checkboxStates.checkbox2 && checkboxStates.checkbox3){
+        console.log("heelllo ")
+        if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+           console.log('hello brother ')
+        }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+          console.log("hey both are true");
+        }
+      const getProductsByPriceRange = async () =>{
+      console.log("here i reached here")
+      try {
+      const response = await axios.get(
+      `http://localhost:4500/api/products/category/shoes/page/1?min=500&max=1999`,
+      
+      {
+      headers: {
+       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+      }, 
+      
+      
+      })
+      console.log(response)
+      setShoesData(response.data)
+      console.log(response.data, "here shoes  data")
+      
+      } catch (error) {
+      console.log(error)
+      }
+      }
+      getProductsByPriceRange()
+      
+      
+      }
+      else if(!checkboxStates.checkbox1 && !checkboxStates.checkbox2 && checkboxStates.checkbox3){
+        console.log("heelllo ")
+        if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+           console.log('hello brother ')
+        }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+          console.log("hey both are true");
+        }
+      const getProductsByPriceRange = async () =>{
+      console.log("here i reached here")
+      try {
+      const response = await axios.get(
+      `http://localhost:4500/api/products/category/shoes/page/1?min=1000&max=1999`,
+      
+      {
+      headers: {
+       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+      }, 
+      
+      
+      })
+      console.log(response)
+      setShoesData(response.data)
+      console.log(response.data, "here shoes  data")
+      
+      } catch (error) {
+      console.log(error)
+      }
+      }
+      getProductsByPriceRange()
+      
+      
+      }
+      else if(!checkboxStates.checkbox1 && checkboxStates.checkbox2 && !checkboxStates.checkbox3){
+        console.log("heelllo ")
+        if(checkboxStates.checkbox1 && !checkboxStates.checkbox3){
+           console.log('hello brother ')
+        }else if(checkboxStates.checkbox1 && checkboxStates.checkbox3){
+          console.log("hey both are true");
+        }
+      const getProductsByPriceRange = async () =>{
+      console.log("here i reached here")
+      try {
+      const response = await axios.get(
+      `http://localhost:4500/api/products/category/shoes/page/1?min=500&max=1000`,
+      
+      {
+      headers: {
+       Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
+      }, 
+      
+      
+      })
+      console.log(response)
+      setShoesData(response.data)
+      console.log(response.data, "here shoes  data")
+      
+      } catch (error) {
+      console.log(error)
+      }
+      }
+      getProductsByPriceRange()
+      
+      
+      }
+
+
+
+  }
+
+}, [checkboxStates,targetValue]); 
+
+
   return (
     <div className='main-shoes'>
     <div className="main-shoes-wrapper">
 
               <div className="main-shoes-left">
                      <div className="main-shoes-left-inner-wrapper">
-                          <select name="" className="left-cct">
-                           <option value="">Category</option>
-                           <option value="fiction">Fiction</option>
-                           <option value="sci-fi">Sci-Fi</option>
-                           <option value="motivational">Motivational</option>
+                          <select name="" onChange={(e)=>{handleSelectShoes(e.target.value)}} className="left-cct">
+                           <option value="default">Category</option>
+                           <option value="boots">Boots</option>
+                           <option value="sneakers">Sneakers</option>
+                           <option value="crocs">Crocs</option>
                           </select> <br />
-                           <select name="" className="left-cct">
+                           <select name="" onChange={(e)=>{handlePrice(e.target.value)}} className="left-cct">
                              <option value="">Price</option>
                              <option value="lth">Low To High</option>
                              <option value="htl">High To Low</option>
                            </select>
-                          <div className='cchbox' ><span>Rs.100 - Rs.299 </span><input type="checkbox" name="" id="" /></div>
-                          <div className='cchbox' ><span>Rs.300 - Rs.599 </span><input type="checkbox" name="" id="" /></div>
-                          <div className='cchbox' ><span>Rs.600 - Rs.999 </span><input type="checkbox" name="" id="" /></div>
-                          <div className='cchbox' ><span>Rs.1000 - Rs.1999 </span><input type="checkbox" name="" id="" /></div>
-
+                           <div className='cchbox' ><span>Rs.100 - Rs.499 </span>
+                                 
+                                 <input type="checkbox"    checked={checkboxStates.checkbox1}
+                                  onChange={() => handleCheckboxChange('checkbox1')} name="" id="" />
+                              </div>
+                                 <div className='cchbox' ><span>Rs.500 - Rs.999 </span>
+                                 <input type="checkbox"    checked={checkboxStates.checkbox2}
+                                  onChange={() => handleCheckboxChange('checkbox2')} name="" id="" />
+                                  </div>
+                                 <div className='cchbox' ><span>Rs.1000 - Rs.1999 </span>
+                                 <input type="checkbox"  checked={checkboxStates.checkbox3}
+                                  onChange={() => handleCheckboxChange('checkbox3')}  name="" id="" />
+                               </div>
                      </div>
               </div>
               <div className="main-shoes-right">
