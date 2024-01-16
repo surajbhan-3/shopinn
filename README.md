@@ -235,3 +235,15 @@
          -- Update product image.
          -- Dashboard: Retrieve counts of various entities (e.g., users, products).
 
+
+
+##### Landing page
+
+     ![LandingPage1](frontend/src/assets/lp1.png)
+
+     ![LandingPage2](frontend/src/assets/lp2.png)
+
+##### Signup page
+
+      ![LoginPage](frontend/src/assets/lg.png)      
+     

@@ -190,6 +190,7 @@ export const AuthContextProvider = ({children})=>{
                         productId: _id,
                         count: 1,
                         productName:name,}));
+                        console.log(newArray)
                         dispatch(addCartdataTocartItemsAndCount(newArray));
                     }
                 
