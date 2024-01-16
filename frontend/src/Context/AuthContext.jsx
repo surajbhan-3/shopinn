@@ -90,12 +90,14 @@ export const AuthContextProvider = ({children})=>{
                   localStorage.setItem("shopinn-user-profile-image", data.avtar);
                   handleIsLoggedIn();
                   const userId = localStorage.getItem("userId")
-                  const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
-                                                        )
-                    
-                                             alert("sdlkfj")    
-                                             alert(response)
-                 
+                  const response = await axios.get(`${AUTH_BASE_URL}/api/products/cart/get_cartdata/${userId}`,
+                  {
+
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${localStorage.getItem("shopin-token")}`,
+                    },
+                  })
                     if(response){
                       const productData = response.data.products
                       const newArray = productData.map(({ _id, name}) => ({
@@ -209,10 +211,7 @@ export const AuthContextProvider = ({children})=>{
                         localStorage.setItem("shopinn-user-profile-image", data.avtar);
                     
                         handleIsLoggedIn();
-                        console.log('helo')
                           const userId = localStorage.getItem("userId")
-                          console.log(userId, "userId")
-                          console.log(localStorage.getItem("shopin-token"))
                           const response = await axios.get(`${AUTH_BASE_URL}/api/products/cart/get_cartdata/${userId}`,
                           {
 
@@ -224,13 +223,6 @@ export const AuthContextProvider = ({children})=>{
 
 
 
-
-                                                                alert("sdlkfj")    
-                                                                                                                         
-
-                                                                console.log('hello this')
-                           
-                                console.log(response, "hey respones")
                             if(response){
                               const productData = response.data.products
                               console.log(productData)
@@ -238,11 +230,7 @@ export const AuthContextProvider = ({children})=>{
                                 productId: _id,
                                 count: 1,
                                 productName:name,}));
-                                console.log(newArray)
-                                dispatch(addCartdataTocartItemsAndCount(newArray));
-                                alert(productData)
-                                alert(newArray)
-                                
+                                dispatch(addCartdataTocartItemsAndCount(newArray));                              
                             }
                         
                         
