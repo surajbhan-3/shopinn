@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import axios from "axios"
 import apiService from '../../Config/apiService';
 import "./Reviews.css";
 
@@ -60,7 +59,7 @@ const handleDeleteReview = async(key,productId)=>{
   
 
     try {
-      const response = await apiService.delete(
+       await apiService.delete(
         `/products/reviews/delete_reveiw`,
         {
           // this data keyword is neccessary in axios when using delete method 

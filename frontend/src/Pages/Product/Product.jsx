@@ -126,7 +126,7 @@ const finalReviewDataFromUser ={
              setPartLoader(true)
            try {
             
-            const response = await apiService.post(
+            await apiService.post(
               `/user/products/review/${__productKey}`,
               {
                 finalReviewDataFromUser
@@ -275,8 +275,8 @@ const userReviewedTime =(time)=>{
                                       <div id='htpd'><i>{el.reviewTitle}</i></div> 
                                       <div>
                                       {
-                                     el.rating==5?<span>⭐⭐⭐⭐⭐</span>:el.rating==4?<span>⭐⭐⭐⭐</span>:el.rating==3?<span>⭐⭐⭐</span>
-                                     :el.rating==2?<span>⭐⭐</span>:el.rating==1?<span>⭐</span>:null
+                                     el.rating===5?<span>⭐⭐⭐⭐⭐</span>:el.rating===4?<span>⭐⭐⭐⭐</span>:el.rating===3?<span>⭐⭐⭐</span>
+                                     :el.rating===2?<span>⭐⭐</span>:el.rating===1?<span>⭐</span>:null
                                      } 
                                       </div>
                                      

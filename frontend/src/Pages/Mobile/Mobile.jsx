@@ -269,7 +269,7 @@ function Mobile() {
       getProductsByPriceRange();
     }
 
-    if (targetValue == "default") {
+    if (targetValue === "default") {
       if (
         checkboxStates.checkbox1 &&
         !checkboxStates.checkbox2 &&
@@ -412,7 +412,7 @@ function Mobile() {
         getProductsByPriceRange();
       }
     }
-  }, [checkboxStates]);
+  }, [checkboxStates,targetValue]);
 
   return (
     <div className="main-mobiles">

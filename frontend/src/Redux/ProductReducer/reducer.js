@@ -20,7 +20,7 @@ export const reducer = (state = intialState, { type, payload }) => {
       return {...state, wishlistData:payload}
     }
     case ActionTypes.CART_PRODUCTS:{
-      console.log("hey reducer iam here", payload)
+     
       return {
         ...state, cartData:payload
       }
@@ -104,7 +104,7 @@ export const reducer = (state = intialState, { type, payload }) => {
       }
   }
   case ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT : {
-        
+    console.log("hey reducer iam here", payload)
     
   return {
            

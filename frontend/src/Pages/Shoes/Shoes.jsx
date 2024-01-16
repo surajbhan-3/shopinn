@@ -1,9 +1,9 @@
 import React from "react";
 import ShoeCard from "../../Component/ShoeCard/ShoeCard";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import apiService from "../../Config/apiService";
 import "./Shoes.css";
-import { ProductContext } from "../../Context/ProductContext";
+
 
 function Shoes() {
   const [shoesData, setShoesData] = useState([]);
@@ -265,7 +265,7 @@ function Shoes() {
       getProductsByPriceRange();
     }
 
-    if (targetValue == "default") {
+    if (targetValue === "default") {
       if (
         checkboxStates.checkbox1 &&
         !checkboxStates.checkbox2 &&

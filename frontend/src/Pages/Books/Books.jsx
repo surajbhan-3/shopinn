@@ -276,7 +276,7 @@ function Books() {
       getProductsByPriceRange();
     }
 
-    if (targetValue == "default") {
+    if (targetValue === "default") {
       if (
         checkboxStates.checkbox1 &&
         !checkboxStates.checkbox2 &&
@@ -419,7 +419,7 @@ function Books() {
         getProductsByPriceRange();
       }
     }
-  }, [checkboxStates]);
+  }, [checkboxStates,targetValue]);
 
   return (
     <div className="main-books">

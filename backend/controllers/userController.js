@@ -57,13 +57,13 @@ console.log(email, password, "ehllo")
         
          if(!isUserPresent){
 
-           return res.status(401).json({"Message":"Authentication Failed"});
+           return res.status(401).json({status:"failed",Message:"Authentication Failed"});
          }
 
          const isPasswordValid = await bcrypt.compare(password, isUserPresent.password);
          if(!isPasswordValid){
 
-          return res.status(401).json({"Message":"Authentication Failed"});
+          return res.status(401).json({status:"failed",Message:"Authentication Failed"});
 
          }
             // console.log(isUserPresent)

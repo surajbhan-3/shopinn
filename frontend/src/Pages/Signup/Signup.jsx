@@ -31,9 +31,9 @@ function Signup() {
                 <form action="" id='sform-form' onSubmit={handleSingupFormSubmit}>
                     <h1>Create an account</h1>
                     <p>Enter your details below</p>
-                    <input type="text" maxLength={50}  placeholder='Name' id='username' name='username' value={username} onChange={(e)=> setUsername(e.target.value)} required />
-                    <input type="email" max={50} placeholder='Email' id='email' name='email' value={emailSignup} onChange={(e)=> setEmailSignup(e.target.value)}  required/>
-                    <input type="password" maxLength={50} required name="password" id="password" value={passwordSignup} onChange={(e)=> setPasswordSignup(e.target.value)}  placeholder='Password' />
+                    <input type="text" maxLength={50}  placeholder='Log in as a guest user, go to login button' id='username' name='username' value={username} onChange={(e)=> setUsername(e.target.value)} required />
+                    <input type="email" max={50} placeholder='Log in as a guest user, go to login button' id='email' name='email' value={emailSignup} onChange={(e)=> setEmailSignup(e.target.value)}  required/>
+                    <input type="password" maxLength={50} required name="password" id="password" value={passwordSignup} onChange={(e)=> setPasswordSignup(e.target.value)}  placeholder='Log in as a guest user, go to login button' />
                     <button id='bt-1' type='submit'>Create Account</button>     
                 </form>
                        {/* <button id='bt-2' >  

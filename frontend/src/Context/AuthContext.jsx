@@ -5,7 +5,9 @@ import { useDispatch } from "react-redux";
 import { AUTH_BASE_URL} from "../Config/apiConfig";
 import { Store } from 'react-notifications-component';
 import axios from "axios";
+import apiService from "../Config/apiService";
 import { addCartdataTocartItemsAndCount } from "../Redux/ProductReducer/Action";
+
 export const AuthContext = createContext();
 
 
@@ -43,90 +45,221 @@ export const AuthContextProvider = ({children})=>{
 
 
 
-            const handleLoginFormSubmit = async (e) => {
-                              e.preventDefault();
+            // const handleLoginFormSubmit = async (e) => {
+            //                   e.preventDefault();
 
-                              setPartLoader(true)
-                              const user = {  email: emailLogin, password: passwordLogin  };
+            //                   setPartLoader(true)
+            //                   const user = {  email: emailLogin, password: passwordLogin  };
              
-                  try {
+            //       try {
                  
-                      localStorage.setItem("email",emailLogin)
-                      await fetch(`${AUTH_BASE_URL}/api/user/login`,{
-                               method:'POST',
-                               headers:{
-                                        'Content-Type':'application/json'
-                                        },
-                              body:JSON.stringify(user)
-                    }).then((res)=>{
-                      return res.json()
-                    }).then((data)=>{
-                      console.log(data)
-                      if(data.Token && data.Role!=="admin"){
-                       localStorage.setItem("shopin-token",data.Token)
-                       localStorage.setItem("userId", data.userId);
-                       localStorage.setItem("shopinn-user-profile-image", data.avtar)
-                       handleIsLoggedIn()
-                       Store.addNotification({
-                        title: "Login",
-                        message: "User LoggedIn Successfully",
-                        type: "success",
-                        insert: "top",
-                        container: "top-right",
-                        animationIn: ["animate__animated", "animate__fadeIn"],
-                        animationOut: ["animate__animated", "animate__fadeOut"],
-                        dismiss: {
-                          duration: 2000,
-                          onScreen: true
-                        }
-                     
-                      });
-                      setPartLoader(false)
-                      dispatch(addCartdataTocartItemsAndCount())
-                       // doing this window reload because wihout reload the token in config file does not work
-                       window.location.href=`http://localhost:3000/` 
-                    navigate("/")
-                      }else if(data.Token && data.Role==="admin"){
-                        console.log(data.Token, data.Role)
-                        localStorage.setItem("shopin-token",data.Token);
-                        localStorage.setItem("userId", data.userId);
-                        localStorage.setItem("shopinn-user-profile-image", data.avtar)
+            //           localStorage.setItem("email",emailLogin)
+            //           await fetch(`${AUTH_BASE_URL}/api/user/login`,{
+            //                    method:'POST',
+            //                    headers:{
+            //                             'Content-Type':'application/json'
+            //                             },
+            //                   body:JSON.stringify(user)
+            //         }).then((res)=>{
+            //           return res.json()
+            //         }).then((data)=>{
+            //           console.log(data)
+            //           if(data.Token && data.Role!=="admin"){
+            //            localStorage.setItem("shopin-token",data.Token)
+            //            localStorage.setItem("userId", data.userId);
+            //            localStorage.setItem("shopinn-user-profile-image", data.avtar)
+            //            handleIsLoggedIn()
                        
-                        Store.addNotification({
-                            title: "Login",
-                            message: "Admin LoggedIn Successfully",
-                            type: "success",
-                            insert: "top",
-                            container: "top-right",
-                            animationIn: ["animate__animated", "animate__fadeIn"],
-                            animationOut: ["animate__animated", "animate__fadeOut"],
-                            dismiss: {
-                              duration: 2000,
-                              onScreen: true
-                            }
+            //            Store.addNotification({
+            //             title: "Login",
+            //             message: "User LoggedIn Successfully",
+            //             type: "success",
+            //             insert: "top",
+            //             container: "top-right",
+            //             animationIn: ["animate__animated", "animate__fadeIn"],
+            //             animationOut: ["animate__animated", "animate__fadeOut"],
+            //             dismiss: {
+            //               duration: 2000,
+            //               onScreen: true
+            //             }
+                     
+            //           });
+            //           setPartLoader(false)
+            //           dispatch(addCartdataTocartItemsAndCount())
+            //            // doing this window reload because wihout reload the token in config file does not work
+            //            window.location.href=`http://localhost:3000/` 
+            //         navigate("/")
+            //           }else if(data.Token && data.Role==="admin"){
+            //             console.log(data.Token, data.Role)
+            //             localStorage.setItem("shopin-token",data.Token);
+            //             localStorage.setItem("userId", data.userId);
+            //             localStorage.setItem("shopinn-user-profile-image", data.avtar)
+                       
+            //             Store.addNotification({
+            //                 title: "Login",
+            //                 message: "Admin LoggedIn Successfully",
+            //                 type: "success",
+            //                 insert: "top",
+            //                 container: "top-right",
+            //                 animationIn: ["animate__animated", "animate__fadeIn"],
+            //                 animationOut: ["animate__animated", "animate__fadeOut"],
+            //                 dismiss: {
+            //                   duration: 2000,
+            //                   onScreen: true
+            //                 }
                          
-                          });
-                        handleIsLoggedIn()
-                         // doing this window reload because wihout reload the token in config file does not work
-                         window.location.href=`http://localhost:3000/` 
-                     navigate("/admin")
-                      }
-                    }).catch((error)=>{
-                     console.log(error)
-                    })
+            //               });
+            //             handleIsLoggedIn()
+            //              // doing this window reload because wihout reload the token in config file does not work
+
+            //              window.location.href=`http://localhost:3000/` 
+            //          navigate("/admin")
+            //           }
+            //         }).catch((error)=>{
+            //          console.log(error)
+            //         })
                     
                
                  
          
-                     setEmailLogin("")
-                     setPasswordLogin("")
+            //          setEmailLogin("")
+            //          setPasswordLogin("")
                      
-               } catch (error) {
+            //    } catch (error) {
                  
-               }                       
+            //    }                       
                                               
-                                              }                                
+            //                                   }                                
 
+
+            const handleLoginFormSubmit = async (e) => {
+              e.preventDefault();
+            
+              setPartLoader(true);
+              const user = { email: emailLogin, password: passwordLogin };
+            
+              try {
+                localStorage.setItem("email", emailLogin);
+            
+                const response = await fetch(`${AUTH_BASE_URL}/api/user/login`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(user)
+                });
+                 
+                const data = await response.json();
+            
+               
+
+                if(data.status === "failed"){
+                  Store.addNotification({
+                    title: "Login Failed",
+                    message: "Wrong Credential",
+                    type: "danger",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    dismiss: {
+                      duration: 2000,
+                      onScreen: true
+                    }
+                  });
+                  setPartLoader(false)
+                  navigate("/login")
+                 }
+            
+                if (data.Token && data.Role !== "admin") {
+                  localStorage.setItem("shopin-token", data.Token);
+                  localStorage.setItem("userId", data.userId);
+                  localStorage.setItem("shopinn-user-profile-image", data.avtar);
+                  handleIsLoggedIn();
+                  const userId = localStorage.getItem("userId")
+                  const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
+                                                        ).catch((err)=>{
+                                                          console.log(err)
+                                                       
+                                                        });
+                   
+                 
+                    if(response){
+                      const productData = response.data.products
+                      const newArray = productData.map(({ _id, name}) => ({
+                        productId: _id,
+                        count: 1,
+                        productName:name,}));
+                        dispatch(addCartdataTocartItemsAndCount(newArray));
+                    }
+                
+            
+                  Store.addNotification({
+                    title: "Login",
+                    message: "User LoggedIn Successfully",
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    dismiss: {
+                      duration: 2000,
+                      onScreen: true
+                    }
+                  });
+            
+                  setPartLoader(false);
+                  // Reload the page because without a reload, the token in the config file may not work
+                  window.location.href = `http://localhost:3000/`;
+                  navigate("/");
+                } else if (data.Token && data.Role === "admin") {
+                  console.log(data.Token, data.Role);
+                  localStorage.setItem("shopin-token", data.Token);
+                  localStorage.setItem("userId", data.userId);
+                  localStorage.setItem("shopinn-user-profile-image", data.avtar);
+            
+                  Store.addNotification({
+                    title: "Login",
+                    message: "Admin LoggedIn Successfully",
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    dismiss: {
+                      duration: 2000,
+                      onScreen: true
+                    }
+                  });
+            
+                  handleIsLoggedIn();
+                  // Reload the page because without a reload, the token in the config file may not work
+                  window.location.href = `http://localhost:3000/`;
+                  navigate("/admin");
+                }
+              } catch (error) {
+                console.log(error);
+                Store.addNotification({
+                  title: "Login Failed",
+                  message: "Wrong Credential",
+                  type: "success",
+                  insert: "top",
+                  container: "top-right",
+                  animationIn: ["animate__animated", "animate__fadeIn"],
+                  animationOut: ["animate__animated", "animate__fadeOut"],
+                  dismiss: {
+                    duration: 2000,
+                    onScreen: true
+                  }
+                });
+                setPartLoader(false)
+          
+              }
+            
+              setEmailLogin("");
+              setPasswordLogin("");
+            };
+            
 
 
             const handleGuestLogin  = async ()=>{
@@ -139,65 +272,90 @@ export const AuthContextProvider = ({children})=>{
                     };
            
                   setPartLoader(true)
+                  
                     try {
-                     
-                           localStorage.setItem("email",emailLogin)
-                        
-                     await fetch(`${AUTH_BASE_URL}/api/user/login`,{
-                          method:'POST',
-                          headers:{
-                            'Content-Type':'application/json'
-                          },
-                          body:JSON.stringify(user)
-                         }).then((res)=>{
-                           return res.json()
-                         }).then((data)=>{
-                        
-                           if(data.Token && data.Role!=="admin"){
-                            localStorage.setItem("shopin-token",data.Token)
-                            localStorage.setItem("userId", data.userId);
-                            localStorage.setItem("shopinn-user-profile-image", data.avtar)
-                            handleIsLoggedIn()
-                            setPartLoader(false)
-                          
-                            Store.addNotification({
-                                title: "Login",
-                                message: "User LoggedIn Successfully",
-                                type: "success",
-                                insert: "top",
-                                container: "top-right",
-                                animationIn: ["animate__animated", "animate__fadeIn"],
-                                animationOut: ["animate__animated", "animate__fadeOut"],
-                                dismiss: {
-                                  duration: 2000,
-                                  onScreen: true
-                                }
-                             
-                              });
-                              dispatch(addCartdataTocartItemsAndCount())
-                              // doing this window reload because wihout reload the token in config file does not work
-                              window.location.href=`http://localhost:3000/` 
-                         navigate("/")
-                           }else if(data.Token && data.Role==="admin"){
-                            
-                             localStorage.setItem("shopin-token",data.Token);
-                             localStorage.setItem("userId", data.userId);
-                             localStorage.setItem("shopinn-user-profile-image", data.avtar)
-                             alert("user login succesfully")
-                             handleIsLoggedIn()
-                             dispatch(addCartdataTocartItemsAndCount())
-                          navigate("/admin")
-                           }
-                         }).catch((error)=>{
-                          console.log(error)
-                         })
+                      localStorage.setItem("email", emailLogin);
+                    
+                      const response = await fetch(`${AUTH_BASE_URL}/api/user/login`, {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                      });
+                    
+                      if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                      }
+                    
+                      const data = await response.json();
+                    
+                      if (data.Token) {
+                        localStorage.setItem("shopin-token", data.Token);
+                        localStorage.setItem("userId", data.userId);
+                        localStorage.setItem("shopinn-user-profile-image", data.avtar);
+                    
+                        handleIsLoggedIn();
+                          const userId = localStorage.getItem("userId")
+                          const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
+                                                                ).catch((err)=>{
+                                                                  console.log(err)
+                                                               
+                                                                });
+                           
                          
-                  
-                          
+                            if(response){
+                              const productData = response.data.products
+                              const newArray = productData.map(({ _id, name}) => ({
+                                productId: _id,
+                                count: 1,
+                                productName:name,}));
+                                dispatch(addCartdataTocartItemsAndCount(newArray));
+                            }
+                        
+
+                        setPartLoader(false);
+                    
+                        const notificationOptions = {
+                          title: "Login",
+                          message: "User Logged In Successfully",
+                          type: "success",
+                          insert: "top",
+                          container: "top-right",
+                          animationIn: ["animate__animated", "animate__fadeIn"],
+                          animationOut: ["animate__animated", "animate__fadeOut"],
+                          dismiss: {
+                            duration: 2000,
+                            onScreen: true
+                          }
+                        };
+                    
+                        // Show notification
+                        Store.addNotification(notificationOptions);
+                    
+                        // Reload the page
+                        window.location.href = `http://localhost:3000/`;
+                        navigate("/");
+                      }
+                    
+                      if (data.Role === "admin") {
+                        localStorage.setItem("shopin-token", data.Token);
+                        localStorage.setItem("userId", data.userId);
+                        localStorage.setItem("shopinn-user-profile-image", data.avtar);
+                    
+                        // Alert is not recommended, consider using a notification library
+                        alert("User logged in successfully");
+                    
+                        handleIsLoggedIn();
+                      await  dispatch(addCartdataTocartItemsAndCount());
+                    
+                        // Redirect to admin page
+                        navigate("/admin");
+                      }
                     } catch (error) {
-                       console.log(error, "errro at authcontext")
+                      console.error(error, "Error at authcontext");
                     }
-                  
+                    
                   
             }
             

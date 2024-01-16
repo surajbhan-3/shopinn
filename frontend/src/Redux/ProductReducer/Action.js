@@ -24,7 +24,6 @@ export const cartProducts = ()=>{
       const userId = localStorage.getItem("userId")
       const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
        ).catch((err)=>{
-          console.log(userId, 'jhersfd cart{rpdicts')
          console.log(err)
        });
          
@@ -100,32 +99,38 @@ export const decrementCartData = (cartInitialPrice, cartDiscountedPrice, cartTot
    
 }
 
- export const  addCartdataTocartItemsAndCount = () =>{
-          
-   return async function (dispatch) {
-    const userId = localStorage.getItem("userId")
-    const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
-                                          ).catch((err)=>{
-                                            console.log(err)
+ export const  addCartdataTocartItemsAndCount = (payload) =>{
+          console.log("atleast i am reaching here")
+//    return async function (dispatch) {
+//     const userId = localStorage.getItem("userId")
+//     const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
+//                                           ).catch((err)=>{
+//                                             console.log(err)
                                          
-                                          });
+//                                           });
      
    
-      if(response){
-        const productData = response.data.products
-        const newArray = productData.map(({ _id, name}) => ({
-          productId: _id,
-          count: 1,
-          productName:name,}));
+//       if(response){
+//         const productData = response.data.products
+//         const newArray = productData.map(({ _id, name}) => ({
+//           productId: _id,
+//           count: 1,
+//           productName:name,}));
+
+//           console.log(newArray)
     
-        dispatch({
-          type:ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT,
-          payload:newArray
-      })
-      }
+//         dispatch({
+//           type:ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT,
+//           payload:newArray
+//       })
+//       }
   
     
- }  
+//  }  
+ return{
+  type:ActionTypes.ADD_CARTDATA_TO_CARTITMESANDCOUNT,
+  payload:payload
+}
  }
 export const incrementQuantity = (productId,incrementCount,name)=>{
 
