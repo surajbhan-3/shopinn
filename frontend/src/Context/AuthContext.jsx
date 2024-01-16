@@ -45,93 +45,6 @@ export const AuthContextProvider = ({children})=>{
 
 
 
-            // const handleLoginFormSubmit = async (e) => {
-            //                   e.preventDefault();
-
-            //                   setPartLoader(true)
-            //                   const user = {  email: emailLogin, password: passwordLogin  };
-             
-            //       try {
-                 
-            //           localStorage.setItem("email",emailLogin)
-            //           await fetch(`${AUTH_BASE_URL}/api/user/login`,{
-            //                    method:'POST',
-            //                    headers:{
-            //                             'Content-Type':'application/json'
-            //                             },
-            //                   body:JSON.stringify(user)
-            //         }).then((res)=>{
-            //           return res.json()
-            //         }).then((data)=>{
-            //           console.log(data)
-            //           if(data.Token && data.Role!=="admin"){
-            //            localStorage.setItem("shopin-token",data.Token)
-            //            localStorage.setItem("userId", data.userId);
-            //            localStorage.setItem("shopinn-user-profile-image", data.avtar)
-            //            handleIsLoggedIn()
-                       
-            //            Store.addNotification({
-            //             title: "Login",
-            //             message: "User LoggedIn Successfully",
-            //             type: "success",
-            //             insert: "top",
-            //             container: "top-right",
-            //             animationIn: ["animate__animated", "animate__fadeIn"],
-            //             animationOut: ["animate__animated", "animate__fadeOut"],
-            //             dismiss: {
-            //               duration: 2000,
-            //               onScreen: true
-            //             }
-                     
-            //           });
-            //           setPartLoader(false)
-            //           dispatch(addCartdataTocartItemsAndCount())
-            //            // doing this window reload because wihout reload the token in config file does not work
-            //            window.location.href=`http://localhost:3000/` 
-            //         navigate("/")
-            //           }else if(data.Token && data.Role==="admin"){
-            //             console.log(data.Token, data.Role)
-            //             localStorage.setItem("shopin-token",data.Token);
-            //             localStorage.setItem("userId", data.userId);
-            //             localStorage.setItem("shopinn-user-profile-image", data.avtar)
-                       
-            //             Store.addNotification({
-            //                 title: "Login",
-            //                 message: "Admin LoggedIn Successfully",
-            //                 type: "success",
-            //                 insert: "top",
-            //                 container: "top-right",
-            //                 animationIn: ["animate__animated", "animate__fadeIn"],
-            //                 animationOut: ["animate__animated", "animate__fadeOut"],
-            //                 dismiss: {
-            //                   duration: 2000,
-            //                   onScreen: true
-            //                 }
-                         
-            //               });
-            //             handleIsLoggedIn()
-            //              // doing this window reload because wihout reload the token in config file does not work
-
-            //              window.location.href=`http://localhost:3000/` 
-            //          navigate("/admin")
-            //           }
-            //         }).catch((error)=>{
-            //          console.log(error)
-            //         })
-                    
-               
-                 
-         
-            //          setEmailLogin("")
-            //          setPasswordLogin("")
-                     
-            //    } catch (error) {
-                 
-            //    }                       
-                                              
-            //                                   }                                
-
-
             const handleLoginFormSubmit = async (e) => {
               e.preventDefault();
             
@@ -211,7 +124,7 @@ export const AuthContextProvider = ({children})=>{
             
                   setPartLoader(false);
                   // Reload the page because without a reload, the token in the config file may not work
-                  window.location.href = `${AUTH_BASE_URL}`;
+                  window.location.href = `/`;
                   navigate("/");
                 } else if (data.Token && data.Role === "admin") {
                   console.log(data.Token, data.Role);
@@ -235,7 +148,7 @@ export const AuthContextProvider = ({children})=>{
             
                   handleIsLoggedIn();
                   // Reload the page because without a reload, the token in the config file may not work
-                  window.location.href = `${AUTH_BASE_URL}`;
+                  window.location.href = `/admin`;
                   navigate("/admin");
                 }
               } catch (error) {
@@ -303,10 +216,13 @@ export const AuthContextProvider = ({children})=>{
                                                                   console.log(err)
                                                                
                                                                 });
+
+                                                                console.log('hello this')
                            
                          
                             if(response){
                               const productData = response.data.products
+                              console.log(productData)
                               const newArray = productData.map(({ _id, name}) => ({
                                 productId: _id,
                                 count: 1,
@@ -335,7 +251,7 @@ export const AuthContextProvider = ({children})=>{
                         Store.addNotification(notificationOptions);
                     
                         // Reload the page
-                        window.location.href = `${AUTH_BASE_URL}`;
+                        window.location.href = `/`;
                         navigate("/");
                       }
                     
