@@ -6,7 +6,7 @@ require("dotenv").config();
 const Port = process.env.PORT;
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://example.com'], // Allowed origins
+  origin: ['http://localhost:3000', 'https://shopinn-red.vercel.app'], // Allowed origins
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',               // Allowed HTTP methods
   allowedHeaders: 'Content-Type,Authorization',            // Allowed headers in preflight requests
   exposedHeaders: ['Content-Length', 'Authorization'],    // Headers to expose to the browser
