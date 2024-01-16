@@ -6,7 +6,7 @@ require("dotenv").config();
 const Port = process.env.PORT;
 
 const corsOptions = {
-  origin: 'http://localhost:3000', 
+  origin: ['http://localhost:3000', 'https://shopinn-red.vercel.app' ],
   credentials: true,
 };
 
