@@ -16,8 +16,7 @@ const corsOptions = {
   optionsSuccessStatus: 204,                               // HTTP status code for successful preflight requests
 };
 
-// Use cors middleware with the configured options
-app.use(cors(corsOptions));
+
 
 
 const app = express();
