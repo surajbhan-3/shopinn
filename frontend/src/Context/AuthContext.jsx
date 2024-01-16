@@ -210,7 +210,7 @@ export const AuthContextProvider = ({children})=>{
             
                   setPartLoader(false);
                   // Reload the page because without a reload, the token in the config file may not work
-                  window.location.href = `http://localhost:3000/`;
+                  window.location.href = `${AUTH_BASE_URL}`;
                   navigate("/");
                 } else if (data.Token && data.Role === "admin") {
                   console.log(data.Token, data.Role);
@@ -234,7 +234,7 @@ export const AuthContextProvider = ({children})=>{
             
                   handleIsLoggedIn();
                   // Reload the page because without a reload, the token in the config file may not work
-                  window.location.href = `http://localhost:3000/`;
+                  window.location.href = `${AUTH_BASE_URL}`;
                   navigate("/admin");
                 }
               } catch (error) {
@@ -334,7 +334,7 @@ export const AuthContextProvider = ({children})=>{
                         Store.addNotification(notificationOptions);
                     
                         // Reload the page
-                        window.location.href = `http://localhost:3000/`;
+                        window.location.href = `${AUTH_BASE_URL}`;
                         navigate("/");
                       }
                     

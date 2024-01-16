@@ -6,8 +6,8 @@ const { getProduct,  addProductToWishList, getProductFromWishlist, addProductToC
 
 productRouter.get("/products",getProduct)
 productRouter.get("/product_details/:id", getSingleProduct)
-productRouter.get("/category/:category/page/:pagenumber", auth, getProductsByCategory)
-productRouter.get("/category/:category/subcategory/:subcategory/page/:pagenumber", auth, getProductsBySubCategory)
+productRouter.get("/category/:category/page/:pagenumber", getProductsByCategory)
+productRouter.get("/category/:category/subcategory/:subcategory/page/:pagenumber", getProductsBySubCategory)
 productRouter.post("/wishlist/add_product", auth, addProductToWishList)
 productRouter.get("/wishlist/get_products/:userId",auth, getProductFromWishlist)
 productRouter.delete("/wishlist/remove_product/:id", auth, removeSingleProductFromWishlist)
