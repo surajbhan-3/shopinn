@@ -212,6 +212,7 @@ export const AuthContextProvider = ({children})=>{
                         localStorage.setItem("shopinn-user-profile-image", data.avtar);
                     
                         handleIsLoggedIn();
+                        console.log('helo')
                           const userId = localStorage.getItem("userId")
                           const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
                                                                 ).catch((err)=>{
@@ -228,7 +229,7 @@ export const AuthContextProvider = ({children})=>{
 
                                                                 console.log('hello this')
                            
-                         
+                                console.log(response, "hey respones")
                             if(response){
                               const productData = response.data.products
                               console.log(productData)
@@ -236,6 +237,7 @@ export const AuthContextProvider = ({children})=>{
                                 productId: _id,
                                 count: 1,
                                 productName:name,}));
+                                console.log(newArray)
                                 dispatch(addCartdataTocartItemsAndCount(newArray));
                                 alert(productData)
                                 alert(newArray)
@@ -263,8 +265,8 @@ export const AuthContextProvider = ({children})=>{
                         Store.addNotification(notificationOptions);
                     
                         // Reload the page
-                        window.location.href = `/`;
-                        navigate("/");
+                        // window.location.href = `/`;
+                        // navigate("/");
                       }
                     
                       if (data.Role === "admin") {
@@ -276,7 +278,7 @@ export const AuthContextProvider = ({children})=>{
                         alert("User logged in successfully");
                     
                         handleIsLoggedIn();
-                      await  dispatch(addCartdataTocartItemsAndCount());
+                        dispatch(addCartdataTocartItemsAndCount());
                     
                         // Redirect to admin page
                         navigate("/admin");
