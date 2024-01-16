@@ -5,10 +5,15 @@ const cors = require("cors")
 require("dotenv").config();
 const Port = process.env.PORT;
 
+const corsOptions = {
+  origin: 'http://localhost:3000', 
+  credentials: true,
+};
 
 const app = express();
 app.use(express.json())
-app.use(cors())
+app.use(cors(corsOptions))
+
 
  const instance = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
