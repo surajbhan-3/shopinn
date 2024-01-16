@@ -211,8 +211,9 @@ export const AuthContextProvider = ({children})=>{
                         handleIsLoggedIn();
                         console.log('helo')
                           const userId = localStorage.getItem("userId")
-                          const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
-                                                                )
+                          console.log(userId, "userId")
+                          console.log(localStorage.getItem("shopin-token"))
+                          const response = await apiService.get(`/products/cart/get_cartdata/${userId}`)
 
 
 
