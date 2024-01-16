@@ -27,13 +27,7 @@ function Books() {
        console.log(partLoader)
       try {
         const response = await apiService.get(
-          `/products/category/books/page/1`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            },
-          }
-        );
+          `/products/category/books/page/1`, );
 
         setBooksData(response.data);
         setPartLoader(false)
@@ -72,12 +66,6 @@ function Books() {
       try {
         const response = await apiService.get(
           `/products/category/books/subcategory/${subcategory}/page/1`,
-
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("shopin-token")}`,
-            },
-          }
         );
 
         setBooksData(response.data);
