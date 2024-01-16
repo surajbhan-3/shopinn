@@ -213,7 +213,7 @@ export const AuthContextProvider = ({children})=>{
                           const userId = localStorage.getItem("userId")
                           console.log(userId, "userId")
                           console.log(localStorage.getItem("shopin-token"))
-                          const response = await axios.get(`/products/cart/get_cartdata/${userId}`,
+                          const response = await axios.get(`${AUTH_BASE_URL}/products/cart/get_cartdata/${userId}`,
                           {
 
                             headers: {
