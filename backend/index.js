@@ -6,9 +6,19 @@ require("dotenv").config();
 const Port = process.env.PORT;
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://shopinn-red.vercel.app' ],
-  credentials: true,
+  origin: ['http://localhost:3000', 'https://example.com'], // Allowed origins
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',               // Allowed HTTP methods
+  allowedHeaders: 'Content-Type,Authorization',            // Allowed headers in preflight requests
+  exposedHeaders: ['Content-Length', 'Authorization'],    // Headers to expose to the browser
+  credentials: true,                                       // Allow credentials (e.g., cookies)
+  maxAge: 3600,                                            // Cache preflight requests for 1 hour
+  preflightContinue: false,                                // Don't continue processing if CORS checks fail
+  optionsSuccessStatus: 204,                               // HTTP status code for successful preflight requests
 };
+
+// Use cors middleware with the configured options
+app.use(cors(corsOptions));
+
 
 const app = express();
 app.use(express.json())
