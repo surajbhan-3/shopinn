@@ -94,8 +94,10 @@ export const AuthContextProvider = ({children})=>{
                                                         ).catch((err)=>{
                                                           console.log(err)
                                                        
-                                                        });
-                   
+                                             });
+                    
+                                             alert("sdlkfj")    
+                                             alert(response)
                  
                     if(response){
                       const productData = response.data.products
@@ -216,6 +218,13 @@ export const AuthContextProvider = ({children})=>{
                                                                   console.log(err)
                                                                
                                                                 });
+
+
+
+
+
+                                                                alert("sdlkfj")    
+                                                                alert(response)                                                                
 
                                                                 console.log('hello this')
                            
