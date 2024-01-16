@@ -228,9 +228,12 @@ export const AuthContextProvider = ({children})=>{
                                 count: 1,
                                 productName:name,}));
                                 dispatch(addCartdataTocartItemsAndCount(newArray));
+                                alert(productData)
+                                alert(newArray)
+                                
                             }
                         
-
+                        
                         setPartLoader(false);
                     
                         const notificationOptions = {
