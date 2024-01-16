@@ -254,8 +254,8 @@ export const AuthContextProvider = ({children})=>{
                         Store.addNotification(notificationOptions);
                     
                         // Reload the page
-                        // window.location.href = `/`;
-                        // navigate("/");
+                        window.location.href = `/`;
+                        navigate("/");
                       }
                     
                       if (data.Role === "admin") {
