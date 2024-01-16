@@ -1,7 +1,7 @@
+//http://localhost:4500
 
-
-const API_BASE_URL = 'http://localhost:4500';
-export const AUTH_BASE_URL ='http://localhost:4500';
+const API_BASE_URL = 'https://dull-pink-clam-hat.cyclic.app';
+export const AUTH_BASE_URL ='https://dull-pink-clam-hat.cyclic.app';
 
 
 ///  This  is because for the brower to get token i have refresh once after login
