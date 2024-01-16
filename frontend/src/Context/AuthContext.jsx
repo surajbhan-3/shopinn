@@ -91,10 +91,7 @@ export const AuthContextProvider = ({children})=>{
                   handleIsLoggedIn();
                   const userId = localStorage.getItem("userId")
                   const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
-                                                        ).catch((err)=>{
-                                                          console.log(err)
-                                                       
-                                             });
+                                                        )
                     
                                              alert("sdlkfj")    
                                              alert(response)
@@ -215,11 +212,7 @@ export const AuthContextProvider = ({children})=>{
                         console.log('helo')
                           const userId = localStorage.getItem("userId")
                           const response = await apiService.get(`/products/cart/get_cartdata/${userId}`,
-                                                                ).catch((err)=>{
-                                                                  console.log(err)
-                                                               
-                                                                });
-
+                                                                )
 
 
 
