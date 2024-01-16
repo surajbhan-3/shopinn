@@ -1,4 +1,5 @@
 
+
 /* 
    # Functions available 
     
@@ -7,7 +8,6 @@
 
 
 */ 
-
 
 import { createContext, useContext, useState} from "react";
 import { useDispatch } from "react-redux";
@@ -276,7 +276,8 @@ const removeProductFromCart = async (productId) => {
 
 return  <ProductContext.Provider value={{handleAddProductToWishlist, handleSingleProductPage,
 
-           removeProductFromWishlist, handleAddProductToCart,moveProducToWishlist, removeProductFromCart, isLoading
+           removeProductFromWishlist, handleAddProductToCart,moveProducToWishlist, removeProductFromCart, isLoading, setPartLoader
+           ,partLoader
 }} >
                 
                         {children}

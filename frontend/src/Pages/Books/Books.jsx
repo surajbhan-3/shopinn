@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Books.css";
 import apiService from "../../Config/apiService";
 import BookCard from "../../Component/BookCard/BookCard";
+import { ProductContext } from "../../Context/ProductContext";
+import PartLoader from "../../Component/PartLoader/PartLoader";
 function Books() {
   const [booksData, setBooksData] = useState([]);
   const [pageIndex, setPageIndex] = useState(1);
@@ -12,12 +14,17 @@ function Books() {
     checkbox3: false,
   });
 
+  const {setPartLoader, isLoading,partLoader}=useContext(ProductContext)
+
   const colorSyle = {
     backgroundColor: "#ff4e5c",
   };
 
   useEffect(() => {
     const getBooksProducts = async () => {
+      setPartLoader(true)
+       console.log(isLoading, "sdfk")
+       console.log(partLoader)
       try {
         const response = await apiService.get(
           `/products/category/books/page/1`,
@@ -29,6 +36,7 @@ function Books() {
         );
 
         setBooksData(response.data);
+        setPartLoader(false)
       } catch (error) {
         console.log(error);
       }

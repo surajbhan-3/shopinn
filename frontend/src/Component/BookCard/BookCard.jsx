@@ -15,9 +15,9 @@ function BookCard({productId, imageUrl, name, rating, price}) {
 // console.log(imageUrl, name, productId)
   return (
           <div className='book-card-container' key={productId}>
-            {isLoading?<PartLoader />:null}
-
-           <div className="book-inner-card"  >
+            {isLoading?<PartLoader />:
+            
+            <div className="book-inner-card"  >
                         <div id="book-image-div" onClick={ ()=> handleSingleProductPage(productId)}>
                           <img src={imageUrl} alt="" />
                         </div>
@@ -44,6 +44,9 @@ function BookCard({productId, imageUrl, name, rating, price}) {
                         </div>
             </div>
                     
+            }
+
+           
             
          </div>
 
