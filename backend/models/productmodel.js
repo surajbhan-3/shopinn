@@ -11,6 +11,7 @@ const productSchema = mongoose.Schema({
     category:{type:String, required:true, enum:["electronics", "shoes", "clothing", "furniture","books"]},
     subcategory:{type:String , required:true},
     gender:{type:String, enum:["male", "female", "unisex"] , required:true},
+    rating:{type:Number, default:5},
     createdAt: { type: Date,default: Date.now },
     updatedAt: { type: Date },
 

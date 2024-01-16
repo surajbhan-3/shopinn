@@ -4,7 +4,7 @@ import "./ShoeCard.css"
 import { useContext } from 'react'
 import { ProductContext } from '../../Context/ProductContext'
 
-function ShoeCard({productId, imageUrl, name, price}) {
+function ShoeCard({productId, imageUrl, name, rating, price}) {
 
  const [partLoader, setPartLoader]= useState(false)
  const isLoading = partLoader
@@ -28,7 +28,13 @@ function ShoeCard({productId, imageUrl, name, price}) {
                           <span>Rs. {price}</span>
                         </div>
                         <div id="shoe-rating" onClick={ ()=> handleSingleProductPage(productId)}>
-                          <span>*****</span>
+                          
+                          {
+                         rating===5?<div>☆☆☆☆☆</div>:rating===4?<div>☆☆☆☆</div>:rating===3?<div>☆☆☆</div>
+                         :rating===2?<div>☆☆</div>:rating===1?<div>☆</div>:null
+                         
+                         } 
+                         
                         </div>
                         <div className="wishlist-shoe">
                           <button onClick={() => handleAddProductToWishlist(productId)}>

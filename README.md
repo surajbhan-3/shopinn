@@ -132,21 +132,13 @@
        |
        |----- http://localhost:4500/  || Your Server URL
        |
-       |
        |----- http://localhost:4500/api/user/register      
-       |
        |----- http://localhost:4500/api/user/login          
-       |
        |----- http://localhost:4500/api/user/logout
-       |
        |----- http://localhost:4500/api/user/settings
-       |
        |----- http://localhost:4500/api/user/profile_picture/:id
-       |
        |----- http://localhost:4500/api/user/products/review/:id
-       |
        |----- http://localhost:4500/api/user/update_profile_info
-       |
        |----- http://localhost:4500/api/user/update_address_info
        |
 
@@ -157,33 +149,19 @@
        |
        |----- http://localhost:4500/  || Your Server URL
        |
-       |
        |----- http://localhost:4500/api/products/products
-       |
        |----- http://localhost:4500/api/products/product_details/:id
-       |
        |----- http://localhost:4500/api/products/wishlist/add_product
-       |
        |----- http://localhost:4500/api/products/wishlist/get_products/:id;
-       |
        |----- http://localhost:4500/api/products/wishlist/remove_product/:id
-       |
        |----- http://localhost:4500/api/products/cart/add_to_cart
-       |
        |----- http://localhost:4500/api/products/cart/get_cartdata/:id
-       |
        |----  http://localhost:4500/api/products/cart/remove_cart_items/:id
-       |
        |----  http://localhost:4500/api/products/reviews/get_all_reviews
-       |
        |----  http://localhost:4500/api/products/reviews/delete_review
-       |
        |----  http://localhost:4500/api/products/category/:category/page/:pagenumber
-       |
        |----  http://localhost:4500/api/products/category/:category/subcategory/:subcategory/page/:pagenumber
-       |
        |----  http://localhost:4500/api/products/order_details
-       |
        |----  http://localhost:4500/api/products/purchase_items
 
 
@@ -191,14 +169,10 @@
 ##### Admin Routes 
        |
        |----- http://localhost:4500/  || Your Server URL
-       |
        |----- http://localhost:4500/api/admin/alluser
        |----- http://localhost:4500/api/admin/add_product
-       |
        |----- http://localhost:4500/api/admin/update_product
-       |
        |----- http://localhost:4500/api/admin/delete_product
-       |
        |----- http://localhost:4500/api/admin/products/:category
        |----- http://localhost:4500/api/admin/product_details/:id
        |----- http://localhost:4500/api/admin/update/product_image
@@ -208,9 +182,7 @@
 ##### Payment Routes 
        |
        |---- http://localhost:4500/api/get_key 
-       |
        |----  http://localhost:4500/api/accept_payment
-       |
        |----  http://localhost:4500/api/payment_verification
 
 
@@ -249,7 +221,8 @@
          -- Category Filtering
          -- Sorting by Price
          -- Filtering by Price Range
-         -- Checkbox Handling
+         -- Checkbox Handling/filtering
+         -- Token Blacklisting
 
     -- ADMIN SIDE FEATURE     
 

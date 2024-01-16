@@ -4,7 +4,7 @@ import "./MobileCard.css"
 import { useContext } from 'react'
 import { ProductContext } from '../../Context/ProductContext'
 
-function MobileCard({productId, imageUrl, name, price}) {
+function MobileCard({productId, imageUrl, name, rating, price}) {
 
  const [partLoader, setPartLoader]= useState(false)
  const isLoading = partLoader
@@ -29,7 +29,11 @@ function MobileCard({productId, imageUrl, name, price}) {
                           <span>Rs. {price}</span>
                         </div>
                         <div id="mobile-rating" onClick={ ()=> handleSingleProductPage(productId)}>
-                          <span>*****</span>
+                        {
+                         rating===5?<div>☆☆☆☆☆</div>:rating===4?<div>☆☆☆☆</div>:rating===3?<div>☆☆☆</div>
+                         :rating===2?<div>☆☆</div>:rating===1?<div>☆</div>:null
+                         
+                         } 
                         </div>
                         <div className="wishlist-mobile">
                           <button onClick={() => handleAddProductToWishlist(productId)}>

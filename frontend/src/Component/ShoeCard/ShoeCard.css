@@ -63,3 +63,8 @@
     
     
 }
+#shoe-rating div{
+  height: 20px;
+  /* width: 40%; */
+  margin-left: -2px;
+}

@@ -5,7 +5,7 @@ require("dotenv").config();
 const auth = async (req,res,next)=>{
  
     const token = req.headers.authorization.split(" ")[1];
-    console.log(token, "this is the token")
+    // console.log(token, "this is the token")
    
     
 
@@ -33,14 +33,14 @@ const auth = async (req,res,next)=>{
 }
 
 const isAdmin = async(req,res,next)=>{
-    console.log("hello is adimin")
+    // console.log("hello is adimin")
 
 
         try {
             const token = req.headers.authorization.split(" ")[1];
             console.log(token)
             const decodeToken = jwt.verify(token, process.env.secret);
-            console.log(decodeToken)
+            // console.log(decodeToken)
 
             if(decodeToken.role=="admin"){
                 return next()

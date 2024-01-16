@@ -8,7 +8,7 @@ import { AdminContextProvider } from './Context/AdminContext';
 import { Provider } from 'react-redux';
 import store, {persistor} from './Redux/Store';
 import { BrowserRouter } from "react-router-dom";
-import { GoogleOAuthProvider } from '@react-oauth/google';
+// import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // import { showLoader,stopLoader } from './Redux/LoaderReducer/Action';
 import { ReactNotifications } from 'react-notifications-component'
@@ -17,7 +17,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <GoogleOAuthProvider clientId="519462446984-lki74cm8rn7s5c9embi3r8he5h7ls9ks.apps.googleusercontent.com">
+ 
     
   <Provider store={store}>
 <PersistGate  persistor={persistor}>
@@ -37,6 +37,6 @@ root.render(
  </PersistGate>   
 
   </Provider>
-  </GoogleOAuthProvider>
+
 );
 

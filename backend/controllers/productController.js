@@ -346,12 +346,22 @@ const getAllReivewsGiven = async (req, res) => {
 };
 
 const deleteReview = async (req, res) => {
-  const { userId, reviewId } = req.body;
+  const { userId, reviewId, productId } = req.body;
   try {
-    const updateReviewData = await ReviewModel.updateOne(
-      { "reviews.user": objectId },
-      { $pull: { reviews: { _id: reviewId } } }
-    );
+   await ReviewModel.updateOne( { "reviews.user": objectId }, { $pull: { reviews: { _id: reviewId } } }  );
+
+   const checkProductIdInReviewModel = await  ReviewModel.findOne({product:productId})
+               
+               const ratingArray = checkProductIdInReviewModel.reviews;
+               const allRatings = ratingArray.map((el)=>{
+                        return el.rating
+               })
+               const totalRating = allRatings.reduce((el,prev)=>{
+                                  return el+prev
+               },0)
+               const averageRating = Math.floor(totalRating/allRatings.length)
+               await ProductModel.findByIdAndUpdate({_id:productId},{rating:averageRating})
+            
 
 
     res.status(200).json({ status: "success", message: "Review deleted successfully" });

@@ -50,7 +50,11 @@ function Today() {
               <span>Rs. {products.price}</span>
             </div>
             <div id="t-rating" onClick={ ()=> handleSingleProductPage(products._id)}>
-              <span>*****</span>
+            {
+                         products.rating===5?<div>☆☆☆☆☆</div>:products.rating===4?<div>☆☆☆☆</div>:products.rating===3?<div>☆☆☆</div>
+                         :products.rating===2?<div>☆☆</div>:products.rating===1?<div>☆</div>:null
+                         
+                         } 
             </div>
             <div className="wishlist-t">
               <button onClick={() => handleAddProductToWishlist(products._id)}>

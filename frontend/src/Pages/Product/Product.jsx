@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import axios from "axios";
 import apiService from '../../Config/apiService';
 import { Rating } from 'react-simple-star-rating'
 import "./Product.css"
 import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../Context/AuthContext';
+import PartLoader from '../../Component/PartLoader/PartLoader';
 
 
 
@@ -22,6 +22,8 @@ function Product() {
       const [rating, setRating] = useState(0)
       const [title , setTitle] = useState("")
       const [reviewText, setReviewText] = useState("")
+      const [partLoader, setPartLoader] = useState(false);
+      const isLoading = partLoader
     const ___cartProducts = (useSelector((state)=>{
       return state.ProductReducer.cartData
 }))
@@ -121,7 +123,7 @@ const finalReviewDataFromUser ={
          
  
      // when working with axios you don't need to stringfy and dont' need to write body just like we do in fetch 
-
+             setPartLoader(true)
            try {
             
             const response = await apiService.post(
@@ -135,7 +137,7 @@ const finalReviewDataFromUser ={
                 },
               }
             );
-       
+             setPartLoader(false)
            
               setRating(0)
               setReviewText("")
@@ -143,6 +145,7 @@ const finalReviewDataFromUser ={
               window.location.reload()
            } catch (error) {
               console.log(error)
+              setPartLoader(false)
            }
  }
 
@@ -203,48 +206,50 @@ const userReviewedTime =(time)=>{
                              </div>
                       <div className="reviewsSection">
                       <div>
-      <div className="userReview">
+      {isLoading?<PartLoader/>: 
+        <div className="userReview">
 
-                          <div className='all-reviews-of-product'>
-                               <i id='stpr'>See the Proudct Reviews</i>
-                          </div>
-                          <div className="addReviewButton">
+        <div className='all-reviews-of-product'>
+             <i id='stpr'>See the Proudct Reviews</i>
+        </div>
+        <div className="addReviewButton">
 
-                              {
-                                userAlreadyReviewed? null:  <button onClick={handleAddReview} >
-                                {reviewAddBox ? "Adding Review" : "Add Review"}
-                                </button>
-                              }
-                              
-                              
-                          </div>
-                         
-                          {
-                            
-                            reviewAddBox ? 
-                           (  <div className="writeReview">
-                           <form action="" className='rf-review-form' onSubmit={handleWriteReview}>
-                             <label htmlFor="">How satisfy You are</label>
-                                  <Rating size={25} className='rating-star-c'
-                                      onClick={handleRating}
-                                      onPointerEnter={onPointerEnter}
-                                      onPointerLeave={onPointerLeave}
-                                      onPointerMove={onPointerMove}
-                                      /* Available Props */
-                                    />
-                            <label id='rt-title'>Title</label>
-                            <input type="text" value={title} onChange={(e)=> setTitle(e.target.value)} maxLength={40} placeholder='Title of the product' />
-                           <label htmlFor="" id='rt-feed'>Write Review</label> 
-                            <textarea name="" id="" cols="40" rows="10" maxLength={250} value={reviewText} onChange={(e)=> setReviewText(e.target.value)}></textarea>
-                            <button type='submit'>Submit</button>
-                           </form>
-                      </div>)
-                            
-                            :(null) 
-                           
-                          }
-                          </div>
+            {
+              userAlreadyReviewed? null:  <button onClick={handleAddReview} >
+              {reviewAddBox ? "Adding Review" : "Add Review"}
+              </button>
+            }
+            
+            
+        </div>
+       
+        {
+          
+          reviewAddBox ? 
+         (  <div className="writeReview">
+         <form action="" className='rf-review-form' onSubmit={handleWriteReview}>
+           <label htmlFor="">How satisfy You are</label>
+                <Rating size={25} className='rating-star-c'
+                    onClick={handleRating}
+                    onPointerEnter={onPointerEnter}
+                    onPointerLeave={onPointerLeave}
+                    onPointerMove={onPointerMove}
+                    /* Available Props */
+                  />
+          <label id='rt-title'>Title</label>
+          <input type="text" value={title} onChange={(e)=> setTitle(e.target.value)} maxLength={40} placeholder='Title of the product' />
+         <label htmlFor="" id='rt-feed'>Write Review</label> 
+          <textarea name="" id="" cols="40" rows="10" maxLength={250} value={reviewText} onChange={(e)=> setReviewText(e.target.value)}></textarea>
+          <button type='submit'>Submit</button>
+         </form>
+    </div>)
+          
+          :(null) 
+         
+        }
+</div>
 
+      }
                           <div >
                                 {
                                  reviewData.map((el)=>{

@@ -55,7 +55,7 @@ function Reviews() {
     
     }
 
-const handleDeleteReview = async(key)=>{
+const handleDeleteReview = async(key,productId)=>{
 
   
 
@@ -65,7 +65,8 @@ const handleDeleteReview = async(key)=>{
         {
           // this data keyword is neccessary in axios when using delete method 
           data: {
-            reviewId: key
+            reviewId: key,
+            productId:productId
           }
         })
       
@@ -116,7 +117,7 @@ const handleDeleteReview = async(key)=>{
                          <div className="reviewData"><p>{el.review.reviewData}</p></div>
                          <div id='delbutton'>
                            <button id='dd'>lk</button>
-                          <button onClick={()=>{handleDeleteReview(el.review._id)}}>Delete</button> 
+                          <button onClick={()=>{handleDeleteReview(el.review._id,el.productId)}}>Delete</button> 
                           
                          </div>
                     </div>

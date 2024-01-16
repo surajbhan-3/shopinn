@@ -486,6 +486,7 @@ function Mobile() {
                   name={el.name}
                   price={el.price}
                   imageUrl={el.imageUrl}
+                  rating ={el.rating}
                 />
               ))
             ) : (

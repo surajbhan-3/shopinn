@@ -228,40 +228,76 @@ const addUserReview = async (req,res)=>{
 
        try {
          
+        // *find product which is going to be reivewd with product id ,
          const productTobeReview = await ProductModel.findOne({_id:productId})
   
-
+        //  if product not present return message
           if(!productTobeReview){
             return res.status(400).json({"Message":error.message})
           }
+          // * finding user is present in a database
          const userWhichIsReviewing = await UserModel.findOne({_id: userId}) 
+         // if user not present return message
          if(!userWhichIsReviewing){
           return res.status(400).json({"Message":error.message})
          }
+         // * checking productId present in a reivewmodel
           const checkProductIdInReviewModel = await  ReviewModel.findOne({product:productTobeReview._id})
+          // * if productId is not there means the product has no reivews. we can add new review
           if(!checkProductIdInReviewModel){
          
               const productReivew = new ReviewModel({product:productId, reviews:[{user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewText}]})
-              await productReivew.save()
-         return  res.status(200).send({"Message":"Product review added Successfully"})
+              
+              console.log(productReivew, "hey product reivew")
+               await productReivew.save()
+              const checkProductIdInReviewModel = await  ReviewModel.findOne({product:productTobeReview._id})
+               console.log(checkProductIdInReviewModel, "id newnwnenwe")
+               const ratingArray = checkProductIdInReviewModel.reviews;
+               const allRatings = ratingArray.map((el)=>{
+                        return el.rating
+               })
+               const totalRating = allRatings.reduce((el,prev)=>{
+                                  return el+prev
+               },0)
+               const averageRating = Math.floor(totalRating/allRatings.length)
+               await ProductModel.findByIdAndUpdate({_id:productId},{rating:averageRating})
+               console.log(averageRating, "average raating new new ")
+               console.log(allRatings, "allRatings new wnewnew")
+             return  res.status(200).send({"Message":"Product review added Successfully"})
           }
-
+        // * storing the reviews array in allReviewsData because the reiviews array contians the userid ant ther review data
           const allReviewsdata = checkProductIdInReviewModel.reviews
+          // checking is user present in reivew array of objects and each objects holds user reivew info
           const isUseridAvailable = allReviewsdata.find((el)=>{
                       return el.user == userId
           })
+         //*if user already given riview , will not be able to do so again
           if(isUseridAvailable){
             return res.status(200).send({"Message":"User already Given the reviews you can edit only"})
           }
 
         checkProductIdInReviewModel.reviews.push({user:userId, rating:rating, reviewTitle:reviewTitle, reviewData:reviewText} );
-              await  checkProductIdInReviewModel.save()
+          await  checkProductIdInReviewModel.save()
         
-         return  res.status(200).send({"Message":"Product review added Successfully"})
-        
+        //  return  res.status(200).send({"Message":"Product review added Successfully"})
+      
+        // console.log(checkProductIdInReviewModel.reviews, "review model")
+        const ratingArray = checkProductIdInReviewModel.reviews;
+        const allRatings = ratingArray.map((el)=>{
+                 return el.rating
+        })
+        const totalRating = allRatings.reduce((el,prev)=>{
+                           return el+prev
+        },0)
+        const averageRating = Math.floor(totalRating/allRatings.length)
+        await ProductModel.findByIdAndUpdate({_id:productId},{rating:averageRating})
+        console.log(averageRating, "average raating")
+        console.log(allRatings, "allRatings")
+        return  res.status(200).send({"Message":"Product review added Successfully"})
        } catch (error) {
         return res.status(400).json({"Message":error.message})
        }
+
 
 }
 
