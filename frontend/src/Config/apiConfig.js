@@ -16,7 +16,7 @@ const apiConfig = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${Token}`,
   },
-  timeout: 5000, // Request timeout in milliseconds
+  // timeout: 5000, // Request timeout in milliseconds
 };
 
 
