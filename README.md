@@ -245,5 +245,40 @@
 
 ##### Signup page
 
+![signPage](frontend/src/assets/sp.png)  
+
+
+##### login page
 ![LoginPage](frontend/src/assets/lg.png)      
      
+
+##### category page
+![categoryPage](frontend/src/assets/ctp.png)   
+
+
+
+##### Single Product page 
+![productPage](frontend/src/assets/productpp.png)  
+
+
+
+##### wishlist page 
+![wishlistPage](frontend/src/assets/wishlistpp.png)  
+ 
+ ##### cart page 
+![cartPage](frontend/src/assets/cartpage.png)  
+
+ ##### order page 
+![orderPage](frontend/src/assets/orderdetails.png)  
+
+
+ ##### payment page 
+![cartPage](frontend/src/assets/paymentpage.png)  
+
+ ##### setting page 
+![cartPage](frontend/src/assets/setting.png)  
+
+ ##### all reviews page 
+![cartPage](frontend/src/assets/allreviews.png)  
+
+ 
