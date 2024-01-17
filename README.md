@@ -258,7 +258,7 @@
 
 
 ##### Single Product page 
-![productPage](frontend/src/assets/productpp.png)  
+![productPage](frontend/src/assets/produtpp.png)  
 
 
 
