@@ -50,7 +50,6 @@ export const AuthContextProvider = ({children})=>{
             
               setPartLoader(true);
               const user = { email: emailLogin, password: passwordLogin };
-            
               try {
                 localStorage.setItem("email", emailLogin);
             
@@ -63,7 +62,7 @@ export const AuthContextProvider = ({children})=>{
                 });
                  
                 const data = await response.json();
-            
+   
                
 
                 if(data.status === "failed"){

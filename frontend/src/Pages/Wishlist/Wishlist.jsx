@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { ProductContext } from '../../Context/ProductContext';
 import { useContext } from 'react';
 import "./Wishlist.css"
+import PartLoader from '../../Component/PartLoader/PartLoader';
 
 function Wishlist() {
  

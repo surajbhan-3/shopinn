@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import PartLoader from '../PartLoader/PartLoader'
 import apiService from '../../Config/apiService'
 import "./Profile.css"
 
@@ -22,6 +22,7 @@ function Profile() {
   const [city, setCity] = useState("");
   const [postalCode, setPostalcode]= useState("");
   const [landmark, setLandmark]= useState("");
+  const [isLoading, setIsLoading] = useState(false)
 
 
   const handleImagechange = async (event) =>{
@@ -30,6 +31,7 @@ function Profile() {
   }
 
   useEffect(()=>{
+     setIsLoading(true)
     const getUserDetails = async () => {
       try {
         const response = await apiService.get(
@@ -48,7 +50,14 @@ function Profile() {
   
     getUserDetails();
 
+    setTimeout(() => {
+      // Hide loader
+      setIsLoading(false);
+
+    }, 2000) 
+
   },[])
+
 
   useEffect(() => {
     // Use secondaryData here or perform actions based on its changes 
@@ -80,7 +89,7 @@ function Profile() {
 
 
   const handleUploadImage = async () =>{
-
+      setIsLoading(true)
     try {
       const userId =localStorage.getItem("userId")
       const formData = new FormData();
@@ -89,6 +98,7 @@ function Profile() {
       const response = await apiService.post(`/user/profile_picture/${userId}`, formData);
 
       // Handle the uploaded URL (e.g., display the image)
+      setIsLoading(false)
     } catch (error) {
       console.error('Upload failed:', error);
     }
@@ -101,7 +111,7 @@ function Profile() {
   const handleUpdateProfileInfo = async (e) =>{
          e.preventDefault()
 
-
+        setIsLoading(true)
         try {
           
           const response = await apiService.patch(
@@ -113,10 +123,9 @@ function Profile() {
                 gender,
                 dateOfBirth
             
-            }
-        
-            
+            }        
           );
+          setIsLoading(false)
 
         } catch (error) {
           console.log(error)
@@ -161,7 +170,11 @@ function Profile() {
 
 
   return (
-    <div className='profile-main-section'>
+     <React.Fragment>
+        {
+          isLoading?<PartLoader/> :
+          (
+            <div className='profile-main-section'>
            <div className="profile-user-section">
                   <div className='userProfile-wrapper'> 
                         <div className="userProfilePicture">
@@ -180,7 +193,7 @@ function Profile() {
                    
            </div>
            <div className="updateProfileSection">
-
+      
                  <form action="" onSubmit={handleUpdateProfileInfo} >
                  <h3>Edit Profile</h3>
                   <label htmlFor="">First Name</label>
@@ -240,6 +253,9 @@ function Profile() {
 
            </div>
     </div>
+          )
+        }
+     </React.Fragment>    
   )
 }
 

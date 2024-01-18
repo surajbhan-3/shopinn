@@ -3,7 +3,6 @@ import Today from '../../Component/Today/Today';
 import "./Home.css"
 import Hero from '../../Component/Hero/Hero';
 
-
 function Home() {
   return (
     <div className="home-section">

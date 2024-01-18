@@ -4,9 +4,12 @@ import {ActionTypes} from "./ActionTypes"
 
 
 
+
+
 export const fetchTodayDealProducts =  () => {
 
    return async function (dispatch,getState) {
+
       const response = await apiService.get(`/products/products`)
   
       dispatch({
