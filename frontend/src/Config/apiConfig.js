@@ -1,4 +1,9 @@
-//http://localhost:4500
+
+// development server
+// const API_BASE_URL = 'http://localhost:4500';
+// export const AUTH_BASE_URL ='http://localhost:4500';
+
+// production server
 
 const API_BASE_URL = 'https://dull-pink-clam-hat.cyclic.app';
 export const AUTH_BASE_URL ='https://dull-pink-clam-hat.cyclic.app';

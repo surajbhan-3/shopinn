@@ -55,8 +55,8 @@ const placeOrder = async()=>{
           callback_url:`${AUTH_BASE_URL}/api/payment/payment_verification`,
           redirect: true,
           prefill: {
-              name: "Suraj bhan",
-              email: "surajbhan@example.com",
+              name: `${localStorage.getItem("shopin-username")}`,
+              email: `${localStorage.getItem("email")}`,
               contact: "9000090000"
           },
           notes: {

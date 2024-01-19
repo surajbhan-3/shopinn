@@ -34,7 +34,7 @@ const paymentVerification = async(req,res)=>{
 const {razorpay_order_id, razorpay_payment_id, razorpay_signature} = req.body;
 
      try {
-        
+        console.log(req.body,"getting data")
     //  const   generated_signature = hmac_sha256(razorpay_order_id + "|" + razorpay_payment_id, process.env.RAZORPAY_SECRET_KEY)
      
     //       console.log(generated_signature, razorpay_signature)

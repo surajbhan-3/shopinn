@@ -69,7 +69,9 @@ console.log(email, password, "ehllo")
             // console.log(isUserPresent)
          const token = jwt.sign({userId:isUserPresent._id, username:isUserPresent.username, role:isUserPresent.role},process.env.secret, {expiresIn:"7d"})
           
-         return res.status(200).json({"Message":"User Logged in Successfully",Token:token,Role:isUserPresent.role, userId:isUserPresent._id, avtar:isUserPresent.avtar})
+         return res.status(200).json({"Message":"User Logged in Successfully",Token:token,Role:isUserPresent.role, userId:isUserPresent._id, avtar:isUserPresent.avtar
+             , username:isUserPresent.username
+        })
         
         
       } catch (error) {

@@ -87,6 +87,7 @@ export const AuthContextProvider = ({children})=>{
                   localStorage.setItem("shopin-token", data.Token);
                   localStorage.setItem("userId", data.userId);
                   localStorage.setItem("shopinn-user-profile-image", data.avtar);
+                  localStorage.setItem("shopin-username", data.username)
                   handleIsLoggedIn();
                   const userId = localStorage.getItem("userId")
                   const response = await axios.get(`${AUTH_BASE_URL}/api/products/cart/get_cartdata/${userId}`,
@@ -131,6 +132,7 @@ export const AuthContextProvider = ({children})=>{
                   localStorage.setItem("shopin-token", data.Token);
                   localStorage.setItem("userId", data.userId);
                   localStorage.setItem("shopinn-user-profile-image", data.avtar);
+
             
                   Store.addNotification({
                     title: "Login",
@@ -203,11 +205,12 @@ export const AuthContextProvider = ({children})=>{
                       }
                     
                       const data = await response.json();
-                    
+                     
                       if (data.Token) {
                         localStorage.setItem("shopin-token", data.Token);
                         localStorage.setItem("userId", data.userId);
                         localStorage.setItem("shopinn-user-profile-image", data.avtar);
+                        localStorage.setItem("shopin-username", data.username)
                     
                         handleIsLoggedIn();
                           const userId = localStorage.getItem("userId")
@@ -219,6 +222,7 @@ export const AuthContextProvider = ({children})=>{
                               'Authorization': `Bearer ${localStorage.getItem("shopin-token")}`,
                             },
                           })
+                          
 
 
 
